@@ -1,11 +1,17 @@
 <jsp:include page="header.jsp"></jsp:include>
 
-<div class="container-fluid text-center">
-    <button type="button" class="btn btn-danger">Danger</button>
-    <button type="button" class="btn btn-danger">Danger</button>
-    <button type="button" class="btn btn-danger">Danger</button>
-</div>
 
+<div id="container-fluid text-center">
+    <div>
+        <a class="btn btn-danger btn-xs non-block" href="${pageContext.request.contextPath}/modifyDB/createDB">Create Database</a>
+    </div>
+    <div>
+        <a class="btn btn-danger btn-xs non-block" href="${pageContext.request.contextPath}/modifyDB/clearDB">Clear Database</a>
+    </div>
+    <div>
+        <a class="btn btn-danger btn-xs non-block" href="${pageContext.request.contextPath}/modifyDB/deleteDB">Delete Database</a>
+    </div>
+</div>
 
 
 <jsp:include page="footer.jsp"></jsp:include>
