@@ -1,9 +1,11 @@
 package databaseActions;
 
+import util.ConfigFileController;
+import fileActions.CustomLogger;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-
 
 public class GetDatabaseConnection {
 
@@ -14,21 +16,25 @@ public class GetDatabaseConnection {
      * Boolean uploadData determines if user wants to upload
      * data or just grab a connection for looking at the DB
      */
-    public static Connection getDB(String url, String user, String password){
+    public static Connection getDB(){
         Connection conn1 = null;
-        //DatabaseAlerts alerts = new DatabaseAlerts();
+
+        CustomLogger.createLogMsgAndSave(ConfigFileController.getDatabaseURL());
+        CustomLogger.createLogMsgAndSave(ConfigFileController.getDatabaseUser());
+        CustomLogger.createLogMsgAndSave(ConfigFileController.getDatabasePass());
 
         try {
-            conn1 = DriverManager.getConnection(url, user, password);
+            DriverManager.registerDriver(new com.mysql.jdbc.Driver()); //would not work without this guy
+            conn1 = DriverManager.getConnection("jdbc:mysql://localhost:3306/assign1_db_augustus", "augustus",
+                    "mypass123");
         } catch (SQLException ex) {
-            //exception is thrown with conn1 == null
+            ex.printStackTrace();
         }
 
         if (conn1 != null) {
-           // CustomLogger.createLogMsgAndSave("Connection established");
-            //alerts.goodConnection(); leave out for now
+            CustomLogger.createLogMsgAndSave("Connection established");
         }else{
-            //alerts.badConnection(whoNeedsIt);
+            CustomLogger.createLogMsgAndSave("Unable to retrieve database connection");
         }
 
         return conn1;

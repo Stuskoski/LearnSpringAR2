@@ -3,11 +3,8 @@ package databaseActions;
 import enums.DatabaseCommands;
 import org.springframework.beans.factory.annotation.Value;
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 
 
@@ -80,8 +77,8 @@ public class ModifyDatabaseMethods {
 
                     //Vulnerable to sql injection if you type extra junk into file with last field
                     sqlStr = "INSERT INTO customers(last_name, first_name, email_addr, home_addr, city, state, zip_code)" +
-                            "VALUES ('"+ person.getLastName() + "','" + person.getFirstName() + "','" + person.getEmailAddr() + "','" +
-                            person.getHomeAddr() + "','" + person.getCity() + "','" + person.getState() + "','" + person.getZipCode() +
+                            "VALUES ('"+ person.getLastName() + "','" + person.getFirstName() + "','" + person.getEmailAddress() + "','" +
+                            person.getHomeAddress() + "','" + person.getCity() + "','" + person.getState() + "','" + person.getZipCode() +
                             "');";
 
                     statement.executeUpdate(sqlStr);

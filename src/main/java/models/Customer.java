@@ -17,8 +17,8 @@ package models;
 public class Customer {
     private String lastName;
     private String firstName;
-    private String emailAddr;
-    private String homeAddr;
+    private String emailAddress;
+    private String homeAddress;
     private String city;
     private String state;
     private String zipCode;
@@ -39,20 +39,20 @@ public class Customer {
         this.firstName = firstName;
     }
 
-    public String getEmailAddr() {
-        return emailAddr;
+    public String getEmailAddress() {
+        return emailAddress;
     }
 
-    public void setEmailAddr(String emailAddr) {
-        this.emailAddr = emailAddr;
+    public void setEmailAddress(String emailAddress) {
+        this.emailAddress = emailAddress;
     }
 
-    public String getHomeAddr() {
-        return homeAddr;
+    public String getHomeAddress() {
+        return homeAddress;
     }
 
-    public void setHomeAddr(String homeAddr) {
-        this.homeAddr = homeAddr;
+    public void setHomeAddress(String homeAddress) {
+        this.homeAddress = homeAddress;
     }
 
     public String getCity() {

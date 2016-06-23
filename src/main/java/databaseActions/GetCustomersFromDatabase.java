@@ -1,5 +1,6 @@
 package databaseActions;
 
+import fileActions.CustomLogger;
 import models.Customer;
 import models.CustomerArrayListDownloadedFromDB;
 import org.springframework.beans.factory.annotation.Value;
@@ -13,22 +14,13 @@ import java.sql.Statement;
  */
 public class GetCustomersFromDatabase {
 
-    @Value("${db.user:augustus}")
-    private static String databaseUser;
-
-    @Value("${db.pass:mypass123}")
-    private static String databasePass;
-
-    @Value("${db.url:jdbc:mysql://localhost:3306/assign1_db_augustus}")
-    private static String databaseURL;
 
     public static void getCustomers() {
         Statement statement;
         String sqlStr;
         Connection connection;
 
-        connection = GetDatabaseConnection.getDB(databaseURL, databaseUser,
-                databasePass); //false for prompt screen
+        connection = GetDatabaseConnection.getDB(); //false for prompt screen
 
         if (connection != null) {
 
@@ -48,6 +40,7 @@ public class GetCustomersFromDatabase {
                 int counter = 1;
 
                 while (rs.next()) {
+                    CustomLogger.createLogMsgAndSave("added");
                     //last_name, first_name, email_addr, home_addr, city, state, zip_code, time_stamp
                     //Retrieve by data by column names
                     String last_name = rs.getString("last_name");
@@ -63,8 +56,8 @@ public class GetCustomersFromDatabase {
                     Customer customer = new Customer();
                     customer.setLastName(last_name);
                     customer.setFirstName(first_name);
-                    customer.setEmailAddr(email_addr);
-                    customer.setHomeAddr(home_addr);
+                    customer.setEmailAddress(email_addr);
+                    customer.setHomeAddress(home_addr);
                     customer.setCity(city);
                     customer.setState(state);
                     customer.setZipCode(zip_code);

@@ -1,7 +1,6 @@
 package com.springapp.mvc;
 
 import models.Customer;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,8 +26,8 @@ public class CustomerController {
         model.addAttribute("name", customer.getLastName());
         model.addAttribute("name", customer.getLastName());
         model.addAttribute("name", customer.getFirstName());
-        model.addAttribute("name", customer.getEmailAddr());
-        model.addAttribute("name", customer.getHomeAddr());
+        model.addAttribute("name", customer.getEmailAddress());
+        model.addAttribute("name", customer.getHomeAddress());
         model.addAttribute("name", customer.getCity());
         model.addAttribute("name", customer.getState());
         model.addAttribute("name", customer.getZipCode());
