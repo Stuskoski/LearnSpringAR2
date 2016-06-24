@@ -2,7 +2,6 @@ package databaseActions;
 
 import util.ConfigFileController;
 import fileActions.CustomLogger;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -25,8 +24,8 @@ public class GetDatabaseConnection {
 
         try {
             DriverManager.registerDriver(new com.mysql.jdbc.Driver()); //would not work without this guy
-            conn1 = DriverManager.getConnection("jdbc:mysql://localhost:3306/assign1_db_augustus", "augustus",
-                    "mypass123");
+            conn1 = DriverManager.getConnection(ConfigFileController.getDatabaseURL(), ConfigFileController.getDatabaseUser(),
+                    ConfigFileController.getDatabasePass());
         } catch (SQLException ex) {
             ex.printStackTrace();
         }

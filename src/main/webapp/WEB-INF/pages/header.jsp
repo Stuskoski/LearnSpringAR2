@@ -10,6 +10,8 @@
     <link href="<c:url value="/resources/css/style.css" />" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="<c:url value="/resources/js/fileUploadHelper.js"/>"></script>
+
 </head>
 
 <body>
@@ -37,7 +39,7 @@
                             <ul class="dropdown-menu">
                                 <li class="dropdown-header">Database</li>
                                 <li><a href="${pageContext.request.contextPath}/modifyDB">Modify Database</a></li>
-                                <li><a href="${pageContext.request.contextPath}/viewCustomers">View Customers</a></li>
+                                <li><a href="${pageContext.request.contextPath}/customers">View Customers</a></li>
 
                                 <li class="dropdown-header">Upload Customers</li>
                                 <li><a href="${pageContext.request.contextPath}/uploadCustomers/textFileUpload">Text

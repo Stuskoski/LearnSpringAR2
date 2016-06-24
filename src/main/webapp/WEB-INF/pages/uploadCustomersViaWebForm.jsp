@@ -5,7 +5,7 @@
     <div id="add-customer-web-form">
         <div class="col-lg-4 col-md-4 col-sm-2 col-xs-0"></div>
         <div class="col-lg-4 col-md-4 col-sm-8 col-xs-12 signupContent">
-            <form:form method="post" modelAttribute="customer" action="/uploadCustomers/addCustomer">
+            <form:form method="post" modelAttribute="customer" action="/customer/add">
                 <div id="upload-customer-title">Upload Customer</div>
                 <fieldset class="form-group">
                     <label for="lastName">First Name</label>
