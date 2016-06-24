@@ -8,13 +8,15 @@
 
 <c:url var="addAction" value="/customer/add"></c:url>
 
+
+<script src="<c:url value="/resources/js/editUserJS.js"/>"></script>
+
 <br>
 
-<h3>Persons List</h3>
 
 <c:if test="${!empty listCustomers}">
     <div class="container">
-    <h2>Striped Rows</h2>
+    <h2>Customers</h2>
     <table class="table table-striped">
         <thead>
         <tr>
@@ -33,16 +35,17 @@
 
         <c:forEach items="${listCustomers}" var="DbCustomerEntity">
             <tr>
-                <td>${DbCustomerEntity.id}</td>
-                <td>${DbCustomerEntity.firstName}</td>
-                <td>${DbCustomerEntity.lastName}</td>
-                <td>${DbCustomerEntity.emailAddress}</td>
-                <td>${DbCustomerEntity.homeAddress}</td>
-                <td>${DbCustomerEntity.city}</td>
-                <td>${DbCustomerEntity.state}</td>
-                <td>${DbCustomerEntity.zipCode}</td>
-                <td>${DbCustomerEntity.timeStamp}</td>
-                <td><a href="<c:url value='/edit/${DbCustomerEntity.id}' />">Edit</a></td>
+                <td id="customerEntityIds${DbCustomerEntity.id}" oninput="enableLink(${DbCustomerEntity.id})"><div contenteditable="false">${DbCustomerEntity.id}</div></td>
+                <%--<td id="customerEntityId">${DbCustomerEntity.id}</td>--%>
+                <td id="customerEntityFirstName${DbCustomerEntity.id}" oninput="enableLink(${DbCustomerEntity.id})"><div contenteditable="true">${DbCustomerEntity.firstName}</div></td>
+                <td id="customerEntityLastName${DbCustomerEntity.id}" oninput="enableLink(${DbCustomerEntity.id})"><div contenteditable="true">${DbCustomerEntity.lastName}</div></td>
+                <td id="customerEntityEmailAddress${DbCustomerEntity.id}" oninput="enableLink(${DbCustomerEntity.id})"><div contenteditable="true">${DbCustomerEntity.emailAddress}</div></td>
+                <td id="customerEntityHomeAddress${DbCustomerEntity.id}" oninput="enableLink(${DbCustomerEntity.id})"><div contenteditable="true">${DbCustomerEntity.homeAddress}</div></td>
+                <td id="customerEntityCity${DbCustomerEntity.id}" oninput="enableLink(${DbCustomerEntity.id})"><div contenteditable="true">${DbCustomerEntity.city}</div></td>
+                <td id="customerEntityState${DbCustomerEntity.id}" oninput="enableLink(${DbCustomerEntity.id})"><div contenteditable="true">${DbCustomerEntity.state}</div></td>
+                <td id="customerEntityZipCode${DbCustomerEntity.id}" oninput="enableLink(${DbCustomerEntity.id})"><div contenteditable="true">${DbCustomerEntity.zipCode}</div></td>
+                <td id="customerEntityTimeStamp${DbCustomerEntity.id}" oninput="enableLink(${DbCustomerEntity.id})"><div contenteditable="true">${DbCustomerEntity.timeStamp}</div></td>
+                <td><a onclick="editCustomer(${DbCustomerEntity.id})" id="commitLink${DbCustomerEntity.id}" class="disabledAnchor" href="#">Commit Edit</a></td>
                 <td><a href="<c:url value='/remove/${DbCustomerEntity.id}' />">Delete</a></td>
             </tr>
         </c:forEach>

@@ -71,7 +71,11 @@ public class DatabaseCustomerController {
     }
 
     /**
-     * Upload single file using Spring Controller
+     * Controller receives a file upload from post
+     * and proceeds to create a new temp file on the
+     * Tomcat server root.  The file is passed into
+     * a function to begin parsing and eventually
+     * adding to the database.
      */
     @RequestMapping(value = "/uploadCustomerViaFile", method = RequestMethod.POST)
     String uploadFileHandler(@RequestParam("file") MultipartFile file) {
