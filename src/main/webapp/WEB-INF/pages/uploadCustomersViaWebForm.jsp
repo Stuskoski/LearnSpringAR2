@@ -8,7 +8,7 @@
             <form:form method="post" modelAttribute="customer" action="/customer/add">
                 <div id="upload-customer-title">Upload Customer</div>
                 <fieldset class="form-group">
-                    <label for="lastName">First Name</label>
+                    <label for="firstName">First Name</label>
                     <form:input path="firstName" id="firstName" cssClass="form-control"
                                 placeholder="Enter Customer First Name" required="true"/>
                 </fieldset>

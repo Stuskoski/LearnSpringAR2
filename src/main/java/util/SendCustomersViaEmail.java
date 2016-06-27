@@ -4,6 +4,13 @@ import databaseActions.GetDatabaseConnection;
 import fileActions.CustomLogger;
 import models.CustomerArrayListDownloadedFromDB;
 import persistance.DbCustomerEntity;
+
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -27,12 +34,47 @@ public class SendCustomersViaEmail {
      * @param fromEmail Email address to send email from
      * @param subject The subject of the email
      */
-    public static void sendSortedEmail(String toEmail, String fromEmail, String subject){
-        CustomLogger.createLogMsgAndSave("Sending sorted customer list");
-        //get all the users and put into unsorted list and then call sort array list
-        ArrayList<DbCustomerEntity> sortedCustomerList = sortArrayList(getUsersFromDBAndAddToList());
+    public static void sendEmail(String toEmail, String fromEmail, String subject, String message){
+        CustomLogger.createLogMsgAndSave("Sending email...");
 
+        String host = ConfigFileController.getMailHost();
 
+        Properties properties = System.getProperties();
+
+        properties.setProperty("mail.smtp.host", host);
+
+        Session session = Session.getInstance(properties);
+
+        try{
+            // Create a default MimeMessage object.
+            MimeMessage mimeMessage = new MimeMessage(session);
+
+            // Set From: header field of the header.
+            mimeMessage.setFrom(new InternetAddress(fromEmail));
+
+            // Set To: header field of the header.
+            mimeMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(toEmail));
+
+            // Set Subject: header field
+            mimeMessage.setSubject(subject);
+
+            // Now set the actual message
+            mimeMessage.setText(message);
+
+            // Send message
+            Transport.send(mimeMessage);
+            CustomLogger.createLogMsgAndSave("Email sent");
+
+            //send good log
+        }catch (MessagingException mex) {
+            //todo add error page redirection?
+            CustomLogger.createLogMsgAndSave("Unable to send email.  Check the following credentials: \n" +
+                    "From: "+toEmail+"\n" +
+                    "To: " + fromEmail + "\n" +
+                    "Host: " + host + "\n" +
+                    "Port: Default(25)");
+
+        }
     }
 
     /**
@@ -75,78 +117,65 @@ public class SendCustomersViaEmail {
      * @param fromEmail Email address to send email from
      * @param subject The subject of the email
      */
-    public static void sendUnsortedEmail(String toEmail, String fromEmail, String subject){
+    public static void sendUnsortedEmail(String toEmail, String fromEmail, String subject, String message){
         CustomLogger.createLogMsgAndSave("Sending unsorted customer list");
         ArrayList<DbCustomerEntity> unsortedCustomerList = getUsersFromDBAndAddToList();
 
+        sendJavaxEmail(toEmail, fromEmail, subject, message);
 
     }
 
     /**
-     * Method uses the Javax library to compile
-     * a MimeMessage and send it to the user specified
-     * in toEmail
-     *
-     * @param toEmail Email Address to send to
-     * @param message Message to send
+     * todo
      */
-    private static void sendJavaxEmail(String toEmail, String message){
+    private static void sendJavaxEmail(String toEmail, String fromEmail, String subject, String message){
 
         CustomLogger.createLogMsgAndSave("Sending email...");
 
-        // Sender's email ID needs to be mentioned
-        String from = "Rutkoski.Augustus@heb.com";
+        String host = ConfigFileController.getMailHost();
 
-        // Assuming you are sending email from localhost
-        String host = "exchange.heb.com";
-
-        // Get system properties
         Properties properties = System.getProperties();
 
-        // Setup mail server
         properties.setProperty("mail.smtp.host", host);
 
-        // Get the default Session object.
-        Session session = Session.getDefaultInstance(properties);
+        Session session = Session.getInstance(properties);
 
         try{
             // Create a default MimeMessage object.
             MimeMessage mimeMessage = new MimeMessage(session);
 
             // Set From: header field of the header.
-            mimeMessage.setFrom(new InternetAddress(from));
+            mimeMessage.setFrom(new InternetAddress(fromEmail));
 
             // Set To: header field of the header.
             mimeMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(toEmail));
 
             // Set Subject: header field
-            mimeMessage.setSubject("Assignment 1 - Customer List");
+            mimeMessage.setSubject(subject);
 
             // Now set the actual message
             mimeMessage.setText(message);
 
             // Send message
             Transport.send(mimeMessage);
+            CustomLogger.createLogMsgAndSave("Email sent");
+
 
             //send good log
         }catch (MessagingException mex) {
-            EmailAlerts alerts = new EmailAlerts();
-            alerts.badSend();
+            //todo add error page redirection?
             CustomLogger.createLogMsgAndSave("Unable to send email.  Check the following credentials: \n" +
-                    "From: Rutkoski.Augustus@heb.com\n" +
-                    "To: " + from + "\n" +
+                    "From: "+toEmail+"\n" +
+                    "To: " + fromEmail + "\n" +
                     "Host: " + host + "\n" +
-                    "Port: Default(25)", "red");
+                    "Port: Default(25)");
 
         }
     }
 
 
     /**
-     * Attempts to make a database connection and if ok will
-     * pull all the customers from the table.
-     * Dynamically creates vbox's will all the users info
-     * and adds it to the scroll pane
+     * todo
      *
      */
     public static ArrayList<DbCustomerEntity> getUsersFromDBAndAddToList(){

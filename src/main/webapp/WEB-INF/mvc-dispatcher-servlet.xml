@@ -11,6 +11,7 @@
         http://www.springframework.org/schema/mvc/spring-mvc.xsd
         http://www.springframework.org/schema/tx
         http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+         http://www.springframework.org/schema/util
         http://www.springframework.org/schema/tool
         http://www.springframework.org/schema/tool/spring-tool.xsd">
 
@@ -67,6 +68,11 @@
     <bean id="customerSpringService" class="persistance.CustomerSpringServiceImplementation">
         <property name="customerDAO" ref="customerDAO"/>
     </bean>
+
+    <!-- Bean for sending mail -->
+    <!--<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">-->
+
+   <!-- </bean>-->
 
 
 

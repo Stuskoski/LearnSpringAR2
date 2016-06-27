@@ -14,6 +14,7 @@ public class ConfigFileController {
     private static String databaseURL;
     private static String databaseUser;
     private static String databasePass;
+    private static String mailHost;
 
     public static String getDatabaseURL() {
         return databaseURL;
@@ -25,6 +26,10 @@ public class ConfigFileController {
 
     public static String getDatabasePass() {
         return databasePass;
+    }
+
+    public static String getMailHost() {
+        return mailHost;
     }
 
 
@@ -40,6 +45,10 @@ public class ConfigFileController {
     @Value("${db.pass}")
     public void setDatabasePass(String pass){
         ConfigFileController.databasePass = pass;
+    }
+    @Value("${mail.host}")
+    public void setMailHost(String host){
+        ConfigFileController.mailHost = host;
     }
 
 
