@@ -71,6 +71,7 @@ public class ModifyDatabaseMethods {
                     case CREATE:
                         //create the table with an initial root connection
                         sqlStr = "CREATE DATABASE IF NOT EXISTS `assign2_db_augustus`;";
+                        CustomLogger.createLogMsgAndSave("Executing: " + sqlStr);
                         statement.executeUpdate(sqlStr);
 
                         //create new connection with the new database specified
@@ -79,58 +80,29 @@ public class ModifyDatabaseMethods {
 
                         //drop the table if it exists
                         sqlStr = "DROP TABLE IF EXISTS customers;";
+                        CustomLogger.createLogMsgAndSave("Executing: " + sqlStr);
                         statement.executeUpdate(sqlStr);
 
                         //Finally create the table
-                        sqlStr ="CREATE TABLE customers " +
-                                "(idcustomers INTEGER(11) NOT NULL AUTO_INCREMENT, " +
-                                " lastName VARCHAR(30) DEFAULT NULL, " +
-                                " firstName VARCHAR(30) DEFAULT NULL, " +
-                                " emailAddress VARCHAR(50) DEFAULT NULL, " +
-                                " homeAddress VARCHAR(60) DEFAULT NULL, " +
-                                " city VARCHAR(40) DEFAULT NULL, " +
-                                " state VARCHAR(50) DEFAULT NULL, " +
-                                " zipCode VARCHAR(15) DEFAULT NULL, " +
-                                " timeStamp DATETIME DEFAULT NULL, " +
-                                " PRIMARY KEY (idcustomers))";
+                        sqlStr ="";
+                        StringBuilder stringBuilder = new StringBuilder(sqlStr);
+                        stringBuilder.append("CREATE TABLE customers ");
+                        stringBuilder.append("(idcustomers INTEGER(11) NOT NULL AUTO_INCREMENT, ");
+                        stringBuilder.append(" lastName varchar(30) DEFAULT NULL, ");
+                        stringBuilder.append(" firstName varchar(30) DEFAULT NULL, ");
+                        stringBuilder.append(" emailAddress varchar(50) DEFAULT NULL, ");
+                        stringBuilder.append(" homeAddress varchar(60) DEFAULT NULL, ");
+                        stringBuilder.append(" city varchar(40) DEFAULT NULL, ");
+                        stringBuilder.append(" state varchar(50) DEFAULT NULL, ");
+                        stringBuilder.append(" zipCode varchar(15) DEFAULT NULL, ");
+                        stringBuilder.append(" timeStamp datetime DEFAULT NULL, ");
+                        stringBuilder.append(" PRIMARY KEY (idcustomers))");
 
-                        /*sqlStr = "DROP TABLE IF EXISTS customers; " +
-                                "CREATE TABLE customers " +
-                                "(id INTEGER not NULL, " +
-                                " first VARCHAR(255), " +
-                                " last VARCHAR(255), " +
-                                " age INTEGER, " +
-                                " PRIMARY KEY ( id ))";*/
+                        CustomLogger.createLogMsgAndSave("Executing: " + stringBuilder.toString());
 
-                       /* StringBuilder stringBuilder = new StringBuilder(sqlStr);
-
-                        //stringBuilder.append("CREATE DATABASE IF NOT EXISTS `assign2_db_augustus`;\n");
-                        //stringBuilder.append("USE `assign2_db_augustus`;\n");
-                        stringBuilder.append("DROP TABLE IF EXISTS `customers`;\n");
-                        //stringBuilder.append("SET @saved_cs_client = @@character_set_client;\n");
-                        //stringBuilder.append("SET character_set_client = utf8;\n");
-                        stringBuilder.append("CREATE TABLE `customers` (\n");
-                        stringBuilder.append("`idcustomers` int(11) NOT NULL AUTO_INCREMENT,\n");
-                        stringBuilder.append("`lastName` varchar(30) DEFAULT NULL,\n");
-                        stringBuilder.append("`firstName` varchar(30) DEFAULT NULL,\n");
-                        stringBuilder.append("`emailAddress` varchar(50) DEFAULT NULL,\n");
-                        stringBuilder.append("`homeAddress` varchar(60) DEFAULT NULL,\n");
-                        stringBuilder.append("`city` varchar(40) DEFAULT NULL,\n");
-                        stringBuilder.append("`state` varchar(50) DEFAULT NULL,\n");
-                        stringBuilder.append("`zipCode` varchar(15) DEFAULT NULL,\n");
-                        stringBuilder.append("`timeStamp` datetime DEFAULT NULL,\n\n");
-                        stringBuilder.append("PRIMARY KEY (`idcustomers`)\n");
-                        stringBuilder.append(");");
-                        //stringBuilder.append("SET character_set_client = @saved_cs_client;\n");
-                        //stringBuilder.append("\n");
-                       // stringBuilder.append("\n");*/
-
-                        CustomLogger.createLogMsgAndSave(sqlStr);
-
-                        statement.executeUpdate(sqlStr);
+                        statement.executeUpdate(stringBuilder.toString());
 
                         break;
-
 
                     case CLEAR:
                         sqlStr = "TRUNCATE `assign2_db_augustus`.`customers`;";
