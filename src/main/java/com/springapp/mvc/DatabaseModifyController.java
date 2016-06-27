@@ -1,9 +1,7 @@
 package com.springapp.mvc;
 
-import databaseActions.GetCustomersFromDatabase;
 import databaseActions.ModifyDatabaseMethods;
 import enums.DatabaseCommands;
-import fileActions.CustomLogger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,23 +20,23 @@ public class DatabaseModifyController {
 
     @RequestMapping("/createDB")
     public String  createDatabase(){
-        //GetCustomersFromDatabase.getCustomers();
+        //GetCustomersFromDatabaseDELETE.getCustomers();
         ModifyDatabaseMethods.makeClearDeleteDB(DatabaseCommands.CREATE);
 
-        return "modify";
+        return "redirect:/modifyDB";
     }
 
     @RequestMapping("/clearDB")
     public String clearDatabase(){
         ModifyDatabaseMethods.makeClearDeleteDB(DatabaseCommands.CLEAR);
 
-        return "modify";
+        return "redirect:/modifyDB";
     }
 
     @RequestMapping("/deleteDB")
     public String deleteDatabase(){
         ModifyDatabaseMethods.makeClearDeleteDB(DatabaseCommands.DELETE);
 
-        return "modify";
+        return "redirect:/modifyDB";
     }
 }

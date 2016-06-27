@@ -1,6 +1,8 @@
 package fileActions;
 
 import models.Customer;
+import persistance.DbCustomerEntity;
+
 import java.util.ArrayList;
 
 /**
@@ -13,7 +15,7 @@ public class HandleLinesFromFile {
      *
      * @param line A string representing one line from the read customer file
      */
-    public static void parseLines(String line, ArrayList<Customer> customerArray){
+    public static void parseLines(String line, ArrayList<DbCustomerEntity> customerArray){
 
         //Variables
         String strippedLines;
@@ -41,14 +43,14 @@ public class HandleLinesFromFile {
      * @param customerArray An ArrayList reference that contains
      *                    multiple users.
      */
-    public static void createUserAndAddToArray(String personDetails[], ArrayList<Customer> customerArray){
+    public static void createUserAndAddToArray(String personDetails[], ArrayList<DbCustomerEntity> customerArray){
 
         if(personDetails.length != 7){
             CustomLogger.createLogMsgAndSave("Error: Incorrect number of details for person in file");
             return;
         }
 
-        Customer customer = new Customer();
+        DbCustomerEntity customer = new DbCustomerEntity();
 
         //The order matters here according to the text file specs
         customer.setLastName(personDetails[0]);

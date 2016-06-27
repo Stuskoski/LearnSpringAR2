@@ -2,13 +2,8 @@ package databaseActions;
 
 import enums.DatabaseCommands;
 import fileActions.CustomLogger;
-import org.springframework.beans.factory.annotation.Value;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStreamReader;
+
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -61,7 +56,7 @@ public class ModifyDatabaseMethods {
         Statement statement;
         String sqlStr;
 
-        connection = GetDatabaseConnection.getDBTest();
+        connection = GetDatabaseConnection.getDBConnectionWithDefaultDB();
 
         if(connection != null){
             try {

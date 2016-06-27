@@ -1,5 +1,7 @@
 package models;
 
+import persistance.DbCustomerEntity;
+
 import java.util.ArrayList;
 
 /**
@@ -11,5 +13,5 @@ import java.util.ArrayList;
  * sort or when creating an email to send.
  */
 public class CustomerArrayListDownloadedFromDB {
-    public static ArrayList<Customer> downloadedArrayList = new ArrayList<Customer>();
+    public static ArrayList<DbCustomerEntity> downloadedArrayList = new ArrayList<DbCustomerEntity>();
 }

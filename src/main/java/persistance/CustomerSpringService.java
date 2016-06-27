@@ -2,6 +2,7 @@ package persistance;
 
 import models.Customer;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -10,6 +11,7 @@ import java.util.List;
 public interface CustomerSpringService {
 
     public void addCustomer(DbCustomerEntity p);
+    public void addMultipleCustomers(ArrayList<DbCustomerEntity> customerList);
     public void updateCustomer(DbCustomerEntity p);
     public List<DbCustomerEntity> listCustomers();
     public DbCustomerEntity getCustomerById(int id);

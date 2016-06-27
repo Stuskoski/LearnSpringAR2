@@ -40,7 +40,7 @@ public class GetDatabaseConnection {
 
     }
 
-    public static Connection getDBTest(){
+    public static Connection getDBConnectionWithDefaultDB(){
         Connection conn1 = null;
 
         CustomLogger.createLogMsgAndSave(ConfigFileController.getDatabaseURL());

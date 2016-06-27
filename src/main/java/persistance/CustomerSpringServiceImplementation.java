@@ -1,8 +1,7 @@
 package persistance;
 
-import models.Customer;
 import org.springframework.transaction.annotation.Transactional;
-
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -20,6 +19,14 @@ public class CustomerSpringServiceImplementation implements CustomerSpringServic
     @Transactional
     public void addCustomer(DbCustomerEntity customer) {
         this.customerDAO.addCustomer(customer);
+    }
+
+    @Override
+    @Transactional
+    public void addMultipleCustomers(ArrayList<DbCustomerEntity> customerList) {
+        for(DbCustomerEntity customer : customerList){
+            this.customerDAO.addCustomer(customer);
+        }
     }
 
     @Override

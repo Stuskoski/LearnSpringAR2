@@ -6,6 +6,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -30,6 +31,16 @@ public class CustomerDAOImplementation implements CustomerDAO{
     }
 
     @Override
+    public void addMultipleCustomers(ArrayList<DbCustomerEntity> customerList) {
+        Session session = this.sessionFactory.getCurrentSession();
+
+        for(DbCustomerEntity customer : customerList){
+            session.persist(customer);
+            CustomLogger.createLogMsgAndSave("Customer saved successfully, Customer Details="+customer.toString());
+        }
+    }
+
+    @Override
     public void updateCustomer(DbCustomerEntity customer) {
         Session session = this.sessionFactory.getCurrentSession();
         session.update(customer);
@@ -42,9 +53,14 @@ public class CustomerDAOImplementation implements CustomerDAO{
         Session session = this.sessionFactory.getCurrentSession();
        // String qry = "FROM " + "customers";
         List<DbCustomerEntity> customerList = (List<DbCustomerEntity>)session.createQuery("from persistance.DbCustomerEntity").list();
-        for (DbCustomerEntity customer : customerList){
-            CustomLogger.createLogMsgAndSave("Customer Info: \n"+customer.toString());
+        if(customerList.size() <= 500){
+            for (DbCustomerEntity customer : customerList){
+                 CustomLogger.createLogMsgAndSave("Customer Info: \n"+customer.toString());
+            }
+        }else{
+            CustomLogger.createLogMsgAndSave("Customer list too large to list all customers. 500 or less.");
         }
+
         return customerList;
     }
 

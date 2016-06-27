@@ -3,6 +3,8 @@ package fileActions;
 import databaseActions.UploadCustomerIntoDatabase;
 import models.Customer;
 import models.CustomerArrayList;
+import persistance.DbCustomerEntity;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -19,12 +21,12 @@ public class ReadFile {
     /**
      * @param inFile File passed from main to be read and handled
      */
-    public static void readAndCreateObjects(File inFile){
+    public static ArrayList<DbCustomerEntity> readAndCreateObjects(File inFile){
 
         CustomLogger.createLogMsgAndSave("Reading and handling file: " + inFile.toString());
 
         String line;
-        ArrayList<Customer> customerArrayList = new ArrayList<Customer>();
+        ArrayList<DbCustomerEntity> customerArrayList = new ArrayList<DbCustomerEntity>();
 
         try {
             // Create fileReader to read the inFile
@@ -53,9 +55,11 @@ public class ReadFile {
         }
 
 
-        CustomerArrayList.personsArray = new ArrayList<Customer>(customerArrayList);
+        //CustomerArrayList.personsArray = new ArrayList<Customer>(customerArrayList);
 
-        UploadCustomerIntoDatabase.uploadMultipleCustomersIntoDatabase(customerArrayList);
+        //UploadCustomerIntoDatabase.uploadMultipleCustomersIntoDatabase(customerArrayList);
+
+        return customerArrayList;
 
     }
 }

@@ -46,7 +46,7 @@
         </property>
         <property name="hibernateProperties">
             <props>
-                <prop key="hibernate.hbm2ddl.auto">create</prop>
+                <!--<prop key="hibernate.hbm2ddl.auto">create</prop> Erases the db every redeploy.  Be careful -->
                 <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect
                 </prop>
                 <prop key="hibernate.show_sql">true</prop>
@@ -70,8 +70,6 @@
 
 
 
-
-
     <tx:annotation-driven/>
 
 
@@ -85,7 +83,7 @@
                 class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 
         <!-- setting maximum upload size -->
-        <property name="maxUploadSize" value="100000" />
+        <property name="maxUploadSize" value="10000000" />
 
     </bean>
 

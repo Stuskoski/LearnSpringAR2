@@ -1,5 +1,7 @@
 package com.springapp.mvc;
 
+import databaseActions.GetDatabaseConnection;
+import fileActions.CreateTempCustomerFile;
 import fileActions.CustomLogger;
 import fileActions.ReadFile;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -13,11 +15,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.mvc.support.RedirectAttributesModelMap;
 import persistance.CustomerSpringService;
 import persistance.DbCustomerEntity;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.sql.Connection;
+import java.util.ArrayList;
 
 /**
  * Created by r730819 on 6/24/2016.
@@ -36,9 +42,16 @@ public class DatabaseCustomerController {
 
     @RequestMapping(value = "/customers", method = RequestMethod.GET)
     public String listCustomers(Model model){
-        model.addAttribute("DbCustomerEntity", new DbCustomerEntity());
-        model.addAttribute("listCustomers", this.customerSpringService.listCustomers());
-        return "viewCustomers";
+
+        //if a database connection can be made, redirect to view customers with the data, else go back home
+        if(GetDatabaseConnection.getDB()!=null){
+            model.addAttribute("DbCustomerEntity", new DbCustomerEntity());
+            model.addAttribute("listCustomers", this.customerSpringService.listCustomers());
+            return "viewCustomers";
+        }else{
+            return "redirect:/"; //todo redirect to error page
+        }
+
     }
 
     @RequestMapping(value = "/customer/add", method = RequestMethod.POST)
@@ -77,37 +90,29 @@ public class DatabaseCustomerController {
      */
     @RequestMapping(value = "/uploadCustomerViaFile", method = RequestMethod.POST)
     String uploadFileHandler(@RequestParam("file") MultipartFile file) {
-
         if (!file.isEmpty()) {
             try {
-                byte[] bytes = file.getBytes();
+                //create temp file
+                File tempFile = CreateTempCustomerFile.createFile(file);
 
-                // Creating the directory to store file
-                String rootPath = System.getProperty("catalina.home");
-
-                File dir = new File(rootPath + File.separator + "tmpFiles");
-                if (!dir.exists())
-                    dir.mkdirs();
-
-                // Create the file on server
-                File serverFile = new File(dir.getAbsolutePath()
-                        + File.separator + "tmpCustomerFile"+ RandomStringUtils.randomNumeric(5)+".txt");
-                BufferedOutputStream stream = new BufferedOutputStream(
-                        new FileOutputStream(serverFile));
-                stream.write(bytes);
-                stream.close();
-
-                CustomLogger.createLogMsgAndSave("Server File Location="
-                        + serverFile.getAbsolutePath());
-
-                ReadFile.readAndCreateObjects(serverFile);
+                //Calls read file to generate DbCustomerEntity array list and then loop through it
+                for (DbCustomerEntity customer : ReadFile.readAndCreateObjects(tempFile)){
+                    if(customer.getId() == 0){
+                        this.customerSpringService.addCustomer(customer);
+                    }
+                    else{
+                        this.customerSpringService.updateCustomer(customer);
+                    }
+                } //todo ask during demo how to past post variables to other controllers from controller
 
                 return "redirect:/customers";
             } catch (Exception e) {
+                CustomLogger.createLogMsgAndSave("Unable to upload customer list: " + e.getMessage());
                 return "redirect:/customers";
             }
         } else {
-                return "redirect:/customers";
+            CustomLogger.createLogMsgAndSave("Unable to upload customer list: File empty!");
+            return "redirect:/customers";
         }
     }
 }
