@@ -39,4 +39,29 @@ public class GetDatabaseConnection {
         return conn1;
 
     }
+
+    public static Connection getDBTest(){
+        Connection conn1 = null;
+
+        CustomLogger.createLogMsgAndSave(ConfigFileController.getDatabaseURL());
+        CustomLogger.createLogMsgAndSave(ConfigFileController.getDatabaseUser());
+        CustomLogger.createLogMsgAndSave(ConfigFileController.getDatabasePass());
+
+        try {
+            DriverManager.registerDriver(new com.mysql.jdbc.Driver()); //would not work without this guy
+            conn1 = DriverManager.getConnection("jdbc:mysql://localhost:3306", ConfigFileController.getDatabaseUser(),
+                    ConfigFileController.getDatabasePass());
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        if (conn1 != null) {
+            CustomLogger.createLogMsgAndSave("Connection established");
+        }else{
+            CustomLogger.createLogMsgAndSave("Unable to retrieve database connection");
+        }
+
+        return conn1;
+
+    }
 }

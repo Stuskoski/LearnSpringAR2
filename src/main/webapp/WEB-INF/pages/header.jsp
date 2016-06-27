@@ -55,6 +55,7 @@
                                 <li class="dropdown-header">Other</li>
                                 <li><a href="${pageContext.request.contextPath}/settings">Settings</a></li>
                                 <li><a href="${pageContext.request.contextPath}/logging">Logging</a></li>
+                                <li><a href="${pageContext.request.contextPath}/email">Email</a></li>
                             </ul>
                         </li>
                     </ul>

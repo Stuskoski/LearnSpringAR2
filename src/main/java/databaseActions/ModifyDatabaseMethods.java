@@ -1,37 +1,32 @@
 package databaseActions;
 
 import enums.DatabaseCommands;
+import fileActions.CustomLogger;
 import org.springframework.beans.factory.annotation.Value;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 
 public class ModifyDatabaseMethods {
-
-    @Value("${db.user:augustus}")
-    private static String databaseUser;
-
-    @Value("${db.pass:mypass123}")
-    private static String databasePass;
-
-    @Value("${db.url:jdbc:mysql://localhost:3306/assign1_db_augustus}")
-    private static String databaseURL;
-
     /**
      * Created by r730819 on 6/15/2016.
      * This method will get a SQL connection
      * and simply update all the time stamps
      * of every customer is the
      *
+     */
 
     public static void updateTimeStampAfterEmail(){
         Statement statement;
         String sqlStr;
 
-        Connection connection = GetDatabaseConnection.getDBConnectionForEmail(SettingsTab.urlTextField.getText(),
-                SettingsTab.userTextField.getText(), SettingsTab.passTextField.getText(), "email");
+        Connection connection = GetDatabaseConnection.getDB();
 
         if(connection!=null){
             CustomLogger.createLogMsgAndSave("Attempting to update email timestamps");
@@ -39,140 +34,128 @@ public class ModifyDatabaseMethods {
                 statement = connection.createStatement();
 
                 sqlStr = "UPDATE customers " +
-                         "SET time_stamp = now()";
+                         "SET timeStamp = NOW()";
 
                 statement.executeUpdate(sqlStr);
 
             } catch (SQLException e) {
-                CustomLogger.createLogMsgAndSave("Unable to update email timestamps", "red");
+                CustomLogger.createLogMsgAndSave("Unable to update email timestamps");
             }
         }else{
-            PromptForDatabaseCredentialsScreen.createScreen("email");
+            CustomLogger.createLogMsgAndSave("Unable to update email timestamps");
         }
-
-    }*/
-
-    /**
-     * Send file to a method that will
-     * parse the file and create
-     * Person objects.  The method returns
-     * an ArrayList containing all the objects
-     * created from the file.  Ensures all 7 details
-     * are present for each user.
-
-    public static void attemptUploadData(Connection connection){
-        if(connection!=null){
-            CustomLogger.createLogMsgAndSave("Attempting to upload data from file to database");
-
-            Statement statement;
-            String sqlStr;
-
-            ReadFile.readAndCreateObjects(new File(UploadDataTab.fileNameTextField.getText()));
-
-            //Alternative, search for mysqlimport.exe then execute the cmd below.  Mysqlimport is probably faster.
-            //'mysqlimport.exe --local -u[USER] -p[PASSWORD] --fields-terminated-by=, assign1_db_augustus [PATH TO FILE]'
-            for (Person person : PersonsArrayList.personsArray){
-                try {
-                    statement = connection.createStatement();
-
-                    //Vulnerable to sql injection if you type extra junk into file with last field
-                    sqlStr = "INSERT INTO customers(last_name, first_name, email_addr, home_addr, city, state, zip_code)" +
-                            "VALUES ('"+ person.getLastName() + "','" + person.getFirstName() + "','" + person.getEmailAddress() + "','" +
-                            person.getHomeAddress() + "','" + person.getCity() + "','" + person.getState() + "','" + person.getZipCode() +
-                            "');";
-
-                    statement.executeUpdate(sqlStr);
-
-                } catch (SQLException e) {
-                    CustomLogger.createLogMsgAndSave("Error inserting data", "red");
-                }
-            }
-
-            DatabaseAlerts alerts = new DatabaseAlerts();
-            alerts.uploadDataSuccess();
-        }
-    }*/
-
+    }
 
     /**
      * Combined 3 methods into one that takes a string
      * as an action to either make, clear(truncate), or
      * delete(drop) the database.
      *
-     * @param cmd Received from DatabaseActions.DatabaseActionListeners
-     *               and is either "create", "clear", "delete" to specify
-     *               which action to take.
+     * @param cmd Enum received from the controller to
+     *            either create, clear or delete the
+     *            customer table
      */
     public static void makeClearDeleteDB(DatabaseCommands cmd) { //todo use enum for readability
-        File mySqlPath;
-        Process process = null;
+        CustomLogger.createLogMsgAndSave("Attempting to modify database");
+        Connection connection;
+        Statement statement;
+        String sqlStr;
 
-        //CustomLogger.createLogMsgAndSave("Attempting to alter database");
+        connection = GetDatabaseConnection.getDBTest();
 
-        //Find the MySQL path. Restricted to windows only currently
-        mySqlPath = findMySQLExec();
-        if (mySqlPath != null && !mySqlPath.toString().equals("") && mySqlPath.canExecute()) {
+        if(connection != null){
             try {
+                statement = connection.createStatement();
+
                 switch (cmd) {
                     case CREATE:
-                        File tempFile = new File("assign2_db_augustus_customers.sql");
+                        //create the table with an initial root connection
+                        sqlStr = "CREATE DATABASE IF NOT EXISTS `assign2_db_augustus`;";
+                        statement.executeUpdate(sqlStr);
 
-                        Runtime runtime = Runtime.getRuntime();
+                        //create new connection with the new database specified
+                        connection = GetDatabaseConnection.getDB();
+                        statement = connection.createStatement();
 
-                        if(runtime != null){
-                           // runtime.exec(new String[]{mySqlPath.toString(), "-u", databaseUser,
-                             //       "-p" + databasePass, "-e", "source " + tempFile.toString()});
-                        }
+                        //drop the table if it exists
+                        sqlStr = "DROP TABLE IF EXISTS customers;";
+                        statement.executeUpdate(sqlStr);
+
+                        //Finally create the table
+                        sqlStr ="CREATE TABLE customers " +
+                                "(idcustomers INTEGER(11) NOT NULL AUTO_INCREMENT, " +
+                                " lastName VARCHAR(30) DEFAULT NULL, " +
+                                " firstName VARCHAR(30) DEFAULT NULL, " +
+                                " emailAddress VARCHAR(50) DEFAULT NULL, " +
+                                " homeAddress VARCHAR(60) DEFAULT NULL, " +
+                                " city VARCHAR(40) DEFAULT NULL, " +
+                                " state VARCHAR(50) DEFAULT NULL, " +
+                                " zipCode VARCHAR(15) DEFAULT NULL, " +
+                                " timeStamp DATETIME DEFAULT NULL, " +
+                                " PRIMARY KEY (idcustomers))";
+
+                        /*sqlStr = "DROP TABLE IF EXISTS customers; " +
+                                "CREATE TABLE customers " +
+                                "(id INTEGER not NULL, " +
+                                " first VARCHAR(255), " +
+                                " last VARCHAR(255), " +
+                                " age INTEGER, " +
+                                " PRIMARY KEY ( id ))";*/
+
+                       /* StringBuilder stringBuilder = new StringBuilder(sqlStr);
+
+                        //stringBuilder.append("CREATE DATABASE IF NOT EXISTS `assign2_db_augustus`;\n");
+                        //stringBuilder.append("USE `assign2_db_augustus`;\n");
+                        stringBuilder.append("DROP TABLE IF EXISTS `customers`;\n");
+                        //stringBuilder.append("SET @saved_cs_client = @@character_set_client;\n");
+                        //stringBuilder.append("SET character_set_client = utf8;\n");
+                        stringBuilder.append("CREATE TABLE `customers` (\n");
+                        stringBuilder.append("`idcustomers` int(11) NOT NULL AUTO_INCREMENT,\n");
+                        stringBuilder.append("`lastName` varchar(30) DEFAULT NULL,\n");
+                        stringBuilder.append("`firstName` varchar(30) DEFAULT NULL,\n");
+                        stringBuilder.append("`emailAddress` varchar(50) DEFAULT NULL,\n");
+                        stringBuilder.append("`homeAddress` varchar(60) DEFAULT NULL,\n");
+                        stringBuilder.append("`city` varchar(40) DEFAULT NULL,\n");
+                        stringBuilder.append("`state` varchar(50) DEFAULT NULL,\n");
+                        stringBuilder.append("`zipCode` varchar(15) DEFAULT NULL,\n");
+                        stringBuilder.append("`timeStamp` datetime DEFAULT NULL,\n\n");
+                        stringBuilder.append("PRIMARY KEY (`idcustomers`)\n");
+                        stringBuilder.append(");");
+                        //stringBuilder.append("SET character_set_client = @saved_cs_client;\n");
+                        //stringBuilder.append("\n");
+                       // stringBuilder.append("\n");*/
+
+                        CustomLogger.createLogMsgAndSave(sqlStr);
+
+                        statement.executeUpdate(sqlStr);
 
                         break;
 
 
                     case CLEAR:
-                        Runtime.getRuntime().exec(new String[]{mySqlPath.toString(), "-u", databaseUser,
-                                "-p" + databasePass, "-e", "TRUNCATE `assign1_db_augustus`.`customers`;"});
+                        sqlStr = "TRUNCATE `assign2_db_augustus`.`customers`;";
+
+                        statement.executeUpdate(sqlStr);
+
                         break;
 
 
                     case DELETE:
-                        Runtime.getRuntime().exec(new String[]{mySqlPath.toString(), "-u", databaseUser,
-                                "-p" + databasePass, "-e", "DROP DATABASE `assign1_db_augustus`;"});
+                        sqlStr = "DROP DATABASE `assign2_db_augustus`;";
+
+                        statement.executeUpdate(sqlStr);
+
                         break;
                 }
-            } catch (IOException e) {
-                //CustomLogger.createLogMsgAndSave("Unable to execute " + mySqlPath.toString(), "red");
-            }
-        }
-    }
-
-    /**
-     * Searches in program files for the correct
-     * extension to the mysql executable.
-     *
-     * @return the executable mysql file
-     */
-    private static File findMySQLExec(){
-        File retFile = null;
-        Process process = null;
-
-       // CustomLogger.createLogMsgAndSave("Looking for mysql.exe in Program Files");
-
-        //windows cmd to search for the mysql executable. todo - consider handling other OS
-        try {
-            process = Runtime.getRuntime().exec("where /R \"C:\\Program Files\" mysql.exe");
-        } catch (IOException e) {
-            //CustomLogger.createLogMsgAndSave("Unable to locate MySQL executable", "red");
-        }
-
-        //Create a new file based off the path returned and return that file
-        if(process!=null){
-            BufferedReader in = new BufferedReader(new InputStreamReader(process.getInputStream()));
-            try {
-                retFile = new File(in.readLine());
-            } catch (IOException e) {
+            } catch (SQLException e) {
+                CustomLogger.createLogMsgAndSave("Unable to " + cmd.toString() + " database");
                 e.printStackTrace();
             }
-
+        }else{
+            CustomLogger.createLogMsgAndSave("Unable to " + cmd.toString() + " database");
         }
-        return retFile;
+
+        CustomLogger.createLogMsgAndSave("Done altering table");
+
     }
 }

@@ -1,5 +1,5 @@
-CREATE DATABASE  IF NOT EXISTS `assign1_db_augustus` /*!40100 DEFAULT CHARACTER SET utf8 */;
-USE `assign1_db_augustus`;
+CREATE DATABASE  IF NOT EXISTS `assign2_db_augustus` /*!40100 DEFAULT CHARACTER SET utf8 */;
+USE `assign2_db_augustus`;
 -- MySQL dump 10.13  Distrib 5.7.12, for Win64 (x86_64)
 --
 -- Host: 127.0.0.1    Database: assign1_db_augustus
@@ -26,14 +26,14 @@ DROP TABLE IF EXISTS `customers`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `customers` (
   `idcustomers` int(11) NOT NULL AUTO_INCREMENT,
-  `last_name` varchar(30) DEFAULT NULL,
-  `first_name` varchar(30) DEFAULT NULL,
-  `email_addr` varchar(50) DEFAULT NULL,
-  `home_addr` varchar(60) DEFAULT NULL,
+  `lastName` varchar(30) DEFAULT NULL,
+  `firstName` varchar(30) DEFAULT NULL,
+  `emailAddress` varchar(50) DEFAULT NULL,
+  `homeAddress` varchar(60) DEFAULT NULL,
   `city` varchar(40) DEFAULT NULL,
   `state` varchar(50) DEFAULT NULL,
-  `zip_code` varchar(15) DEFAULT NULL,
-  `time_stamp` datetime DEFAULT NULL,
+  `zipCode` varchar(15) DEFAULT NULL,
+  `timeStamp` datetime DEFAULT NULL,
   PRIMARY KEY (`idcustomers`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;

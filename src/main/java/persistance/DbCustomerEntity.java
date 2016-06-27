@@ -123,7 +123,7 @@ public class DbCustomerEntity {
             stringBuilder.append(timeStamp);
         }
 
-        return customerString;
+        return stringBuilder.toString();
     }
 
 
