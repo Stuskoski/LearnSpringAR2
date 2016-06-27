@@ -7,6 +7,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import util.CreateEmailMessage;
 import util.SendCustomersViaEmail;
 
 /**
@@ -31,15 +33,17 @@ public class EmailController {
     }
 
     @RequestMapping(value = "/populateSortedCustomers", method = RequestMethod.GET)
-    public String sendTXSortedEmail(){
+    public @ResponseBody
+    String populateSortedCustomers(){
         //SendCustomersViaEmail.sendEmail("rutkoski.augustus@heb.com", "rutkoski.augustus@heb.com", "Test Subject", "Test MSG");
-        return "redirect:/email";
+        return CreateEmailMessage.getSortedEmail();
     }
 
     @RequestMapping(value = "/populateUnsortedCustomers", method = RequestMethod.GET)
-    public String sendUnsortedEmail(){
+    public @ResponseBody
+    String populateUnsortedCustomers(){
         //SendCustomersViaEmail.sendUnsortedEmail("rutkoski.augustus@heb.com", "rutkoski.augustus@heb.com", "Test Subject", "Test MSG");
-        return "redirect:/email";
+        return CreateEmailMessage.getUnsortedEmail();
     }
 
 

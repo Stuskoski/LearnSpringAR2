@@ -2,6 +2,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
+<script src="<c:url value="/resources/js/getListOfUsers.js"/>"></script>
+
 <div id="web-form-wrapper">
     <div id="add-customer-web-form">
         <div class="col-lg-4 col-md-4 col-sm-2 col-xs-0"></div>
@@ -28,17 +30,13 @@
                     <form:textarea path="message" id="message" cssClass="form-control" placeholder="Email Message"
                                    required="true"/>
                 </fieldset>
-                <div class="container-fluid text-center">
-                    <div>
-                        <a class="btn btn-danger btn-xs non-block"
-                           href="${pageContext.request.contextPath}/email/populateSortedCustomers">Populate Sorted
-                            Customers</a>
-                    </div>
-                    <div>
-                        <a class="btn btn-danger btn-xs non-block"
-                           href="${pageContext.request.contextPath}/email/populateUnsortedCustomers">Populate Unsorted
-                            Customers</a>
-                    </div>
+                <div class="container-fluid text-center non-block" id="populateEmailButtonsDiv">
+                    <button type="button" class="btn btn-danger btn-x" onclick="getSortedCustomers()">
+                        Populate Sorted Customers
+                    </button>
+                    <button type="button" class="btn btn-danger btn-x" onclick="getUnsortedCustomers()">
+                        Populate Unsorted Customers
+                    </button>
                 </div>
                 <div id="submit-customer-btn-div">
                     <button type="submit" id="submit-customer-btn" class="btn btn-primary">Submit</button>
@@ -48,5 +46,7 @@
         <div class="col-lg-4 col-md-4 col-sm-2 col-xs-0"></div>
     </div>
 </div>
+
+
 
 

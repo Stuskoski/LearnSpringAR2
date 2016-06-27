@@ -22,11 +22,11 @@ function enableLink(id){
  */
 function deleteCustomer(id){
     var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
+    /*xhttp.onreadystatechange = function() {
         if (xhttp.readyState == 4 && xhttp.status == 200) {
             document.getElementById("demo").innerHTML = xhttp.responseText;
         }
-    };
+    };*/
     xhttp.open("POST", "/remove/"+id, true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhttp.send();
@@ -74,11 +74,7 @@ function editCustomer(id){
 
 
     var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
-        if (xhttp.readyState == 4 && xhttp.status == 200) {
-            document.getElementById("demo").innerHTML = xhttp.responseText;
-        }
-    };
+
     xhttp.open("POST", "/customer/add", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
