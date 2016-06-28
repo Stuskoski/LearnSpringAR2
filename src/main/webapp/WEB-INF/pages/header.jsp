@@ -50,12 +50,20 @@
 
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                               aria-haspopup="true" aria-expanded="false">Information<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li class="dropdown-header">Information</li>
+                                <li><a href="${pageContext.request.contextPath}/logging">Logging</a></li>
+                                <li><a href="${pageContext.request.contextPath}/email">Email</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                                aria-haspopup="true" aria-expanded="false">Other<span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li class="dropdown-header">Other</li>
                                 <li><a href="${pageContext.request.contextPath}/settings">Settings</a></li>
-                                <li><a href="${pageContext.request.contextPath}/logging">Logging</a></li>
-                                <li><a href="${pageContext.request.contextPath}/email">Email</a></li>
                             </ul>
                         </li>
                     </ul>

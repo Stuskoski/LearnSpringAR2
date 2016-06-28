@@ -20,7 +20,7 @@ public class GetDatabaseConnection {
 
         CustomLogger.createLogMsgAndSave(ConfigFileController.getDatabaseURL());
         CustomLogger.createLogMsgAndSave(ConfigFileController.getDatabaseUser());
-        CustomLogger.createLogMsgAndSave(ConfigFileController.getDatabasePass());
+        CustomLogger.createLogMsgAndSave("********");
 
         try {
             DriverManager.registerDriver(new com.mysql.jdbc.Driver()); //would not work without this guy
@@ -33,7 +33,7 @@ public class GetDatabaseConnection {
         if (conn1 != null) {
             CustomLogger.createLogMsgAndSave("Connection established");
         }else{
-            CustomLogger.createLogMsgAndSave("Unable to retrieve database connection");
+            CustomLogger.createLogErrorAndSave("Unable to retrieve database connection");
         }
 
         return conn1;
@@ -45,7 +45,7 @@ public class GetDatabaseConnection {
 
         CustomLogger.createLogMsgAndSave(ConfigFileController.getDatabaseURL());
         CustomLogger.createLogMsgAndSave(ConfigFileController.getDatabaseUser());
-        CustomLogger.createLogMsgAndSave(ConfigFileController.getDatabasePass());
+        CustomLogger.createLogMsgAndSave("********");
 
         try {
             DriverManager.registerDriver(new com.mysql.jdbc.Driver()); //would not work without this guy
@@ -58,7 +58,7 @@ public class GetDatabaseConnection {
         if (conn1 != null) {
             CustomLogger.createLogMsgAndSave("Connection established");
         }else{
-            CustomLogger.createLogMsgAndSave("Unable to retrieve database connection");
+            CustomLogger.createLogErrorAndSave("Unable to retrieve database connection");
         }
 
         return conn1;

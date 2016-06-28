@@ -26,7 +26,7 @@ public class CustomLogger {
         String logMsg = date.toString() + ": " + msg;
 
         logger.info(logMsg);
-        logStringBuilder.append(logMsg);
+        logStringBuilder.append("<div>").append(logMsg).append("</div>");
     }
 
     /**
@@ -38,8 +38,8 @@ public class CustomLogger {
 
         String logMsg = date.toString() + ": " + msg;
 
-        logger.info(logMsg);
-        logStringBuilder.append(logMsg);
+        logger.error(logMsg);
+        logStringBuilder.append("<div>").append(logMsg).append("</div>");
     }
 
     /**
@@ -48,7 +48,16 @@ public class CustomLogger {
      *
      * @return String builders contents - All logs
      */
-    public static String getLogStringBuilderContents() {
+    public static String getLogStringBuilderContentsAsHtml() {
         return logStringBuilder.toString();
+    }
+
+
+    /**
+     * sets the length of the string builder
+     * to 0 to clear all logs
+     */
+    public static void clearLogs(){
+        logStringBuilder.setLength(0);
     }
 }
