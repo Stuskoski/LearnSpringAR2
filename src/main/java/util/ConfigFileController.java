@@ -50,4 +50,19 @@ public class ConfigFileController {
         ConfigFileController.mailHost = host;
     }
 
+    //Temporary file changes here
+    public void setDatabaseURLStatic(String url){
+        ConfigFileController.databaseURL = url;
+    }
+    public void setRootDatabaseURLStatic(String rootURL) { ConfigFileController.rootDatabaseURL = rootURL; }
+    public void setDatabaseUserStatic(String user){
+        ConfigFileController.databaseUser = user;
+    }
+    public void setDatabasePassStatic(String pass){
+        ConfigFileController.databasePass = pass;
+    }
+    public void setMailHostStatic(String host){
+        ConfigFileController.mailHost = host;
+    }
+
 }
