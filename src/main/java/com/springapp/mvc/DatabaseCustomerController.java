@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-import persistance.CustomerSpringService;
-import persistance.DbCustomerEntity;
+import persistance.hibernateObjects.customer.CustomerSpringService;
+import persistance.hibernateObjects.customer.DbCustomerEntity;
 
 import java.io.File;
 
@@ -41,6 +41,7 @@ public class DatabaseCustomerController {
         if(DatabaseConnections.getDB()!=null){
             model.addAttribute("DbCustomerEntity", new DbCustomerEntity());
             model.addAttribute("listCustomers", this.customerSpringService.listCustomers());
+            DatabaseConnections.clearDBConnection();
             return "viewCustomers";
         }else{
             return "redirect:/"; //todo redirect to error page

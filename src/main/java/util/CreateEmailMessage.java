@@ -1,6 +1,6 @@
 package util;
 
-import persistance.DbCustomerEntity;
+import persistance.hibernateObjects.customer.DbCustomerEntity;
 
 import java.util.ArrayList;
 

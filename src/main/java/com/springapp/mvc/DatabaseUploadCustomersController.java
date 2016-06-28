@@ -1,10 +1,10 @@
 package com.springapp.mvc;
 
-import models.Customer;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import persistance.hibernateObjects.customer.DbCustomerEntity;
 
 
 /**
@@ -25,7 +25,7 @@ public class DatabaseUploadCustomersController {
 
     @RequestMapping(value = "/webFormUpload", method = RequestMethod.GET)
     public String getUploadCustomerViaWebFormPage(Model model){
-        model.addAttribute("customer", new Customer());
+        model.addAttribute("customer", new DbCustomerEntity());
         return "uploadCustomersViaWebForm";
     }
 }

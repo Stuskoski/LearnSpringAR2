@@ -2,7 +2,7 @@ package util;
 
 import databaseActions.DatabaseConnections;
 import fileActions.CustomLogger;
-import persistance.DbCustomerEntity;
+import persistance.hibernateObjects.customer.DbCustomerEntity;
 
 import java.sql.Connection;
 import java.sql.ResultSet;

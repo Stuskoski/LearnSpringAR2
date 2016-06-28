@@ -1,4 +1,4 @@
-package persistance;
+package persistance.hibernateObjects.customer;
 
 import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;

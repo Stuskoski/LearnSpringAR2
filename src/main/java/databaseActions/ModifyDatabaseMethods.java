@@ -10,43 +10,6 @@ import java.sql.Statement;
 
 public class ModifyDatabaseMethods {
     /**
-     * Created by r730819 on 6/15/2016.
-     * This method will get a SQL connection
-     * and simply update all the time stamps
-     * of every customer is the
-     *
-     */
-
-    public static void updateTimeStampAfterEmail(){
-        Statement statement;
-        String sqlStr;
-
-        Connection connection = DatabaseConnections.getDB();
-
-        if(connection!=null){
-            CustomLogger.createLogMsgAndSave("Attempting to update email timestamps");
-            try {
-                statement = connection.createStatement();
-
-                sqlStr = "UPDATE customers " +
-                         "SET timeStamp = NOW()";
-
-                statement.executeUpdate(sqlStr);
-
-            } catch (SQLException e) {
-                CustomLogger.createLogErrorAndSave("Unable to update email timestamps");
-                CustomLogger.createLogErrorAndSave(e.getMessage());
-                DatabaseConnections.clearDBConnection();
-            }
-        }else{
-            CustomLogger.createLogErrorAndSave("Unable to update email timestamps");
-        }
-
-        CustomLogger.createLogMsgAndSave("Done altering email timestamps");
-        DatabaseConnections.clearDBConnection();
-    }
-
-    /**
      * Combined 3 methods into one that takes a string
      * as an action to either make, clear(truncate), or
      * delete(drop) the database.

@@ -1,9 +1,6 @@
 package fileActions;
 
-import databaseActions.UploadCustomerIntoDatabase;
-import models.Customer;
-import models.CustomerArrayList;
-import persistance.DbCustomerEntity;
+import persistance.hibernateObjects.customer.DbCustomerEntity;
 
 import java.io.BufferedReader;
 import java.io.File;

@@ -1,7 +1,6 @@
-package persistance;
+package persistance.hibernateObjects.customer;
 
 import fileActions.CustomLogger;
-import models.Customer;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
@@ -14,7 +13,7 @@ import java.util.List;
  */
 
 @Repository
-public class CustomerDAOImplementation implements CustomerDAO{
+public class CustomerDAOImplementation implements CustomerDAO {
 
     private SessionFactory sessionFactory;
 
@@ -51,8 +50,9 @@ public class CustomerDAOImplementation implements CustomerDAO{
     @Override
     public List<DbCustomerEntity> listCustomers() {
         Session session = this.sessionFactory.getCurrentSession();
-       // String qry = "FROM " + "customers";
-        List<DbCustomerEntity> customerList = (List<DbCustomerEntity>)session.createQuery("from persistance.DbCustomerEntity").list();
+        //Line below does not change on refactor.  Remember this
+        List<DbCustomerEntity> customerList = (List<DbCustomerEntity>)
+                session.createQuery("from persistance.hibernateObjects.customer.DbCustomerEntity").list();
         if(customerList.size() <= 500){
             CustomLogger.createLogMsgAndSave("Reading Customers");
             for (DbCustomerEntity customer : customerList){

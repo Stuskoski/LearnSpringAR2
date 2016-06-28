@@ -1,27 +1,51 @@
-package models;
+package persistance.hibernateObjects.customer;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
- * A person object that is created
- * in FileActions.ReadFile.  All details
- * must be present for object to be created.
+ * Created by r730819 on 6/24/2016.
  *
- * These person objects are stored in a
- * static array list contained in
- * PeopleModels.CustomerArrayList which
- * is populated in FileActions.ReadFile.
- *
- * todo set private access with getters/setters
- *
- * Created by r730819 on 6/15/2016.
+ * Entity that represents the customers
+ * table in the mysql database
  */
-public class Customer {
+
+@Entity
+@Table(name = "customers")
+public class DbCustomerEntity {
+
+    @Id
+    @Column(name = "idcustomers")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
     private String lastName;
+
     private String firstName;
+
     private String emailAddress;
+
     private String homeAddress;
+
     private String city;
+
     private String state;
+
     private String zipCode;
+
+    private String timeStamp;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getLastName() {
         return lastName;
@@ -80,23 +104,30 @@ public class Customer {
     }
 
     public String getTimeStamp() {
-        return timeStamp;
+        return timeStamp.substring(0, timeStamp.length()-2); //no idea why .0 is added at the end.  Substring it off
     }
 
     public void setTimeStamp(String timeStamp) {
         this.timeStamp = timeStamp;
     }
 
-    public int getCustomerNum() {
-        return customerNum;
-    }
 
-    public void setCustomerNum(int customerNum) {
-        this.customerNum = customerNum;
-    }
+    @Override
+    public String toString(){
+        String customerString = "";
+        StringBuilder stringBuilder = new StringBuilder(customerString);
 
-    private String timeStamp;
-    private int customerNum;
+        stringBuilder.append("Customer #" + id + "\n");
+        stringBuilder.append(lastName + ", " + firstName + "\n");
+        stringBuilder.append(emailAddress + "\n");
+        stringBuilder.append(homeAddress + "\n");
+        stringBuilder.append(city + " " + state + " " + zipCode + "\n");
+        if(timeStamp!=null && !timeStamp.equals("")){
+            stringBuilder.append(timeStamp);
+        }
+
+        return stringBuilder.toString();
+    }
 
 
 }
