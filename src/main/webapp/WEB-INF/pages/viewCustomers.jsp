@@ -8,14 +8,9 @@
 
 <c:url var="addAction" value="/customer/add"></c:url>
 
-
-<script src="<c:url value="/resources/js/editUserJS.js"/>"></script>
-
-<br>
-
 <div class="container">
 <h2>Customers</h2>
-    <table class="table table-striped">
+    <table class="table table-striped table-bordered" id="customerTable">
         <thead>
         <tr>
             <th>ID</th>
@@ -27,6 +22,8 @@
             <th>State</th>
             <th>Zip Code</th>
             <th>Time Stamp</th>
+            <th>Edit</th>
+            <th>Removal</th>
         </tr>
         </thead>
         <tbody>
@@ -50,4 +47,9 @@
         </tbody>
     </table>
 </div>
+
+<script src="<c:url value="/resources/js/editUserJS.js"/>"></script>
+<script src="<c:url value="/resources/js/jquery-1.12.3.js"/>"></script>
+<script src="<c:url value="/resources/js/jquery.dataTables.min.js"/>"></script>
+<link href="<c:url value="/resources/css/jquery.dataTables.min.css"/>" rel="stylesheet">
 

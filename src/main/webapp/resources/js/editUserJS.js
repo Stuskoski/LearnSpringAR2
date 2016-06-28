@@ -114,3 +114,8 @@ function alertMe(){
 /*    </script>*/
 }
 
+//Turn the table into a sortable data table with jquery
+$(document).ready(function() {
+    $('#customerTable').DataTable();
+} );
+

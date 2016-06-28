@@ -13,15 +13,42 @@ import java.util.Date;
  */
 public class CustomLogger {
     private static Logger logger = (Logger) LogManager.getLogger();
+    private static String allLogs = "";
+    private static StringBuilder logStringBuilder = new StringBuilder(allLogs);
 
     /**
-     * Logs but with no color so default is black
+     * Logs into information
      * @param msg msg to be logged
      */
     public static void createLogMsgAndSave(String msg){
-
         Date date = new Date();
 
-        logger.info(date.toString() + ": " + msg);
+        String logMsg = date.toString() + ": " + msg;
+
+        logger.info(logMsg);
+        logStringBuilder.append(logMsg);
+    }
+
+    /**
+     * Logs into error
+     * @param msg msg to be logged
+     */
+    public static void createLogErrorAndSave(String msg){
+        Date date = new Date();
+
+        String logMsg = date.toString() + ": " + msg;
+
+        logger.info(logMsg);
+        logStringBuilder.append(logMsg);
+    }
+
+    /**
+     * returns the contents of the string builder
+     * which is all the logs.
+     *
+     * @return String builders contents - All logs
+     */
+    public static String getLogStringBuilderContents() {
+        return logStringBuilder.toString();
     }
 }
