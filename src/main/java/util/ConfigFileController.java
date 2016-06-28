@@ -51,17 +51,17 @@ public class ConfigFileController {
     }
 
     //Temporary file changes here
-    public void setDatabaseURLStatic(String url){
+    public static void setDatabaseURLStatic(String url){
         ConfigFileController.databaseURL = url;
     }
-    public void setRootDatabaseURLStatic(String rootURL) { ConfigFileController.rootDatabaseURL = rootURL; }
-    public void setDatabaseUserStatic(String user){
+    public static void setRootDatabaseURLStatic(String rootURL) { ConfigFileController.rootDatabaseURL = rootURL; }
+    public static void setDatabaseUserStatic(String user){
         ConfigFileController.databaseUser = user;
     }
-    public void setDatabasePassStatic(String pass){
+    public static void setDatabasePassStatic(String pass){
         ConfigFileController.databasePass = pass;
     }
-    public void setMailHostStatic(String host){
+    public static void setMailHostStatic(String host){
         ConfigFileController.mailHost = host;
     }
 

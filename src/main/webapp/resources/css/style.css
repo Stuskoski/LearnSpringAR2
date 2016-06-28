@@ -62,8 +62,11 @@
 }
 
 /*----------------------------------- Email Page -------------------------*/
-#populateEmailButtonsDiv{
-
+#toEmail, #fromEmail, #subject, #message{
+    max-width: 32em;
+}
+#message{
+    height: 12em;
 }
 /*----------------------------------- Logging Page -------------------------*/
 .logError{
@@ -72,8 +75,110 @@
 .logInfo{
     color: darkgreen;
 }
-/*-----------------------------------HOME -------------------------*/
-/*-----------------------------------HOME -------------------------*/
+/*----------------------------------- Settings Page -------------------------*/
+#saveAlert{
+    left: 50%;
+    top: 50%;
+    color: red;
+    font-size: 12px;
+    width: 55%;
+}
+/*----------------------------------- Loading Overlay -------------------------*/
+#loadingAnimationBorder{
+    background:rgba(0,0,0,0.3);
+    width: 20em;
+    height: 15em;
+    margin: auto;
+    display: block;
+    position: fixed;
+    left: 40%;
+    top: 40%;
+    text-align: center;
+    border-radius: 20px;
+}
+.loading {
+    -moz-animation: loading 5s cubic-bezier(0.680, -0.550, 0.265, 1.550) infinite;
+    -webkit-animation: loading 5s cubic-bezier(0.680, -0.550, 0.265, 1.550) infinite;
+    animation: loading 5s cubic-bezier(0.680, -0.550, 0.265, 1.550) infinite;
+}
+.loading,
+.loading:before,
+.loading:after {
+    color: white;
+    font-size: 30px;
+    font-weight: bolder;
+    background-color: red;
+    display: inline-block;
+    height: 40px;
+    margin: auto;
+    top: 40%;
+    position: relative;
+    border-radius: 25px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.loading:before,
+.loading:after{
+    display: block;
+    position: relative;
+    -webkit-transform: rotate(0deg);
+}
+.loading:after {
+    left: auto;
+}
+@-moz-keyframes loading {
+    0% {
+        -moz-transform: rotate(0deg);
+    }
+    25% {
+        -moz-transform: rotate(180deg);
+    }
+    50% {
+        -moz-transform: rotate(360deg);
+    }
+    75% {
+        -moz-transform: rotate(180deg);
+    }
+   /* 100% {
+        -moz-transform: rotate(360deg);
+    }*/
+}
+@-webkit-keyframes loading {
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+    25% {
+        -webkit-transform: rotate(180deg);
+    }
+    50% {
+        -webkit-transform: rotate(360deg);
+    }
+    75% {
+        -webkit-transform: rotate(180deg);
+    }
+   /* 100% {
+        -webkit-transform: rotate(360deg);
+    }*/
+}
+
+@keyframes loading {
+    0% {
+        transform: rotate(0deg);
+    }
+    25% {
+        transform: rotate(180deg);
+    }
+
+    50% {
+        transform: rotate(360deg);
+    }
+    75% {
+        transform: rotate(180deg);
+    }
+    /*100% {
+        transform: rotate(360deg);
+    }*/
+}
 /*-----------------------------------HOME -------------------------*/
 /*-----------------------------------HOME -------------------------*/
 /*-----------------------------------HOME -------------------------*/

@@ -83,3 +83,7 @@
             </div>
         </nav>
     </div>
+    <%-- add the loading page to every page.
+         not sure if I like it just yet or
+         only to add on long loading pages--%>
+<jsp:include page="loadingAnimation.jsp"/>

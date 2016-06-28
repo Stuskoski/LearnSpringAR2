@@ -104,7 +104,11 @@ public class DbCustomerEntity {
     }
 
     public String getTimeStamp() {
-        return timeStamp.substring(0, timeStamp.length()-2); //no idea why .0 is added at the end.  Substring it off
+        if(timeStamp!=null && timeStamp.length()>3){
+            return timeStamp.substring(0, timeStamp.length()-2); //no idea why .0 is added at the end.  Substring it off
+        }else{
+            return "";
+        }
     }
 
     public void setTimeStamp(String timeStamp) {

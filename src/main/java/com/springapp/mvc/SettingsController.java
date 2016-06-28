@@ -1,13 +1,14 @@
 package com.springapp.mvc;
 
+import models.SettingsTemplate;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import util.ConfigFileController;
-
-import java.lang.reflect.Method;
 
 /**
  * Created by r730819 on 6/22/2016.
@@ -29,12 +30,29 @@ public class SettingsController {
 
 
     @RequestMapping(method = RequestMethod.GET)
-    public String getSettingsPage(ModelMap modelMap){
+    public String getSettingsPage(ModelMap modelMap, Model model){
         modelMap.addAttribute("dbURL", dbURL);
         modelMap.addAttribute("rootURL", rootURL);
         modelMap.addAttribute("dbUser", dbUser);
         modelMap.addAttribute("dbPass", dbPass);
         modelMap.addAttribute("mailHost", mailHost);
+
+        model.addAttribute("settingsTemplate", new SettingsTemplate(ConfigFileController.getDatabaseURL(),
+                ConfigFileController.getRootDatabaseURL(), ConfigFileController.getDatabaseUser(),
+                ConfigFileController.getDatabasePass(), ConfigFileController.getMailHost()));
+
         return "settings";
+    }
+
+    @RequestMapping(method = RequestMethod.POST, value = "/changeSettings")
+    public
+    String changeSettings(@ModelAttribute("settingsTemplate") SettingsTemplate settingsTemplate){
+        ConfigFileController.setDatabaseURLStatic(settingsTemplate.getDatabaseURL());
+        ConfigFileController.setRootDatabaseURLStatic(settingsTemplate.getRootDatabaseURL());
+        ConfigFileController.setDatabaseUserStatic(settingsTemplate.getDatabaseUser());
+        ConfigFileController.setDatabasePassStatic(settingsTemplate.getDatabasePass());
+        ConfigFileController.setMailHostStatic(settingsTemplate.getMailHost());
+
+        return "redirect:/settings";
     }
 }

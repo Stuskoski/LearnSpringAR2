@@ -49,6 +49,7 @@ public class CustomLogger {
      * @return String builders contents - All logs
      */
     public static String getLogStringBuilderContentsAsHtml() {
+        CustomLogger.createLogMsgAndSave("Getting logs");
         return logStringBuilder.toString();
     }
 
@@ -58,6 +59,7 @@ public class CustomLogger {
      * to 0 to clear all logs
      */
     public static void clearLogs(){
+        CustomLogger.createLogMsgAndSave("Clearing logs");
         logStringBuilder.setLength(0);
     }
 }
