@@ -26,7 +26,7 @@ public class CustomLogger {
         String logMsg = date.toString() + ": " + msg;
 
         logger.info(logMsg);
-        logStringBuilder.append("<div>").append(logMsg).append("</div>");
+        logStringBuilder.append("<div class=\"logInfo\">").append(logMsg).append("</div>");
     }
 
     /**
@@ -39,7 +39,7 @@ public class CustomLogger {
         String logMsg = date.toString() + ": " + msg;
 
         logger.error(logMsg);
-        logStringBuilder.append("<div>").append(logMsg).append("</div>");
+        logStringBuilder.append("<div class=\"logError\">").append(logMsg).append("</div>");
     }
 
     /**

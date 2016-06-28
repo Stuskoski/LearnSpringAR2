@@ -5,7 +5,13 @@ function refreshLogs() {
         url: 'logging/getLogs',
         timeout: 2000,
         success: function(data) {
-            $("#logContainer").html(data);
+
+            if(data == ""){
+                $("#logContainer").html("No logs available");
+            }else{
+                $("#logContainer").html(data);
+            }
+
             $("#noticeContainer").html('');
             window.setTimeout(update, 10000);
         },

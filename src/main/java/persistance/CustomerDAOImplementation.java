@@ -54,11 +54,12 @@ public class CustomerDAOImplementation implements CustomerDAO{
        // String qry = "FROM " + "customers";
         List<DbCustomerEntity> customerList = (List<DbCustomerEntity>)session.createQuery("from persistance.DbCustomerEntity").list();
         if(customerList.size() <= 500){
+            CustomLogger.createLogMsgAndSave("Reading Customers");
             for (DbCustomerEntity customer : customerList){
                  CustomLogger.createLogMsgAndSave("Customer Info: \n"+customer.toString());
             }
         }else{
-            CustomLogger.createLogMsgAndSave("Customer list too large to list all customers. 500 or less.");
+            CustomLogger.createLogErrorAndSave("Customer list too large to list all customers. 500 or less.");
         }
 
         return customerList;
@@ -77,8 +78,8 @@ public class CustomerDAOImplementation implements CustomerDAO{
         Session session = this.sessionFactory.getCurrentSession();
         DbCustomerEntity customer = (DbCustomerEntity) session.load(DbCustomerEntity.class, new Integer(id));
         if(customer != null){
+            CustomLogger.createLogMsgAndSave("Customer deleted successfully, customer details: "+customer.toString());
             session.delete(customer);
         }
-        CustomLogger.createLogMsgAndSave("Customer deleted successfully, customer details = " + (customer != null ? customer.toString() : null));
     }
 }

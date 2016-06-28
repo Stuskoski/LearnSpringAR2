@@ -1,8 +1,7 @@
 package util;
 
-import databaseActions.GetDatabaseConnection;
+import databaseActions.DatabaseConnections;
 import fileActions.CustomLogger;
-import models.CustomerArrayListDownloadedFromDB;
 import persistance.DbCustomerEntity;
 
 import javax.mail.Message;
@@ -186,7 +185,7 @@ public class SendCustomersViaEmail {
 
         CustomLogger.createLogMsgAndSave("Attempting to pull customers from database");
 
-        connection = GetDatabaseConnection.getDB(); //false for prompt screen
+        connection = DatabaseConnections.getDB(); //false for prompt screen
 
         if(connection!=null) {
 

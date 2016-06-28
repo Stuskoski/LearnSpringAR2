@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 @Component
 public class ConfigFileController {
     private static String databaseURL;
+    private static String rootDatabaseURL;
     private static String databaseUser;
     private static String databasePass;
     private static String mailHost;
@@ -19,25 +20,23 @@ public class ConfigFileController {
     public static String getDatabaseURL() {
         return databaseURL;
     }
-
+    public static String getRootDatabaseURL(){ return  rootDatabaseURL; }
     public static String getDatabaseUser() {
         return databaseUser;
     }
-
     public static String getDatabasePass() {
         return databasePass;
     }
-
     public static String getMailHost() {
         return mailHost;
     }
-
-
 
     @Value("${db.url}")
     public void setDatabaseURL(String url){
         ConfigFileController.databaseURL = url;
     }
+    @Value("${db.rootUrl}")
+    public void setRootDatabaseURL(String rootURL) { ConfigFileController.rootDatabaseURL = rootURL; }
     @Value("${db.user}")
     public void setDatabaseUser(String user){
         ConfigFileController.databaseUser = user;
@@ -50,8 +49,5 @@ public class ConfigFileController {
     public void setMailHost(String host){
         ConfigFileController.mailHost = host;
     }
-
-
-
 
 }

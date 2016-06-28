@@ -2,12 +2,10 @@ package databaseActions;
 
 import fileActions.CustomLogger;
 import models.Customer;
-import models.CustomerArrayList;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 
 /**
@@ -21,7 +19,7 @@ public class UploadCustomerIntoDatabase {
 
         CustomLogger.createLogMsgAndSave("Attempting to upload data from file to database");
 
-        connection = GetDatabaseConnection.getDB();
+        connection = DatabaseConnections.getDB();
 
         if(connection!=null){
             try {
@@ -61,7 +59,7 @@ public class UploadCustomerIntoDatabase {
 
         if(!customerArrayList.isEmpty()){
 
-            connection = GetDatabaseConnection.getDB();
+            connection = DatabaseConnections.getDB();
 
             if(connection!=null) {
                 CustomLogger.createLogMsgAndSave("Connection achieved");

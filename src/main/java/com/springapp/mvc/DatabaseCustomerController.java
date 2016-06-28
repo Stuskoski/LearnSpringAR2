@@ -1,10 +1,9 @@
 package com.springapp.mvc;
 
-import databaseActions.GetDatabaseConnection;
+import databaseActions.DatabaseConnections;
 import fileActions.CreateTempCustomerFile;
 import fileActions.CustomLogger;
 import fileActions.ReadFile;
-import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -15,15 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.web.servlet.mvc.support.RedirectAttributesModelMap;
 import persistance.CustomerSpringService;
 import persistance.DbCustomerEntity;
-import java.io.BufferedOutputStream;
+
 import java.io.File;
-import java.io.FileOutputStream;
-import java.sql.Connection;
-import java.util.ArrayList;
 
 /**
  * Created by r730819 on 6/24/2016.
@@ -44,7 +38,7 @@ public class DatabaseCustomerController {
     public String listCustomers(Model model){
 
         //if a database connection can be made, redirect to view customers with the data, else go back home
-        if(GetDatabaseConnection.getDB()!=null){
+        if(DatabaseConnections.getDB()!=null){
             model.addAttribute("DbCustomerEntity", new DbCustomerEntity());
             model.addAttribute("listCustomers", this.customerSpringService.listCustomers());
             return "viewCustomers";

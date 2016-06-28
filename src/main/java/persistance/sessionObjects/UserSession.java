@@ -1,4 +1,4 @@
-package sessionObjects;
+package persistance.sessionObjects;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;

@@ -1,6 +1,6 @@
 package util;
 
-import databaseActions.GetDatabaseConnection;
+import databaseActions.DatabaseConnections;
 import fileActions.CustomLogger;
 import persistance.DbCustomerEntity;
 
@@ -26,7 +26,7 @@ public class GetUsersAndAddToArrayList {
 
         CustomLogger.createLogMsgAndSave("Attempting to pull customers from database");
 
-        connection = GetDatabaseConnection.getDB(); //false for prompt screen
+        connection = DatabaseConnections.getDB(); //false for prompt screen
 
         if(connection!=null) {
 

@@ -21,7 +21,7 @@ public class ModifyDatabaseMethods {
         Statement statement;
         String sqlStr;
 
-        Connection connection = GetDatabaseConnection.getDB();
+        Connection connection = DatabaseConnections.getDB();
 
         if(connection!=null){
             CustomLogger.createLogMsgAndSave("Attempting to update email timestamps");
@@ -34,11 +34,16 @@ public class ModifyDatabaseMethods {
                 statement.executeUpdate(sqlStr);
 
             } catch (SQLException e) {
-                CustomLogger.createLogMsgAndSave("Unable to update email timestamps");
+                CustomLogger.createLogErrorAndSave("Unable to update email timestamps");
+                CustomLogger.createLogErrorAndSave(e.getMessage());
+                DatabaseConnections.clearDBConnection();
             }
         }else{
-            CustomLogger.createLogMsgAndSave("Unable to update email timestamps");
+            CustomLogger.createLogErrorAndSave("Unable to update email timestamps");
         }
+
+        CustomLogger.createLogMsgAndSave("Done altering email timestamps");
+        DatabaseConnections.clearDBConnection();
     }
 
     /**
@@ -50,13 +55,13 @@ public class ModifyDatabaseMethods {
      *            either create, clear or delete the
      *            customer table
      */
-    public static void makeClearDeleteDB(DatabaseCommands cmd) { //todo use enum for readability
+    public static void makeClearDeleteDB(DatabaseCommands cmd) { //todo enums in place
         CustomLogger.createLogMsgAndSave("Attempting to modify database");
         Connection connection;
         Statement statement;
         String sqlStr;
 
-        connection = GetDatabaseConnection.getDBConnectionWithDefaultDB();
+        connection = DatabaseConnections.getDBConnectionWithDefaultDB();
 
         if(connection != null){
             try {
@@ -70,7 +75,7 @@ public class ModifyDatabaseMethods {
                         statement.executeUpdate(sqlStr);
 
                         //create new connection with the new database specified
-                        connection = GetDatabaseConnection.getDB();
+                        connection = DatabaseConnections.getDB();
                         statement = connection.createStatement();
 
                         //drop the table if it exists
@@ -115,14 +120,17 @@ public class ModifyDatabaseMethods {
                         break;
                 }
             } catch (SQLException e) {
-                CustomLogger.createLogMsgAndSave("Unable to " + cmd.toString() + " database");
+                CustomLogger.createLogErrorAndSave("Unable to " + cmd.toString() + " database");
+                CustomLogger.createLogErrorAndSave(e.getMessage());
                 e.printStackTrace();
+                DatabaseConnections.clearRootDBConnection();
             }
         }else{
-            CustomLogger.createLogMsgAndSave("Unable to " + cmd.toString() + " database");
+            CustomLogger.createLogErrorAndSave("Unable to " + cmd.toString() + " database");
         }
 
         CustomLogger.createLogMsgAndSave("Done altering table");
+        DatabaseConnections.clearRootDBConnection();
 
     }
 }
