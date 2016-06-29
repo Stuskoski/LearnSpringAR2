@@ -65,6 +65,9 @@
     color: red;
 }
 
+#customerTable{
+
+}
 /*----------------------------------- Email Page -------------------------*/
 #toEmail, #fromEmail, #subject, #message{
     max-width: 32em;
@@ -220,7 +223,7 @@
 
 
 
-/*-----------------------------------HOME -------------------------*/
+/*----------------------------------- HOME/DASHBOARD -------------------------*/
 
 /* Remove the navbar's default margin-bottom and rounded borders */
 .navbar {
@@ -234,11 +237,64 @@
 .sidenav {
     background-color: #f1f1f1;
     height: 100%;
+    bottom: 0;
 }
 
 /* On small screens, set height to 'auto' for the grid */
 @media screen and (max-width: 767px) {
     .row.content {height: auto;}
+}
+
+.non-link{
+    cursor: pointer;
+}
+
+/* bootstrap 3 helpers */
+
+.navbar-form input, .form-inline input {
+    width:auto;
+}
+
+header {
+    height:270px;
+}
+
+@media (min-width: 979px) {
+    #sidebar.affix-top {
+        position: static;
+        margin-top:50px;
+        width:170px;
+    }
+
+    #sidebar.affix {
+        position: fixed;
+        top:50px;
+        width:170px;
+    }
+}
+
+.affix,.affix-top {
+    position:static;
+}
+
+#dashboard-container{
+    margin-top: 2em;
+}
+
+.custom-active-nav-link{
+    background: red;
+    color: white;
+    border-radius: 5px;
+    font-weight: 700;
+}
+.custom-active-nav-link:hover{
+    background-color: white;
+}
+.custom-active-nav-link:hover a{
+    color: red;
+}
+.custom-active-nav-link a{
+    color: white;
 }
 
 /*----------------------------END HOME ----------------------------*/

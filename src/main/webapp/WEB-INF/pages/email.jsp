@@ -1,13 +1,9 @@
-<jsp:include page="header.jsp"/>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-<script src="<c:url value="/resources/js/getListOfUsers.js"/>"></script>
-
 <div id="web-form-wrapper">
     <div id="add-customer-web-form">
-        <div class="col-lg-4 col-md-4 col-sm-2 col-xs-0"></div>
-        <div class="col-lg-4 col-md-4 col-sm-8 col-xs-12 signupContent">
+        <div class="signupContent">
             <form:form method="post" modelAttribute="emailMessageTemplate" action="/email/sendEmail">
                 <div id="upload-customer-title">Send Email</div>
                 <fieldset class="form-group">
@@ -43,7 +39,6 @@
                 </div>
             </form:form>
         </div>
-        <div class="col-lg-4 col-md-4 col-sm-2 col-xs-0"></div>
     </div>
 </div>
 

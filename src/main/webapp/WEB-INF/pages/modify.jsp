@@ -3,13 +3,13 @@
 
 <div id="container-fluid text-center">
     <div>
-        <a class="btn btn-danger btn-xs non-block" href="${pageContext.request.contextPath}/modifyDB/createDB">Create Database</a>
+        <a class="btn btn-danger btn-xs non-block non-link" onclick="callCreateDBPage()">Create Database</a>
     </div>
     <div>
-        <a class="btn btn-danger btn-xs non-block" href="${pageContext.request.contextPath}/modifyDB/clearDB">Clear Database</a>
+        <a class="btn btn-danger btn-xs non-block non-link" onclick="callClearDBPage()">Clear Database</a>
     </div>
     <div>
-        <a class="btn btn-danger btn-xs non-block" href="${pageContext.request.contextPath}/modifyDB/deleteDB">Delete Database</a>
+        <a class="btn btn-danger btn-xs non-block non-link" onclick="callDeleteDBPage()">Delete Database</a>
     </div>
 </div>
 

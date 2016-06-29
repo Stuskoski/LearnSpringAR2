@@ -1,6 +1,3 @@
-<jsp:include page="header.jsp"/>
-
-
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
@@ -8,7 +5,7 @@
 
 <c:url var="addAction" value="/customer/add"/>
 
-<div class="container">
+<div>
 <h2>Customers</h2>
     <table class="table table-striped table-bordered" id="customerTable">
         <thead>
@@ -68,8 +65,4 @@
     </table>
 </div>
 
-<script src="<c:url value="/resources/js/editUserJS.js"/>"></script>
-<script src="<c:url value="/resources/js/jquery-1.12.3.js"/>"></script>
-<script src="<c:url value="/resources/js/jquery.dataTables.min.js"/>"></script>
-<link href="<c:url value="/resources/css/jquery.dataTables.min.css"/>" rel="stylesheet">
 

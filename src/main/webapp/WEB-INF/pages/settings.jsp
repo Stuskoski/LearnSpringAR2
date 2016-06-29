@@ -1,13 +1,9 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<jsp:include page="header.jsp"/>
-
-
 
 <div id="web-form-wrapper">
     <div id="add-customer-web-form">
-        <div class="col-lg-4 col-md-4 col-sm-2 col-xs-0"></div>
-        <div class="col-lg-4 col-md-4 col-sm-8 col-xs-12 signupContent">
-            <form:form method="post" modelAttribute="settingsTemplate" action="/settings/changeSettings">
+        <div class="signupContent">
+            <form:form method="post" modelAttribute="settingsTemplate" action="">
                 <div id="upload-customer-title">Settings</div>
                 <fieldset class="form-group">
                     <label for="databaseURL">Database URL</label>
@@ -36,10 +32,12 @@
                 </fieldset>
                 <div id="saveAlert" class="center-text">** All changes are saved until server restart **</div><br>
                 <div id="submit-customer-btn-div">
-                    <button type="submit" id="submit-customer-btn" class="btn btn-primary">Submit</button>
+                    <button type="button" id="submit-settings-btn" class="btn btn-primary" onclick="editSettings()">
+                        Submit
+                    </button>
                 </div>
             </form:form>
+
         </div>
-        <div class="col-lg-4 col-md-4 col-sm-2 col-xs-0"></div>
     </div>
 </div>

@@ -23,20 +23,20 @@ public class DatabaseModifyController {
         //GetCustomersFromDatabaseDELETE.getCustomers();
         ModifyDatabaseMethods.makeClearDeleteDB(DatabaseCommands.CREATE);
 
-        return "redirect:/modifyDB";
+        return "modify";
     }
 
     @RequestMapping("/clearDB")
     public String clearDatabase(){
         ModifyDatabaseMethods.makeClearDeleteDB(DatabaseCommands.CLEAR);
 
-        return "redirect:/modifyDB";
+        return "modify";
     }
 
     @RequestMapping("/deleteDB")
     public String deleteDatabase(){
         ModifyDatabaseMethods.makeClearDeleteDB(DatabaseCommands.DELETE);
 
-        return "redirect:/modifyDB";
+        return "modify";
     }
 }

@@ -45,14 +45,13 @@ public class SettingsController {
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/changeSettings")
-    public
-    String changeSettings(@ModelAttribute("settingsTemplate") SettingsTemplate settingsTemplate){
+    public String changeSettings(@ModelAttribute("settingsTemplate") SettingsTemplate settingsTemplate){
         ConfigFileController.setDatabaseURLStatic(settingsTemplate.getDatabaseURL());
         ConfigFileController.setRootDatabaseURLStatic(settingsTemplate.getRootDatabaseURL());
         ConfigFileController.setDatabaseUserStatic(settingsTemplate.getDatabaseUser());
         ConfigFileController.setDatabasePassStatic(settingsTemplate.getDatabasePass());
         ConfigFileController.setMailHostStatic(settingsTemplate.getMailHost());
 
-        return "redirect:/settings";
+        return "settings";
     }
 }

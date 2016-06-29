@@ -147,9 +147,12 @@ function alertMe(){
     }
 /*    </script>*/
 }
+function makeViewCustomersIntoDataTable(){
+    $('#customerTable').DataTable();
+}
 
 //Turn the table into a sortable data table with jquery
-$(document).ready(function() {
-    $('#customerTable').DataTable();
-} );
+//$(document).ready(function() {
+ //   $('#customerTable').DataTable();
+//} );
 
