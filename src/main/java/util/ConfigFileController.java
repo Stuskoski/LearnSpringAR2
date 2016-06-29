@@ -16,6 +16,7 @@ public class ConfigFileController {
     private static String databaseUser;
     private static String databasePass;
     private static String mailHost;
+    private static String mailFrom;
 
     public static String getDatabaseURL() {
         return databaseURL;
@@ -29,6 +30,9 @@ public class ConfigFileController {
     }
     public static String getMailHost() {
         return mailHost;
+    }
+    public static String getMailFrom() {
+        return mailFrom;
     }
 
     @Value("${db.url}")
@@ -49,8 +53,12 @@ public class ConfigFileController {
     public void setMailHost(String host){
         ConfigFileController.mailHost = host;
     }
+    @Value(("${mail.mailFrom}"))
+    public void setMailFrom(String email){
+        ConfigFileController.mailFrom = email;
+    }
 
-    //Temporary file changes here
+    //Temporary file changes here till server reboot
     public static void setDatabaseURLStatic(String url){
         ConfigFileController.databaseURL = url;
     }
@@ -61,8 +69,9 @@ public class ConfigFileController {
     public static void setDatabasePassStatic(String pass){
         ConfigFileController.databasePass = pass;
     }
-    public static void setMailHostStatic(String host){
-        ConfigFileController.mailHost = host;
+    public static void setMailHostStatic(String host){ ConfigFileController.mailHost = host; }
+    public static void setMailFromStatic(String email){
+        ConfigFileController.mailFrom = email;
     }
 
 }

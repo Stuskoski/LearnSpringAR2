@@ -4,7 +4,7 @@
 <div id="web-form-wrapper">
     <div id="add-customer-web-form">
         <div class="signupContent">
-            <form:form method="post" modelAttribute="emailMessageTemplate" action="/email/sendEmail">
+            <form:form method="post" modelAttribute="emailMessageTemplate">
                 <div id="upload-customer-title">Send Email</div>
                 <fieldset class="form-group">
                     <label for="toEmail">To: </label>
@@ -27,15 +27,17 @@
                                    required="true"/>
                 </fieldset>
                 <div class="container-fluid text-center non-block" id="populateEmailButtonsDiv">
-                    <button type="button" class="btn btn-danger btn-x" onclick="getSortedCustomers()">
-                        Populate Sorted Customers
+                    <button type="button" class="customHEBButtonSmall btn" onclick="getSortedCustomers()">
+                        Sort Customers
                     </button>
-                    <button type="button" class="btn btn-danger btn-x" onclick="getUnsortedCustomers()">
-                        Populate Unsorted Customers
+                    <button type="button" class="customHEBButtonSmall btn" onclick="getUnsortedCustomers()">
+                        Unsort Customers
                     </button>
                 </div>
                 <div id="submit-customer-btn-div">
-                    <button type="submit" id="submit-customer-btn" class="btn btn-primary">Submit</button>
+                    <button type="button" id="submit-customer-btn" class="customBlueButtonSmall btn" onclick="sendEmail()">
+                        Send Email
+                    </button>
                 </div>
             </form:form>
         </div>

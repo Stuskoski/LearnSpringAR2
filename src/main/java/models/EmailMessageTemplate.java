@@ -9,6 +9,15 @@ public class EmailMessageTemplate {
     private String subject;
     private String message;
 
+    public EmailMessageTemplate(String fromEmail) {
+        this.fromEmail = fromEmail;
+    }
+
+    public EmailMessageTemplate(){
+
+    }
+
+
     public String getToEmail() {
         return toEmail;
     }

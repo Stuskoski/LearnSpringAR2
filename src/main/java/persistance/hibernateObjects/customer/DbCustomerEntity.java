@@ -129,6 +129,7 @@ public class DbCustomerEntity {
         if(timeStamp!=null && !timeStamp.equals("")){
             stringBuilder.append(timeStamp);
         }
+        stringBuilder.append("\n\n");
 
         return stringBuilder.toString();
     }

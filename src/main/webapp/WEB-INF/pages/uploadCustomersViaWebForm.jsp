@@ -40,7 +40,7 @@
                                 placeholder="Enter Customer Zip Code" required="true"/>
                 </fieldset>
                 <div id="submit-customer-btn-div">
-                    <button type="submit" id="submit-customer-btn" class="btn btn-primary">Submit</button>
+                    <button type="submit" id="submit-customer-btn" class="customHEBButtonSmall btn">Submit</button>
                 </div>
 
             </form:form>

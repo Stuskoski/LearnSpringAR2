@@ -27,6 +27,8 @@ public class SettingsController {
     private String dbPass;
     @Value("${mail.host}")
     private String mailHost;
+    @Value("${mail.mailFrom}")
+    private String mailFrom;
 
 
     @RequestMapping(method = RequestMethod.GET)
@@ -36,10 +38,12 @@ public class SettingsController {
         modelMap.addAttribute("dbUser", dbUser);
         modelMap.addAttribute("dbPass", dbPass);
         modelMap.addAttribute("mailHost", mailHost);
+        modelMap.addAttribute("mailFrom", mailFrom);
 
         model.addAttribute("settingsTemplate", new SettingsTemplate(ConfigFileController.getDatabaseURL(),
                 ConfigFileController.getRootDatabaseURL(), ConfigFileController.getDatabaseUser(),
-                ConfigFileController.getDatabasePass(), ConfigFileController.getMailHost()));
+                ConfigFileController.getDatabasePass(), ConfigFileController.getMailHost(),
+                ConfigFileController.getMailFrom()));
 
         return "settings";
     }
@@ -51,6 +55,7 @@ public class SettingsController {
         ConfigFileController.setDatabaseUserStatic(settingsTemplate.getDatabaseUser());
         ConfigFileController.setDatabasePassStatic(settingsTemplate.getDatabasePass());
         ConfigFileController.setMailHostStatic(settingsTemplate.getMailHost());
+        ConfigFileController.setMailFromStatic(settingsTemplate.getMailFrom());
 
         return "settings";
     }

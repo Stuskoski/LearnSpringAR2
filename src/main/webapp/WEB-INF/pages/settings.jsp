@@ -16,7 +16,7 @@
                                 placeholder="enter root database connection string" required="true"/>
                 </fieldset>
                 <fieldset class="form-group">
-                    <label for="databaseUser">Datbase Username</label>
+                    <label for="databaseUser">Database Username</label>
                     <form:input path="databaseUser" id="databaseUser" cssClass="form-control"
                                 placeholder="enter database name" required="true"/>
                 </fieldset>
@@ -30,9 +30,15 @@
                     <form:input path="mailHost" id="mailHost" cssClass="form-control" placeholder="enter mail host"
                                 required="true"/>
                 </fieldset>
+                <fieldset class="form-group">
+                    <label for="mailFrom">From Email</label>
+                    <form:input path="mailFrom" id="mailFrom" cssClass="form-control" placeholder="enter from email"
+                                required="true"/>
+                </fieldset>
                 <div id="saveAlert" class="center-text">** All changes are saved until server restart **</div><br>
                 <div id="submit-customer-btn-div">
-                    <button type="button" id="submit-settings-btn" class="btn btn-primary" onclick="editSettings()">
+                    <button type="button" id="submit-settings-btn" class="customHEBButtonSmall btn btn-danger"
+                            onclick="editSettings()">
                         Submit
                     </button>
                 </div>

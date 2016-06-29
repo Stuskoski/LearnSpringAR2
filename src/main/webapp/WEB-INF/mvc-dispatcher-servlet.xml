@@ -41,6 +41,7 @@
         <property name="annotatedClasses">
             <list>
                 <value>persistance.hibernateObjects.customer.DbCustomerEntity</value>
+                <value>persistance.hibernateObjects.user.UserEntity</value>
             </list>
         </property>
         <property name="hibernateProperties">
@@ -67,11 +68,15 @@
         <property name="customerDAO" ref="customerDAO"/>
     </bean>
 
-    <!-- Bean for sending mail -->
-    <!--<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">-->
+    <!-- Setting up the user DAO -->
+    <bean id="userDAO" class="persistance.hibernateObjects.user.UserDAOImplementation">
+        <property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
+    </bean>
 
-   <!-- </bean>-->
-
+    <!-- Assigning the service for customer dao-->
+    <bean id="userSpringService" class="persistance.hibernateObjects.user.UserSpringServiceImplementation">
+        <property name="userDAO" ref="userDAO"/>
+    </bean>
 
 
     <tx:annotation-driven/>

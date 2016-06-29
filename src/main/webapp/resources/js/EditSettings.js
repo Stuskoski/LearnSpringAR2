@@ -4,6 +4,7 @@ function editSettings() {
     var databaseUser = document.getElementById("databaseUser").value;
     var databasePass = document.getElementById("databasePass").value;
     var mailHost = document.getElementById("mailHost").value; //.textcontent
+    var mailFrom = document.getElementById("mailFrom").value; //.textcontent
 
     var xhttp = new XMLHttpRequest();
 
@@ -12,7 +13,7 @@ function editSettings() {
 
 
     xhttp.send("databaseURL=" + databaseURL + "&rootDatabaseURL=" + rootDatabaseURL + "&databaseUser=" + databaseUser +
-        "&databasePass=" + databasePass + "&mailHost=" + mailHost);
+        "&databasePass=" + databasePass + "&mailHost=" + mailHost + "&mailFrom=" + mailFrom);
 
 
     xhttp.onreadystatechange = settingsChangedSuccessfully;

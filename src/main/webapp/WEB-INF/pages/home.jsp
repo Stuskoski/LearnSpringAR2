@@ -63,6 +63,7 @@
 
 <script src="<c:url value="/resources/js/dashboard.js"/>"></script>
 <script src="<c:url value="/resources/js/ModifyDatabase.js"/>"></script>
+<script src="<c:url value="/resources/js/SendEmail.js"/>"></script>
 <script src="<c:url value="/resources/js/EditSettings.js"/>"></script>
 <script src="<c:url value="/resources/js/LoggingActions.js"/>"></script>
 <script src="<c:url value="/resources/js/getListOfUsers.js"/>"></script>

@@ -2,6 +2,9 @@
 <%@ page session="false" %>
 
 <form method="POST" action="${pageContext.request.contextPath}/uploadCustomerViaFile" enctype="multipart/form-data">
-    File to upload: <input type="file" name="file">
-    <input type="submit" value="Upload" onclick="enableAnimation()"> Press here to upload the file!
+
+    File to upload: <input class="" type="file" name="file" >
+
+    <input type="submit" value="Upload" onclick="enableAnimation()" class="customHEBButtonSmall btn">
+    Press here to upload the file!
 </form>

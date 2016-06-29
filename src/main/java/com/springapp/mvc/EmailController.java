@@ -1,7 +1,7 @@
 package com.springapp.mvc;
 
-import models.Customer;
 import models.EmailMessageTemplate;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -21,6 +21,8 @@ import util.SendCustomersViaEmail;
 @Controller
 @RequestMapping("/email")
 public class EmailController {
+    @Value("${mail.mailFrom}")
+    private String mailFrom;
 
     /**
      * Receives a new EmailMessageTemplate object
@@ -32,8 +34,8 @@ public class EmailController {
      * @return Returns string email to view that webpage
      */
     @RequestMapping(method = RequestMethod.GET)
-    public String getLoginPage(Model model){
-        model.addAttribute("emailMessageTemplate", new EmailMessageTemplate());
+    public String getEmailPage(Model model){
+        model.addAttribute("emailMessageTemplate", new EmailMessageTemplate(mailFrom));
         return "email";
     }
 
@@ -51,7 +53,7 @@ public class EmailController {
     public String sendEmail(@ModelAttribute("emailMessageTemplate") EmailMessageTemplate email){
         SendCustomersViaEmail.sendEmail(email.getToEmail(), email.getFromEmail(), email.getSubject(),
                 email.getMessage());
-        return "redirect:/email";
+        return "email";
     }
 
     /**

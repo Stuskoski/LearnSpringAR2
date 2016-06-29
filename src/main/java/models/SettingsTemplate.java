@@ -9,14 +9,16 @@ public class SettingsTemplate {
     private String databaseUser;
     private String databasePass;
     private String mailHost;
+    private String mailFrom;
 
     public SettingsTemplate(String databaseURL, String rootDatabaseURL, String databaseUser, String databasePass,
-                            String mailHost) {
+                            String mailHost, String mailFrom) {
         this.databaseURL = databaseURL;
         this.rootDatabaseURL = rootDatabaseURL;
         this.databaseUser = databaseUser;
         this.databasePass = databasePass;
         this.mailHost = mailHost;
+        this.mailFrom = mailFrom;
     }
     public SettingsTemplate() {
     }
@@ -60,6 +62,14 @@ public class SettingsTemplate {
 
     public void setMailHost(String mailHost) {
         this.mailHost = mailHost;
+    }
+
+    public String getMailFrom() {
+        return mailFrom;
+    }
+
+    public void setMailFrom(String mailFrom) {
+        this.mailFrom = mailFrom;
     }
 
 }
