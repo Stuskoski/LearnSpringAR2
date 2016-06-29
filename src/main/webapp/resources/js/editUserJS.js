@@ -73,6 +73,26 @@ function editCustomer(id){
     var timeStamp = document.getElementById("customerEntityTimeStamp"+id).textContent;
 
 
+    /**
+     * I believe the jquery plugin at the bottom
+     * is adding white space and new lines in the
+     * fields for whatever reason.
+     *
+     * This function removes the whitespace in the front
+     * and back of the lines as well as the new line
+     * characters which won't be needed.
+     *
+     * @type {string}
+     */
+    firstName = firstName.trim().replace(/(\r\n|\n|\r)/gm,"");
+    lastName = lastName.trim().replace(/(\r\n|\n|\r)/gm,"");
+    emailAddress = emailAddress.trim().replace(/(\r\n|\n|\r)/gm,"");
+    homeAddress = homeAddress.trim().replace(/(\r\n|\n|\r)/gm,"");
+    city = city.trim().replace(/(\r\n|\n|\r)/gm,"");
+    state = state.trim().replace(/(\r\n|\n|\r)/gm,"");
+    zipCode = zipCode.trim().replace(/(\r\n|\n|\r)/gm,"");
+    timeStamp = timeStamp.trim().replace(/(\r\n|\n|\r)/gm,"");
+
     var xhttp = new XMLHttpRequest();
 
     xhttp.open("POST", "/customer/add", true);
@@ -93,8 +113,22 @@ function editCustomer(id){
         if (xhttp.readyState == 4 ) {
             if(xhttp.status == 200){
                 $('#commitLink'+id).addClass("disabledAnchor");
+                var goodCommit = $("#customerRow"+id);
+
+                goodCommit.removeClass("highLightRed");
+                goodCommit.removeClass("highLightGreen");
+
+                goodCommit.addClass("highLightGreen");
+                goodCommit.fadeOut(500).fadeIn(500);
             }else{
                 alert("Unable to commit customer changes");
+                var badCommit = $("#customerRow"+id);
+
+                badCommit.removeClass("highLightRed");
+                badCommit.removeClass("highLightGreen");
+
+                badCommit.addClass("highLightRed");
+                badCommit.fadeOut(500).fadeIn(500);
             }
         }
     }

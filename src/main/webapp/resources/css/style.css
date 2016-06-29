@@ -21,6 +21,7 @@
     display: inline;
     white-space: nowrap;
 }
+
 /*-----------------------------------Footer-------------------------*/
 .footer {
     position:absolute;
@@ -32,10 +33,6 @@
     background:#999;
     margin-top: 40px;
 }
-
-
-
-
 /*-----------------------------------Upload Customers Via Web Form -------------------------*/
 #web-form-wrapper{
     margin-bottom: 60px;
@@ -61,6 +58,13 @@
     color:Gray;
 }
 
+.highLightGreen{
+    color: #00cc00;
+}
+.highLightRed{
+    color: red;
+}
+
 /*----------------------------------- Email Page -------------------------*/
 #toEmail, #fromEmail, #subject, #message{
     max-width: 32em;
@@ -77,11 +81,10 @@
 }
 /*----------------------------------- Settings Page -------------------------*/
 #saveAlert{
-    left: 50%;
-    top: 50%;
     color: red;
     font-size: 12px;
-    width: 55%;
+    width: 60%;
+    margin-left: 20%;
 }
 /*----------------------------------- Loading Overlay -------------------------*/
 #loadingAnimationBorder{
@@ -91,8 +94,9 @@
     margin: auto;
     display: block;
     position: fixed;
+    z-index: 10;
     left: 40%;
-    top: 40%;
+    top: 30%;
     text-align: center;
     border-radius: 20px;
 }
@@ -179,7 +183,36 @@
         transform: rotate(360deg);
     }*/
 }
-/*-----------------------------------HOME -------------------------*/
+/*----------------------------------- Error Page -------------------------*/
+#errorWindowBorder{
+    background:rgba(0,0,0,0.3);
+    width: 20em;
+    height: 15em;
+    margin: auto;
+    display: block;
+    position: fixed;
+    left: 40%;
+    top: 30%;
+    text-align: center;
+    border-radius: 20px;
+}
+
+#errorWindow{
+    color: red;
+    font-size: 20px;
+    font-weight: bolder;
+    height: 100px;
+    margin: auto;
+    top: 20%;
+    position: relative;
+    border-radius: 25px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.hideMe{
+    display: none!important;
+}
 /*-----------------------------------HOME -------------------------*/
 /*-----------------------------------HOME -------------------------*/
 /*-----------------------------------HOME -------------------------*/
@@ -194,28 +227,18 @@
     margin-bottom: 0;
     border-radius: 0;
 }
-
 /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
-.row.content {
-    height: 450px
-}
+.row.content {height: 550px}
 
 /* Set gray background color and 100% height */
 .sidenav {
-    padding-top: 20px;
     background-color: #f1f1f1;
     height: 100%;
 }
 
-/* On small screens, set height to 'auto' for sidenav and grid */
+/* On small screens, set height to 'auto' for the grid */
 @media screen and (max-width: 767px) {
-    .sidenav {
-        height: auto;
-        padding: 15px;
-    }
-
-    .row.content {
-        height: auto;
-    }
+    .row.content {height: auto;}
 }
+
 /*----------------------------END HOME ----------------------------*/

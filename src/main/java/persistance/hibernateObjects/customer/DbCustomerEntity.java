@@ -121,11 +121,11 @@ public class DbCustomerEntity {
         String customerString = "";
         StringBuilder stringBuilder = new StringBuilder(customerString);
 
-        stringBuilder.append("Customer #" + id + "\n");
-        stringBuilder.append(lastName + ", " + firstName + "\n");
-        stringBuilder.append(emailAddress + "\n");
-        stringBuilder.append(homeAddress + "\n");
-        stringBuilder.append(city + " " + state + " " + zipCode + "\n");
+        stringBuilder.append("Customer #").append(id).append("\n");
+        stringBuilder.append(lastName).append(", ").append(firstName).append("\n");
+        stringBuilder.append(emailAddress).append("\n");
+        stringBuilder.append(homeAddress).append("\n");
+        stringBuilder.append(city).append(" ").append(state).append(" ").append(zipCode).append("\n");
         if(timeStamp!=null && !timeStamp.equals("")){
             stringBuilder.append(timeStamp);
         }

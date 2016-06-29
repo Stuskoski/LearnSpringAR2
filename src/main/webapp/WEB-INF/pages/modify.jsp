@@ -1,4 +1,4 @@
-<jsp:include page="header.jsp"></jsp:include>
+<%--<jsp:include page="header.jsp"/>--%>
 
 
 <div id="container-fluid text-center">
@@ -13,5 +13,3 @@
     </div>
 </div>
 
-
-<jsp:include page="footer.jsp"></jsp:include>
