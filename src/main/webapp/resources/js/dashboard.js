@@ -266,3 +266,30 @@ function pullStatsPage(){
         }
     }
 }
+
+
+/*------------------------ Forms ----------------------------*/
+/**
+ * Ensures all fields of a web
+ * form are filled before
+ * proceeding
+ *
+ * @returns {boolean}
+ */
+function isFormFilled() {
+    var isFull = true;
+
+    var empty = $('#allFieldsFullForm').parent().find("input").filter(function() {
+        return this.value === "";
+    });
+    if(empty.length) {
+        //At least one input is empty
+        isFull = false;
+
+        //error msg to display
+        showAndThenHideInfoWindow("Please fill out all fields in the form");
+
+    }
+
+    return isFull;
+}

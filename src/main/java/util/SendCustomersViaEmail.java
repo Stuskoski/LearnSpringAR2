@@ -34,7 +34,7 @@ public class SendCustomersViaEmail {
      * @param fromEmail Email address to send email from
      * @param subject The subject of the email
      */
-    public static void sendEmail(String toEmail, String fromEmail, String subject, String message){
+    public static boolean sendEmail(String toEmail, String fromEmail, String subject, String message){
         CustomLogger.createLogMsgAndSave("Sending email...");
 
         String host = ConfigFileController.getMailHost();
@@ -67,6 +67,7 @@ public class SendCustomersViaEmail {
 
             UpdateTimeStampAfterEmail.update();
 
+            return true;
             //send good log
         }catch (MessagingException mex) {
             //todo add error page redirection?
@@ -75,6 +76,7 @@ public class SendCustomersViaEmail {
                     "To: " + fromEmail + "\n" +
                     "Host: " + host + "\n" +
                     "Port: Default(25)");
+            return false;
 
         }
     }

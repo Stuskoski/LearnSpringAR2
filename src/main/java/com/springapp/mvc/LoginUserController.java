@@ -6,9 +6,11 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import persistance.hibernateObjects.customer.CustomerSpringService;
 import persistance.hibernateObjects.user.UserEntity;
 import persistance.hibernateObjects.user.UserSpringService;
@@ -30,20 +32,26 @@ public class LoginUserController {
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public String getLoginPage(ModelMap modelMap){
+    public String getLoginPage(ModelMap modelMap, @ModelAttribute("userLoginError")final String userLoginError,
+                               final Model model){
+
         modelMap.addAttribute("userEntity", new UserEntity());
+        model.addAttribute("userLoginError", userLoginError);
 
         return "login";
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "getUser")
-    public String getUser(@ModelAttribute("user") UserEntity user){
+    public String getUser(@ModelAttribute("user") UserEntity user, final RedirectAttributes redirectAttributes){
+
         if(doesUserExist(user.getUserName(), user.getPassword())){
             //create user session
-            return "redirect:/stats";
+            return "redirect:/";
         }else{
             //throw error
-            return "redirect:/";
+            redirectAttributes.addFlashAttribute("userLoginError", "Unable to login user");
+            return "redirect:/login";
+
         }
     }
 

@@ -1,13 +1,13 @@
 package com.springapp.mvc;
 
 import models.EmailMessageTemplate;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import util.ConfigFileController;
 import util.CreateEmailMessage;
 import util.SendCustomersViaEmail;
 
@@ -21,8 +21,6 @@ import util.SendCustomersViaEmail;
 @Controller
 @RequestMapping("/email")
 public class EmailController {
-    @Value("${mail.mailFrom}")
-    private String mailFrom;
 
     /**
      * Receives a new EmailMessageTemplate object
@@ -35,7 +33,7 @@ public class EmailController {
      */
     @RequestMapping(method = RequestMethod.GET)
     public String getEmailPage(Model model){
-        model.addAttribute("emailMessageTemplate", new EmailMessageTemplate(mailFrom));
+        model.addAttribute("emailMessageTemplate", new EmailMessageTemplate(ConfigFileController.getMailFrom()));
         return "email";
     }
 
@@ -47,13 +45,19 @@ public class EmailController {
      * @param email the email message with all the
      *              details to send it
      *
-     * @return redirection to email view
+     * @return The message to display in the browser
+     * after the sending attempt is complete
      */
     @RequestMapping(value = "/sendEmail", method = RequestMethod.POST)
-    public String sendEmail(@ModelAttribute("emailMessageTemplate") EmailMessageTemplate email){
-        SendCustomersViaEmail.sendEmail(email.getToEmail(), email.getFromEmail(), email.getSubject(),
-                email.getMessage());
-        return "email";
+    public @ResponseBody
+    String sendEmail(@ModelAttribute("emailMessageTemplate") EmailMessageTemplate email){
+        if(SendCustomersViaEmail.sendEmail(email.getToEmail(), email.getFromEmail(), email.getSubject(),
+                email.getMessage())){
+            return "Email successfully sent";
+        }else{
+            return "Unable to send email";
+        }
+
     }
 
     /**

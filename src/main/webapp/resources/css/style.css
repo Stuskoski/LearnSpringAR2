@@ -50,6 +50,14 @@
     font-size: x-large;
     font-weight: bold;
 }
+#webFormMsg{
+    margin-top: 20px;
+    margin-left: 10px;
+    color: red;
+    font-size: larger;
+    font-weight: bold;
+    text-align: center;
+}
 /*----------------------------------- View Customers -------------------------*/
 .disabledAnchor{
     pointer-events: none !important;
@@ -68,11 +76,18 @@
 
 }
 /*----------------------------------- Email Page -------------------------*/
-#toEmail, #fromEmail, #subject, #message{
-    max-width: 32em;
-}
 #message{
     height: 12em;
+}
+#populateEmailButtonsDiv, #send-email-btn-div{
+    text-align: center;
+    margin-top: 1em;
+}
+#send-email-title{
+    text-align: center;
+    font-weight: bold;
+    font-size: 34px;
+    margin-top: 30px;
 }
 /*----------------------------------- Logging Page -------------------------*/
 .logError{
@@ -93,8 +108,8 @@
 #saveAlert{
     color: red;
     font-size: 12px;
-    width: 60%;
-    margin-left: 20%;
+    text-align: center;
+
 }
 /*----------------------------------- Loading Overlay -------------------------*/
 #loadingAnimationBorder{
@@ -194,8 +209,8 @@
     }*/
 }
 /*----------------------------------- Error Page -------------------------*/
-#errorWindowBorder{
-    background:rgba(0,0,0,0.3);
+#infoPopupWindowBorder{
+    background:rgba(0,0,0,0.4);
     width: 20em;
     height: 15em;
     margin: auto;
@@ -205,9 +220,10 @@
     top: 30%;
     text-align: center;
     border-radius: 20px;
+    z-index: 9;
 }
 
-#errorWindow{
+#infoPopupMsg {
     color: red;
     font-size: 20px;
     font-weight: bolder;
@@ -366,7 +382,30 @@ header {
     color: white;
 }
 
-/*----------------------------END HOME ----------------------------*/
+/*---------------------------- Login Page ----------------------------*/
+#upload-customer-title{
+    text-align: center;
+    font-weight: bold;
+    font-size: 34px;
+    margin-top: 30px;
+}
+#loginErrorMsg{
+    margin-top: 20px;
+    margin-left: 10px;
+    color: red;
+    font-size: larger;
+    font-weight: bold;
+    text-align: center;
+}
+#login-user-btn{
+    position: relative;
+}
+#clear-user-btn{
+    position: relative;
+}
+#submit-customer-btn-div{
+    text-align: center;
+}
 /*----------------------------END HOME ----------------------------*/
 /*----------------------------END HOME ----------------------------*/
 /*----------------------------END HOME ----------------------------*/

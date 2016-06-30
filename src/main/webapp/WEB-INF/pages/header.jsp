@@ -87,3 +87,4 @@
          not sure if I like it just yet or
          only to add on long loading pages--%>
 <jsp:include page="loadingAnimation.jsp"/>
+<jsp:include page="infoPopup.jsp"/>

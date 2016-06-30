@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import persistance.hibernateObjects.customer.CustomerSpringService;
 import persistance.hibernateObjects.customer.DbCustomerEntity;
@@ -44,21 +45,26 @@ public class DatabaseCustomerController {
             DatabaseConnections.clearDBConnection();
             return "viewCustomers";
         }else{
-            return "redirect:/"; //todo redirect to error page
+            return null; //todo redirect to error page
         }
 
     }
 
     @RequestMapping(value = "/customer/add", method = RequestMethod.POST)
-    public String addCustomer(@ModelAttribute("customer") DbCustomerEntity dbCustomerEntity){
-        if(dbCustomerEntity.getId() == 0){
-            this.customerSpringService.addCustomer(dbCustomerEntity);
+    public @ResponseBody
+    String addCustomer(@ModelAttribute("customer") DbCustomerEntity dbCustomerEntity){
+        try {
+            if(dbCustomerEntity.getId() == 0){
+                this.customerSpringService.addCustomer(dbCustomerEntity);
+                return "Customer successfully added";
+            }
+            else{
+                this.customerSpringService.updateCustomer(dbCustomerEntity);
+                return "Customer exists, customer updated";
+            }
+        }catch (Exception e){
+            return "An error has occurred.  Unable to upload customer";
         }
-        else{
-            this.customerSpringService.updateCustomer(dbCustomerEntity);
-        }
-
-        return "redirect:/customers";
     }
 
     @RequestMapping("/remove/{id}")
@@ -84,7 +90,9 @@ public class DatabaseCustomerController {
      * adding to the database.
      */
     @RequestMapping(value = "/uploadCustomerViaFile", method = RequestMethod.POST)
+    public @ResponseBody
     String uploadFileHandler(@RequestParam("file") MultipartFile file) {
+        CustomLogger.createLogMsgAndSave("file called");
         if (!file.isEmpty()) {
             try {
                 //create temp file
@@ -98,16 +106,16 @@ public class DatabaseCustomerController {
                     else{
                         this.customerSpringService.updateCustomer(customer);
                     }
-                } //todo ask during demo how to past post variables to other controllers from controller
+                }
 
-                return "redirect:/customers";
+                return "Customers uploaded successfully";
             } catch (Exception e) {
                 CustomLogger.createLogMsgAndSave("Unable to upload customer list: " + e.getMessage());
-                return "redirect:/customers";
+                return "Unable to upload customers";
             }
         } else {
             CustomLogger.createLogMsgAndSave("Unable to upload customer list: File empty!");
-            return "redirect:/customers";
+            return "File empty!";
         }
     }
 }

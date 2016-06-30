@@ -1,11 +1,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-
-<div id="web-form-wrapper">
+<div class="col-lg-2 col-md-2 col-sm-3 col-xs-2"></div>
+<div id="web-form-wrapper" class="col-lg-8 col-md-8 col-sm-6 col-xs-8">
     <div id="add-customer-web-form">
         <div class="signupContent">
-            <form:form method="post" modelAttribute="emailMessageTemplate">
-                <div id="upload-customer-title">Send Email</div>
+            <form:form method="post" modelAttribute="emailMessageTemplate" id="allFieldsFullForm">
+                <div id="send-email-title">Send Email</div>
                 <fieldset class="form-group">
                     <label for="toEmail">To: </label>
                     <form:input path="toEmail" id="toEmail" cssClass="form-control"
@@ -26,7 +26,7 @@
                     <form:textarea path="message" id="message" cssClass="form-control" placeholder="Email Message"
                                    required="true"/>
                 </fieldset>
-                <div class="container-fluid text-center non-block" id="populateEmailButtonsDiv">
+                <div id="populateEmailButtonsDiv">
                     <button type="button" class="customHEBButtonSmall btn" onclick="getSortedCustomers()">
                         Sort Customers
                     </button>
@@ -34,8 +34,8 @@
                         Unsort Customers
                     </button>
                 </div>
-                <div id="submit-customer-btn-div">
-                    <button type="button" id="submit-customer-btn" class="customBlueButtonSmall btn" onclick="sendEmail()">
+                <div id="send-email-btn-div">
+                    <button type="button" id="send-email-btn" class="customBlueButtonSmall btn" onclick="sendEmail()">
                         Send Email
                     </button>
                 </div>
@@ -43,6 +43,7 @@
         </div>
     </div>
 </div>
+<div class="col-lg-2 col-md-2 col-sm-3 col-xs-2"></div>
 
 
 

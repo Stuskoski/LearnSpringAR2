@@ -1,9 +1,11 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-<div id="web-form-wrapper">
+
+<div class="col-lg-2 col-md-2 col-sm-3 col-xs-2"></div>
+<div id="web-form-wrapper" class="col-lg-8 col-md-8 col-sm-6 col-xs-8">
     <div id="add-customer-web-form">
         <div class="signupContent">
-            <form:form method="post" modelAttribute="settingsTemplate" action="">
+            <form:form method="post" modelAttribute="settingsTemplate" action="" id="allFieldsFullForm">
                 <div id="upload-customer-title">Settings</div>
                 <fieldset class="form-group">
                     <label for="databaseURL">Database URL</label>
@@ -47,3 +49,4 @@
         </div>
     </div>
 </div>
+<div class="col-lg-2 col-md-2 col-sm-3 col-xs-2"></div>

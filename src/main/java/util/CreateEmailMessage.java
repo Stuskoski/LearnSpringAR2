@@ -45,11 +45,16 @@ public class CreateEmailMessage {
 
         stringBuilder.append("======= Texas Customers =======\n");
 
+        boolean firstNonTexan = true;
+
         //Create email msg
         for(DbCustomerEntity customer : sortedCustomerList){
 
             if(!customer.getState().toLowerCase().equals("tx")){
-                stringBuilder.append("======= Non Texas Customers =======\n");
+                if(firstNonTexan){
+                    stringBuilder.append("======= Non Texas Customers =======\n");
+                    firstNonTexan = false;
+                }
             }
 
             stringBuilder.append(customer.toString()).append("\n");

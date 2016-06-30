@@ -14,16 +14,15 @@ function sendEmail() {
         "&message=" + message);
 
 
-    xhttp.onreadystatechange = settingsChangedSuccessfully;
+    xhttp.onreadystatechange = emailCheck;
 
     //On success disable the commit link again. On error show error box.
-    function settingsChangedSuccessfully() {
+    function emailCheck() {
         if (xhttp.readyState == 4) {
             if (xhttp.status == 200) {
-                document.getElementById("homeScreenLoader").innerHTML = xhttp.responseText;
-                alert("Email sent successfully");
+                showAndThenHideInfoWindow(xhttp.responseText);
             } else {
-                alert("Unable to send email.  Make sure settings are correct.");
+                showAndThenHideInfoWindow(xhttp.responseText);
             }
         }
     }

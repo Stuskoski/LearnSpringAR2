@@ -1,8 +1,10 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<div id="web-form-wrapper">
+
+<div class="col-lg-2 col-md-2 col-sm-3 col-xs-2"></div>
+<div class="col-lg-8 col-md-8 col-sm-6 col-xs-8">
     <div id="add-customer-web-form">
         <div class="signupContent">
-            <form:form method="post" modelAttribute="customer" action="/customer/add">
+            <form:form method="post" modelAttribute="customer" action="/customer/add" id="allFieldsFullForm">
                 <div id="upload-customer-title">Upload Customer</div>
                 <fieldset class="form-group">
                     <label for="firstName">First Name</label>
@@ -40,10 +42,14 @@
                                 placeholder="Enter Customer Zip Code" required="true"/>
                 </fieldset>
                 <div id="submit-customer-btn-div">
-                    <button type="submit" id="submit-customer-btn" class="customHEBButtonSmall btn">Submit</button>
+                    <button type="button" id="submit-customer-btn" onclick="uploadCustomerViaWebForm()"
+                            class="customHEBButtonSmall btn">Submit</button>
                 </div>
 
             </form:form>
         </div>
+        <div id="webFormMsg"></div>
     </div>
 </div>
+
+<div class="col-lg-2 col-md-2 col-sm-3 col-xs-2"></div>

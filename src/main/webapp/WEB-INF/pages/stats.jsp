@@ -1,7 +1,7 @@
 <div>
   <div class="well">
     <h4>Dashboard</h4>
-
+      ${stats.dbEntries}
     <p>Some text..</p>
   </div>
   <div class="row">
