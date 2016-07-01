@@ -56,7 +56,7 @@ public class ModifyDatabaseMethods {
                         stringBuilder.append(" emailAddress varchar(50) DEFAULT NULL, ");
                         stringBuilder.append(" homeAddress varchar(60) DEFAULT NULL, ");
                         stringBuilder.append(" city varchar(40) DEFAULT NULL, ");
-                        stringBuilder.append(" state varchar(50) DEFAULT NULL, ");
+                        stringBuilder.append(" state varchar(2) DEFAULT NULL, ");
                         stringBuilder.append(" zipCode varchar(15) DEFAULT NULL, ");
                         stringBuilder.append(" timeStamp datetime DEFAULT NULL, ");
                         stringBuilder.append(" PRIMARY KEY (idcustomers))");

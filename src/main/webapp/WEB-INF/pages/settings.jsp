@@ -36,7 +36,10 @@
                 <fieldset class="form-group">
                     <label for="mailFrom">From Email</label>
                     <form:input path="mailFrom" id="mailFrom" cssClass="form-control" placeholder="enter from email"
-                                required="true"/>
+                                required="true"
+                                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                                title="Enter a valid email address up to 50 characters"
+                                maxlength="50"/>
                 </fieldset>
                 <div id="saveAlert" class="center-text">** All changes are saved until server restart **</div><br>
                 <div id="submit-customer-btn-div">

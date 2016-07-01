@@ -1,5 +1,6 @@
 package fileActions;
 
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.core.Logger;
 import java.util.Date;
@@ -29,7 +30,8 @@ public class CustomLogger {
         String logMsg = date.toString() + ": " + msg;
 
         logger.info(logMsg);
-        logStringBuilder.append("<div class=\"logInfo\">").append(logMsg).append("</div>");
+        logStringBuilder.append("<div class=\"logInfo\">").append(StringEscapeUtils.escapeHtml4(logMsg))
+                .append("</div>");
     }
 
     /**
@@ -44,7 +46,8 @@ public class CustomLogger {
         String logMsg = date.toString() + ": " + msg;
 
         logger.error(logMsg);
-        logStringBuilder.append("<div class=\"logError\">").append(logMsg).append("</div>");
+        logStringBuilder.append("<div class=\"logError\">").append(StringEscapeUtils.escapeHtml4(logMsg))
+                .append("</div>");
     }
 
     /**

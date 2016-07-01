@@ -4,22 +4,32 @@
 <div class="col-lg-8 col-md-8 col-sm-6 col-xs-8">
     <div id="add-customer-web-form">
         <div class="signupContent">
-            <form:form method="post" modelAttribute="emailMessageTemplate" id="allFieldsFullForm">
+            <form:form method="post" modelAttribute="emailMessageTemplate" id="allFieldsFullForm"
+                       onsubmit="event.preventDefault(); sendEmail()">
                 <div id="send-email-title">Send Email</div>
                 <fieldset class="form-group">
                     <label for="toEmail">To: </label>
                     <form:input path="toEmail" id="toEmail" cssClass="form-control"
-                                placeholder="email@address.com" required="true"/>
+                                placeholder="email@address.com" required="true"
+                                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                                title="Enter a valid email address up to 50 characters"
+                                maxlength="50"/>
                 </fieldset>
                 <fieldset class="form-group">
                     <label for="fromEmail">From: </label>
                     <form:input path="fromEmail" id="fromEmail" cssClass="form-control"
-                                placeholder="email@address.com" required="true"/>
+                                placeholder="email@address.com" required="true"
+                                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                                title="Enter a valid email address up to 50 characters"
+                                maxlength="50"/>
                 </fieldset>
                 <fieldset class="form-group">
                     <label for="subject">Subject: </label>
                     <form:input path="subject" id="subject" cssClass="form-control"
-                                placeholder="Email Subject" required="true"/>
+                                placeholder="Email Subject" required="true"
+                                pattern="[A-Za-z!?.]{1,60}"
+                                maxlength="60"
+                                title="Please enter a subject using only numbers and characters as well as {!?.} and with a max length of 60"/>
                 </fieldset>
                 <fieldset class="form-group">
                     <label for="message">Message: </label>
@@ -35,7 +45,7 @@
                     </button>
                 </div>
                 <div id="send-email-btn-div">
-                    <button type="button" id="send-email-btn" class="customBlueButtonSmall btn" onclick="sendEmail()">
+                    <button type="submit" id="send-email-btn" class="customBlueButtonSmall btn">
                         Send Email
                     </button>
                 </div>

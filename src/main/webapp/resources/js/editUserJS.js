@@ -11,6 +11,7 @@ function enableLink(id){
 }
 
 
+
 /**
  * Function that receives the id of the
  * customer and sends a background
@@ -121,7 +122,7 @@ function editCustomer(id){
                 goodCommit.addClass("highLightGreen");
                 goodCommit.fadeOut(500).fadeIn(500);
             }else{
-                alert("Unable to commit customer changes");
+                showAndThenHideInfoWindow("Unable to commit customer changes");
                 var badCommit = $("#customerRow"+id);
 
                 badCommit.removeClass("highLightRed");
@@ -135,24 +136,172 @@ function editCustomer(id){
 }
 
 
-function alertMe(){
-/*<script>*/
-    function myFunction() {
-        var x;
-        if (confirm("Is this secure?") == true) {
-            alert("lies!");
-        } else {
-            alert("correct!");
-        }
+/**
+ * Start the functions that will
+ * verify editing of the table
+ * is correct.
+ *
+ * If not throw msg and disable
+ * link;
+ *
+ * @param id
+ */
+
+function checkFirstNameEdit(id){
+    var first = document.getElementById("customerEntityFirstName"+id).textContent;
+    first = first.trim().replace(/(\r\n|\n|\r)/gm,"");
+    if(first.length > 30){
+        showAndThenHideInfoWindow("First name must be 30 characters or less");
+        $('#commitLink'+id).addClass("disabledAnchor");
+
+        var badCommit = $("#customerEntityFirstName"+id);
+
+        badCommit.removeClass("highLightRed");
+        badCommit.removeClass("highLightGreen");
+
+        badCommit.addClass("highLightRed");
+    }else{
+        var goodCommit = $("#customerEntityFirstName"+id);
+
+        goodCommit.removeClass("highLightRed");
+        goodCommit.removeClass("highLightGreen");
     }
-/*    </script>*/
 }
+
+function checkLastNameEdit(id){
+    var last = document.getElementById("customerEntityLastName"+id).textContent;
+    last = last.trim().replace(/(\r\n|\n|\r)/gm,"");
+    if(last.length > 30){
+        showAndThenHideInfoWindow("Last name must be 30 characters or less");
+        $('#commitLink'+id).addClass("disabledAnchor");
+
+        var badCommit = $("#customerEntityLastName"+id);
+
+        badCommit.removeClass("highLightRed");
+        badCommit.removeClass("highLightGreen");
+
+        badCommit.addClass("highLightRed");
+    }else{
+        var goodCommit = $("#customerEntityLastName"+id);
+
+        goodCommit.removeClass("highLightRed");
+        goodCommit.removeClass("highLightGreen");
+    }
+}
+
+function checkEmailEdit(id){
+    var email = document.getElementById("customerEntityEmailAddress"+id).textContent;
+    email = email.trim().replace(/(\r\n|\n|\r)/gm,"");
+    if(email.length > 50){
+        showAndThenHideInfoWindow("Email must be 50 characters or less");
+        $('#commitLink'+id).addClass("disabledAnchor");
+
+        var badCommit = $("#customerEntityEmailAddress"+id);
+
+        badCommit.removeClass("highLightRed");
+        badCommit.removeClass("highLightGreen");
+
+        badCommit.addClass("highLightRed");
+    }else{
+        var goodCommit = $("#customerEntityEmailAddress"+id);
+
+        goodCommit.removeClass("highLightRed");
+        goodCommit.removeClass("highLightGreen");
+    }
+}
+
+function checkHomeEdit(id){
+    var home = document.getElementById("customerEntityHomeAddress"+id).textContent;
+    home = home.trim().replace(/(\r\n|\n|\r)/gm,"");
+    if(home.length > 60){
+        showAndThenHideInfoWindow("Home address must be 60 characters or less");
+        $('#commitLink'+id).addClass("disabledAnchor");
+
+        var badCommit = $("#customerEntityHomeAddress"+id);
+
+        badCommit.removeClass("highLightRed");
+        badCommit.removeClass("highLightGreen");
+
+        badCommit.addClass("highLightRed");
+
+    }else{
+        var goodCommit = $("#customerEntityHomeAddress"+id);
+
+        goodCommit.removeClass("highLightRed");
+        goodCommit.removeClass("highLightGreen");
+    }
+}
+
+function checkCityEdit(id){
+    var city = document.getElementById("customerEntityCity"+id).textContent;
+    city = city.trim().replace(/(\r\n|\n|\r)/gm,"");
+    if(city.length > 40){
+        showAndThenHideInfoWindow("City must be 40 characters or less");
+        $('#commitLink'+id).addClass("disabledAnchor");
+
+        var badCommit = $("#customerEntityCity"+id);
+
+        badCommit.removeClass("highLightRed");
+        badCommit.removeClass("highLightGreen");
+
+        badCommit.addClass("highLightRed");
+    }else{
+        var goodCommit = $("#customerEntityCity"+id);
+
+        goodCommit.removeClass("highLightRed");
+        goodCommit.removeClass("highLightGreen");
+    }
+}
+
+function checkStateEdit(id){
+    var state = document.getElementById("customerEntityState"+id).textContent;
+    state = state.trim().replace(/(\r\n|\n|\r)/gm,"");
+    if(state.length != 2){
+        showAndThenHideInfoWindow("State must be 2 characters long");
+        $('#commitLink'+id).addClass("disabledAnchor");
+
+        var badCommit = $("#customerEntityState"+id);
+
+        badCommit.removeClass("highLightRed");
+        badCommit.removeClass("highLightGreen");
+
+        badCommit.addClass("highLightRed");
+    }else{
+        var goodCommit = $("#customerEntityState"+id);
+
+        goodCommit.removeClass("highLightRed");
+        goodCommit.removeClass("highLightGreen");
+    }
+}
+
+function checkZipCodeEdit(id){
+    var zipCode = document.getElementById("customerEntityZipCode"+id).textContent;
+    zipCode = zipCode.trim().replace(/(\r\n|\n|\r)/gm,"");
+    if(zipCode.length > 15){
+        showAndThenHideInfoWindow("Zip code must be less than 15 characters");
+        $('#commitLink'+id).addClass("disabledAnchor");
+
+        var badCommit = $("#customerEntityZipCode"+id);
+
+        badCommit.removeClass("highLightRed");
+        badCommit.removeClass("highLightGreen");
+
+        badCommit.addClass("highLightRed");
+    }else{
+        var goodCommit = $("#customerEntityZipCode"+id);
+
+        goodCommit.removeClass("highLightRed");
+        goodCommit.removeClass("highLightGreen");
+    }
+}
+
+
+/**
+ * Activate the jquery for the table
+ */
 function makeViewCustomersIntoDataTable(){
     $('#customerTable').DataTable();
 }
 
-//Turn the table into a sortable data table with jquery
-//$(document).ready(function() {
- //   $('#customerTable').DataTable();
-//} );
+
 
