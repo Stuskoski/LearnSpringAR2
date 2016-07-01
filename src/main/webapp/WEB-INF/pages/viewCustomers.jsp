@@ -24,6 +24,7 @@
         </tr>
         </thead>
         <tbody>
+
 <c:if test="${!empty listCustomers}">
         <c:forEach items="${listCustomers}" var="DbCustomerEntity">
             <tr id="customerRow${DbCustomerEntity.id}">

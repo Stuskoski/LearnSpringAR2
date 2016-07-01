@@ -13,7 +13,7 @@
             </fieldset>
             <fieldset class="form-group" id="login-user-password-field">
                 <label for="password">Password</label>
-                <form:input path="password" id="password" cssClass="form-control"
+                <form:password path="password" id="password" cssClass="form-control"
                             placeholder="Enter password" required="true"/>
             </fieldset>
             <div id="submit-customer-btn-div">

@@ -10,10 +10,13 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import persistance.hibernateObjects.customer.CustomerSpringService;
 import persistance.hibernateObjects.user.UserEntity;
 import persistance.hibernateObjects.user.UserSpringService;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * Created by r730819 on 6/22/2016.
@@ -21,6 +24,7 @@ import persistance.hibernateObjects.user.UserSpringService;
 
 @Controller
 @RequestMapping("/login")
+@SessionAttributes("userLoggedIn")
 public class LoginUserController {
 
     private UserSpringService userSpringService;
@@ -42,17 +46,28 @@ public class LoginUserController {
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "getUser")
-    public String getUser(@ModelAttribute("user") UserEntity user, final RedirectAttributes redirectAttributes){
+    public String getUser(@ModelAttribute("user") UserEntity user, final RedirectAttributes redirectAttributes,
+                          HttpServletRequest request){
 
         if(doesUserExist(user.getUserName(), user.getPassword())){
             //create user session
-            return "redirect:/";
+            request.getSession().setAttribute("userLoggedIn", user);
+            return "redirect:/assignment2";
         }else{
             //throw error
             redirectAttributes.addFlashAttribute("userLoginError", "Unable to login user");
             return "redirect:/login";
-
         }
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "checkUser")
+    public String isUserLoggedIn(HttpServletRequest request, @ModelAttribute("page")final String page){
+        if(request.getSession().getAttribute("userLoggedIn") != null){
+            return page;
+        }else{
+            return "redirect:/login";
+        }
+
     }
 
     private boolean doesUserExist(String userName, String password){

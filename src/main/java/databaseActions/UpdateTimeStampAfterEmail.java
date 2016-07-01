@@ -30,7 +30,7 @@ public class UpdateTimeStampAfterEmail {
                 statement = connection.createStatement();
 
                 sqlStr = "UPDATE customers " +
-                        "SET timeStamp = NOW()";
+                         "SET timeStamp = NOW()";
 
                 statement.executeUpdate(sqlStr);
 

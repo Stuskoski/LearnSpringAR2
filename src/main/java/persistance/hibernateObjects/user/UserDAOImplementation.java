@@ -3,7 +3,9 @@ package persistance.hibernateObjects.user;
 import fileActions.CustomLogger;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.mapping.List;
 import org.springframework.stereotype.Repository;
+import persistance.hibernateObjects.customer.DbCustomerEntity;
 
 /**
  * Created by r730819 on 6/29/2016.
@@ -28,15 +30,31 @@ public class UserDAOImplementation implements UserDAO {
     public void updateUser(UserEntity user) {
         Session session = this.sessionFactory.getCurrentSession();
         session.update(user);
-        CustomLogger.createLogMsgAndSave("Customer updated successfully, Customer Details="+user.toString());
+        CustomLogger.createLogMsgAndSave("User updated successfully, Customer Details="+user.toString());
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public UserEntity getUser(String userName, String password) {
-        Session session = this.sessionFactory.getCurrentSession();
-        UserEntity user = (UserEntity) session.load(UserEntity.class, userName);
-        CustomLogger.createLogMsgAndSave("Customer loaded successfully, Customer details = " + user.toString());
-        return user;
+        try{
+            Session session = this.sessionFactory.getCurrentSession();
+
+            java.util.List<UserEntity> user = (java.util.List<UserEntity>)
+                    session.createQuery("from persistance.hibernateObjects.user.UserEntity where userName = :userName and password = :password")
+                            .setParameter("userName", userName)
+                            .setParameter("password", password)
+                            .list();
+
+            CustomLogger.createLogMsgAndSave("User loaded successfully, Customer details = " + user.toString());
+
+            return user.get(0);
+        }catch (Exception e){
+            CustomLogger.createLogMsgAndSave("Something went wrong trying to pull user. " +e.getMessage());
+            return null;
+        }
+
+
+
     }
 
     @Override
@@ -44,7 +62,7 @@ public class UserDAOImplementation implements UserDAO {
         Session session = this.sessionFactory.getCurrentSession();
         UserEntity user = (UserEntity) session.load(UserEntity.class, userName);
         if(user != null){
-            CustomLogger.createLogMsgAndSave("Customer deleted successfully, customer details: "+user.toString());
+            CustomLogger.createLogMsgAndSave("User deleted successfully, customer details: "+user.toString());
             session.delete(user);
         }
     }

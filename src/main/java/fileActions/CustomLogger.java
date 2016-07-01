@@ -15,12 +15,15 @@ public class CustomLogger {
     private static Logger logger = (Logger) LogManager.getLogger();
     private static String allLogs = "";
     private static StringBuilder logStringBuilder = new StringBuilder(allLogs);
+    private static int numOfLogs = 0;
 
     /**
      * Logs into information
      * @param msg msg to be logged
      */
     public static void createLogMsgAndSave(String msg){
+        numOfLogs++;
+
         Date date = new Date();
 
         String logMsg = date.toString() + ": " + msg;
@@ -34,6 +37,8 @@ public class CustomLogger {
      * @param msg msg to be logged
      */
     public static void createLogErrorAndSave(String msg){
+        numOfLogs++;
+
         Date date = new Date();
 
         String logMsg = date.toString() + ": " + msg;
@@ -59,7 +64,27 @@ public class CustomLogger {
      * to 0 to clear all logs
      */
     public static void clearLogs(){
+        numOfLogs=0;
         CustomLogger.createLogMsgAndSave("Clearing logs");
         logStringBuilder.setLength(0);
     }
+
+    /**
+     * Gets the number of logs
+     *
+     * @return number of logss
+     */
+    public static int getNumOfLogs(){
+        return numOfLogs;
+    }
+
+    /**
+     * Sets the number of logs
+     *
+     * @param num to set to
+     */
+    public static void setNumOfLogs(int num){
+        numOfLogs = num;
+    }
+
 }

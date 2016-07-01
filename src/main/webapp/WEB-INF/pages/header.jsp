@@ -1,4 +1,5 @@
-<%@ taglib prefix="c" uri="http://www.springframework.org/tags" %>
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -14,7 +15,6 @@
 </head>
 
 <body>
-
 <div id="wrapper">
     <div id="header-wrapper">
         <nav class="navbar navbar-inverse custom-header">
@@ -26,11 +26,11 @@
                         <span class="icon-bar"></span>
                     </button>
                     <a class="navbar-brand" id="logoDiv" href="#"><img id="hebLogo"
-                                                                       src="<c:url value="/resources/images/hebLogo.pn" />"></a>
+                                                                       src="<c:url value="/resources/images/hebLogo.png" />"></a>
                 </div>
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="${pageContext.request.contextPath}/">Home</a></li>
+                        <li class="active"><a href="${pageContext.request.contextPath}/assignment2">Home</a></li>
 
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
@@ -83,6 +83,12 @@
             </div>
         </nav>
     </div>
+
+
+<c:if test="${empty sessionScope.userLoggedIn}">
+    <div>
+    </div>
+    </c:if>
     <%-- add the loading page to every page.
          not sure if I like it just yet or
          only to add on long loading pages--%>
