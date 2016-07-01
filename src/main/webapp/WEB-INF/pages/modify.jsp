@@ -1,20 +1,20 @@
 <%--<jsp:include page="header.jsp"/>--%>
 
 
-<div class="container-fluid text-center" id="modifyDBContainer">
+<div class="text-center" id="modifyDBContainer">
     <div>
-        <button id="modifyDBCreate" class="btn non-block non-link customHEBButtonBig"
-                onclick="callCreateDBPage()">Create Database</button>
+        <button id="modifyDBCreate" class="btn non-block non-link customHEBButtonXBig"
+                onclick="callCreateDBPage()">Create Customer Database</button>
     </div>
 
     <div>
-        <button id="modifyDBClear" class="btn non-block non-link customHEBButtonBig"
-                onclick="callClearDBPage()">Clear Database</button>
+        <button id="modifyDBClear" class="btn non-block non-link customHEBButtonXBig"
+                onclick="callClearDBPage()">Clear Customer Database</button>
     </div>
 
     <div>
-        <button id="modifyDBDelete" class="btn non-block non-link customHEBButtonBig"
-                onclick="callDeleteDBPage()">Delete Database</button>
+        <button id="modifyDBDelete" class="btn non-block non-link customHEBButtonXBig"
+                onclick="callDeleteDBPage()">Delete Customer Database</button>
     </div>
 </div>
 

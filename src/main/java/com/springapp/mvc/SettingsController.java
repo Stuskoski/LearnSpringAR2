@@ -1,5 +1,6 @@
 package com.springapp.mvc;
 
+import fileActions.CustomLogger;
 import models.SettingsTemplate;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -9,6 +10,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import util.ConfigFileController;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * Created by r730819 on 6/22/2016.
@@ -32,31 +35,48 @@ public class SettingsController {
 
 
     @RequestMapping(method = RequestMethod.GET)
-    public String getSettingsPage(ModelMap modelMap, Model model){
-        modelMap.addAttribute("dbURL", dbURL);
-        modelMap.addAttribute("rootURL", rootURL);
-        modelMap.addAttribute("dbUser", dbUser);
-        modelMap.addAttribute("dbPass", dbPass);
-        modelMap.addAttribute("mailHost", mailHost);
-        modelMap.addAttribute("mailFrom", mailFrom);
+    public String getSettingsPage(ModelMap modelMap, Model model, HttpServletRequest request){
 
-        model.addAttribute("settingsTemplate", new SettingsTemplate(ConfigFileController.getDatabaseURL(),
-                ConfigFileController.getRootDatabaseURL(), ConfigFileController.getDatabaseUser(),
-                ConfigFileController.getDatabasePass(), ConfigFileController.getMailHost(),
-                ConfigFileController.getMailFrom()));
+        if(request.getSession().getAttribute("userLoggedIn") != null){
+           /* modelMap.addAttribute("dbURL", dbURL);
+            modelMap.addAttribute("rootURL", rootURL);
+            modelMap.addAttribute("dbUser", dbUser);
+            modelMap.addAttribute("dbPass", dbPass);
+            modelMap.addAttribute("mailHost", mailHost);
+            modelMap.addAttribute("mailFrom", mailFrom);*/
 
-        return "settings";
+            model.addAttribute("settingsTemplate", new SettingsTemplate(ConfigFileController.getDatabaseURL(),
+                    ConfigFileController.getRootDatabaseURL(), ConfigFileController.getDatabaseUser(),
+                    ConfigFileController.getDatabasePass(), ConfigFileController.getMailHost(),
+                    ConfigFileController.getMailFrom()));
+
+            return "settings";
+        }else{
+            return "redirect:/login";
+        }
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/changeSettings")
-    public String changeSettings(@ModelAttribute("settingsTemplate") SettingsTemplate settingsTemplate){
-        ConfigFileController.setDatabaseURLStatic(settingsTemplate.getDatabaseURL());
-        ConfigFileController.setRootDatabaseURLStatic(settingsTemplate.getRootDatabaseURL());
-        ConfigFileController.setDatabaseUserStatic(settingsTemplate.getDatabaseUser());
-        ConfigFileController.setDatabasePassStatic(settingsTemplate.getDatabasePass());
-        ConfigFileController.setMailHostStatic(settingsTemplate.getMailHost());
-        ConfigFileController.setMailFromStatic(settingsTemplate.getMailFrom());
+    public String changeSettings(@ModelAttribute("settingsTemplate") SettingsTemplate settingsTemplate,
+                                 HttpServletRequest request){
 
-        return "settings";
+        if(request.getSession().getAttribute("userLoggedIn") != null){
+            CustomLogger.createLogMsgAndSave("Updating settings");
+
+            ConfigFileController.setDatabaseURLStatic(settingsTemplate.getDatabaseURL());
+            ConfigFileController.setRootDatabaseURLStatic(settingsTemplate.getRootDatabaseURL());
+            ConfigFileController.setDatabaseUserStatic(settingsTemplate.getDatabaseUser());
+            ConfigFileController.setDatabasePassStatic(settingsTemplate.getDatabasePass());
+            ConfigFileController.setMailHostStatic(settingsTemplate.getMailHost());
+            ConfigFileController.setMailFromStatic(settingsTemplate.getMailFrom());
+
+            CustomLogger.createLogMsgAndSave("Settings updated");
+
+            return "settings";
+        }else{
+            return "redirect:/login";
+        }
+
+
     }
 }

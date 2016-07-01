@@ -9,7 +9,7 @@ import util.PopulateStats;
 import javax.servlet.http.HttpServletRequest;
 
 @Controller
-@RequestMapping("/assignment2")
+@RequestMapping(value={"", "/", "/assignment2", "assignment2", "home", "/home"})
 public class HomeController {
 
     @RequestMapping(method = RequestMethod.GET)

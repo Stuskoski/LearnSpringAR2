@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import persistance.hibernateObjects.customer.DbCustomerEntity;
 
+import javax.servlet.http.HttpServletRequest;
+
 
 /**
  * Created by r730819 on 6/22/2016.
@@ -21,11 +23,25 @@ import persistance.hibernateObjects.customer.DbCustomerEntity;
 public class DatabaseUploadCustomersController {
 
     @RequestMapping(value = "/textFileUpload", method = RequestMethod.GET)
-    public String getUploadCustomerViaTextFilePage(){ return "uploadCustomersViaTextFile";}
+    public String getUploadCustomerViaTextFilePage(HttpServletRequest request){
+
+        if(request.getSession().getAttribute("userLoggedIn") != null){
+            return "uploadCustomersViaTextFile";
+        }else{
+            return "redirect:/login";
+        }
+    }
 
     @RequestMapping(value = "/webFormUpload", method = RequestMethod.GET)
-    public String getUploadCustomerViaWebFormPage(Model model){
-        model.addAttribute("customer", new DbCustomerEntity());
-        return "uploadCustomersViaWebForm";
+    public String getUploadCustomerViaWebFormPage(Model model, HttpServletRequest request){
+
+        if(request.getSession().getAttribute("userLoggedIn") != null){
+            model.addAttribute("customer", new DbCustomerEntity());
+            return "uploadCustomersViaWebForm";
+        }else{
+            return "redirect:/login";
+        }
+
+
     }
 }

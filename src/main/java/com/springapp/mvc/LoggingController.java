@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * Logging controller to handle
  * all the logging methods
@@ -25,7 +27,14 @@ public class LoggingController {
      *          correct page
      */
     @RequestMapping(method = RequestMethod.GET)
-    public String getLoggingPage(){return "logging";}
+    public String getLoggingPage(HttpServletRequest request){
+
+        if(request.getSession().getAttribute("userLoggedIn") != null){
+            return "logging";
+        }else{
+            return "redirect:/login";
+        }
+    }
 
 
     /**
@@ -36,8 +45,15 @@ public class LoggingController {
      */
     @RequestMapping(method = RequestMethod.GET, value = "/getLogs")
     public @ResponseBody
-    String getAllLogs(){
-        return CustomLogger.getLogStringBuilderContentsAsHtml();
+    String getAllLogs(HttpServletRequest request){
+
+        if(request.getSession().getAttribute("userLoggedIn") != null){
+            return CustomLogger.getLogStringBuilderContentsAsHtml();
+        }else{
+            return "please log in";
+        }
+
+
     }
 
 
@@ -48,8 +64,13 @@ public class LoggingController {
      */
     @RequestMapping(method = RequestMethod.GET, value = "/clearLogs")
     public @ResponseBody
-    String clearLogs(){
-        CustomLogger.clearLogs();
-        return "Logs cleared";
+    String clearLogs(HttpServletRequest request){
+
+        if(request.getSession().getAttribute("userLoggedIn") != null){
+            CustomLogger.clearLogs();
+            return "Logs cleared";
+        }else{
+            return "please log in";
+        }
     }
 }

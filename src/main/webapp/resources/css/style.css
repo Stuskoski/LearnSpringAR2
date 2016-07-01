@@ -58,6 +58,16 @@
     font-weight: bold;
     text-align: center;
 }
+/*----------------------------------- Upload Customers Via Text File -------------------------*/
+#customerFileForm {
+    display: none;
+}
+.custom-file-upload {
+    border: 1px solid #ccc;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+}
 /*----------------------------------- View Customers -------------------------*/
 .disabledAnchor{
     pointer-events: none !important;
@@ -351,6 +361,21 @@ header {
     color: white;
 }
 
+.customHEBButtonXBig{
+    font-size: 25px;
+    border-radius: 10px;
+    width: 350px;
+    background: white;
+    color: red;
+    transition: all 0.3s ease 0s;
+    border-color: red;
+}
+.customHEBButtonXBig:hover{
+    border-width: 1px;
+    background: red;
+    color: white;
+}
+
 .customHEBButtonSmall{
     font-size: 15px;
     border-radius: 10px;
@@ -365,6 +390,22 @@ header {
     background: red;
     color: white;
 }
+
+.customHEBButtonXSmall{
+    font-size: 12px;
+    border-radius: 10px;
+    width: 125px;
+    background: white;
+    color: red;
+    transition: all 0.3s ease 0s;
+    border-color: red;
+}
+.customHEBButtonXSmall:hover{
+    border-width: 1px;
+    background: red;
+    color: white;
+}
+
 
 .customBlueButtonSmall{
     font-size: 15px;

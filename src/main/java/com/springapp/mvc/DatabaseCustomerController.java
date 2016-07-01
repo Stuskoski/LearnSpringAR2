@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import persistance.hibernateObjects.customer.CustomerSpringService;
 import persistance.hibernateObjects.customer.DbCustomerEntity;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 
 /**
@@ -37,51 +38,69 @@ public class DatabaseCustomerController {
 
 
     @RequestMapping(value = "/customers", method = RequestMethod.GET)
-    public String listCustomers(Model model){
+    public String listCustomers(Model model, HttpServletRequest request){
 
-        //if a database connection can be made, redirect to view customers with the data, else go back home
-        if(DatabaseConnections.getDB()!=null){
-            model.addAttribute("DbCustomerEntity", new DbCustomerEntity());
-            model.addAttribute("listCustomers", this.customerSpringService.listCustomers());
-            DatabaseConnections.clearDBConnection();
-            return "viewCustomers";
+        if(request.getSession().getAttribute("userLoggedIn") != null){
+            //if a database connection can be made, redirect to view customers with the data, else go back home
+            if(DatabaseConnections.getDB()!=null){
+                model.addAttribute("DbCustomerEntity", new DbCustomerEntity());
+                model.addAttribute("listCustomers", this.customerSpringService.listCustomers());
+                DatabaseConnections.clearDBConnection();
+                return "viewCustomers";
+            }else{
+                return null; //todo redirect to error page
+            }
         }else{
-            return null; //todo redirect to error page
+            return "redirect:/login";
         }
-
     }
 
 
     @RequestMapping(value = "/customer/add", method = RequestMethod.POST)
     public @ResponseBody
-    String addCustomer(@ModelAttribute("customer") DbCustomerEntity dbCustomerEntity){
-        try {
-            if(dbCustomerEntity.getId() == 0){
-                this.customerSpringService.addCustomer(dbCustomerEntity);
-                return "Customer successfully added";
+    String addCustomer(@ModelAttribute("customer") DbCustomerEntity dbCustomerEntity, HttpServletRequest request){
+
+        if(request.getSession().getAttribute("userLoggedIn") != null){
+            try {
+                if(dbCustomerEntity.getId() == 0){
+                    this.customerSpringService.addCustomer(dbCustomerEntity);
+                    return "Customer successfully added";
+                }
+                else{
+                    this.customerSpringService.updateCustomer(dbCustomerEntity);
+                    return "Customer exists, customer updated";
+                }
+            }catch (Exception e){
+                CustomLogger.createLogMsgAndSave("An error has occurred.  Unable to upload customer");
+                return "An error has occurred.  Unable to upload customer";
             }
-            else{
-                this.customerSpringService.updateCustomer(dbCustomerEntity);
-                return "Customer exists, customer updated";
-            }
-        }catch (Exception e){
-            return "An error has occurred.  Unable to upload customer";
+        }else{
+            return "redirect:/login";
         }
     }
 
     @RequestMapping("/remove/{id}")
-    public String removeCustomer(@PathVariable("id") int id){
-        this.customerSpringService.removeCustomer(id);
-        return "redirect:/customers";
+    public String removeCustomer(@PathVariable("id") int id, HttpServletRequest request){
+
+        if(request.getSession().getAttribute("userLoggedIn") != null){
+            this.customerSpringService.removeCustomer(id);
+            return "redirect:/customers";
+        }else{
+            return "redirect:/login";
+        }
     }
 
     @RequestMapping("/edit/{id}")
-    public String editCustomer(@PathVariable("id") int id, Model model){
-        model.addAttribute("DbCustomerEntity", this.customerSpringService.getCustomerById(id));
-        model.addAttribute("listCustomers", this.customerSpringService.listCustomers());
+    public String editCustomer(@PathVariable("id") int id, Model model, HttpServletRequest request){
 
-        return "viewCustomers";
+        if(request.getSession().getAttribute("userLoggedIn") != null){
+            model.addAttribute("DbCustomerEntity", this.customerSpringService.getCustomerById(id));
+            model.addAttribute("listCustomers", this.customerSpringService.listCustomers());
 
+            return "viewCustomers";
+        }else{
+            return "redirect:/login";
+        }
     }
 
     /**
@@ -93,31 +112,36 @@ public class DatabaseCustomerController {
      */
     @RequestMapping(value = "/uploadCustomerViaFile", method = RequestMethod.POST)
     public @ResponseBody
-    String uploadFileHandler(@RequestParam("file") MultipartFile file) {
-        CustomLogger.createLogMsgAndSave("file called");
-        if (!file.isEmpty()) {
-            try {
-                //create temp file
-                File tempFile = CreateTempCustomerFile.createFile(file);
+    String uploadFileHandler(@RequestParam("file") MultipartFile file, HttpServletRequest request) {
 
-                //Calls read file to generate DbCustomerEntity array list and then loop through it
-                for (DbCustomerEntity customer : ReadFile.readAndCreateObjects(tempFile)){
-                    if(customer.getId() == 0){
-                        this.customerSpringService.addCustomer(customer);
+        if(request.getSession().getAttribute("userLoggedIn") != null){
+            CustomLogger.createLogMsgAndSave("file called");
+            if (!file.isEmpty()) {
+                try {
+                    //create temp file
+                    File tempFile = CreateTempCustomerFile.createFile(file);
+
+                    //Calls read file to generate DbCustomerEntity array list and then loop through it
+                    for (DbCustomerEntity customer : ReadFile.readAndCreateObjects(tempFile)){
+                        if(customer.getId() == 0){
+                            this.customerSpringService.addCustomer(customer);
+                        }
+                        else{
+                            this.customerSpringService.updateCustomer(customer);
+                        }
                     }
-                    else{
-                        this.customerSpringService.updateCustomer(customer);
-                    }
+
+                    return "Customers uploaded successfully";
+                } catch (Exception e) {
+                    CustomLogger.createLogMsgAndSave("Unable to upload customer list: " + e.getMessage());
+                    return "Unable to upload customers";
                 }
-
-                return "Customers uploaded successfully";
-            } catch (Exception e) {
-                CustomLogger.createLogMsgAndSave("Unable to upload customer list: " + e.getMessage());
-                return "Unable to upload customers";
+            } else {
+                CustomLogger.createLogMsgAndSave("Unable to upload customer list: File empty!");
+                return "File empty!";
             }
-        } else {
-            CustomLogger.createLogMsgAndSave("Unable to upload customer list: File empty!");
-            return "File empty!";
+        }else{
+            return "redirect:/login";
         }
     }
 }

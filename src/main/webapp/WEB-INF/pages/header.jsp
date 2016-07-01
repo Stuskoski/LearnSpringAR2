@@ -25,8 +25,9 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" id="logoDiv" href="#"><img id="hebLogo"
-                                                                       src="<c:url value="/resources/images/hebLogo.png" />"></a>
+                    <a class="navbar-brand" id="logoDiv" href="${pageContext.request.contextPath}/assignment2">
+                        <img id="hebLogo" src="<c:url value="/resources/images/hebLogo.png" />">
+                    </a>
                 </div>
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav">
@@ -37,14 +38,12 @@
                                aria-haspopup="true" aria-expanded="false">Database<span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li class="dropdown-header">Database</li>
-                                <li><a href="${pageContext.request.contextPath}/modifyDB">Modify Database</a></li>
-                                <li><a href="${pageContext.request.contextPath}/customers">View Customers</a></li>
+                                <li><a class="non-link" onclick="pullModifyDatabasePage()">Modify Database</a></li>
+                                <li><a class="non-link" onclick="pullViewCustomersPage()">View Customers</a></li>
 
                                 <li class="dropdown-header">Upload Customers</li>
-                                <li><a href="${pageContext.request.contextPath}/uploadCustomers/textFileUpload">Text
-                                    File</a></li>
-                                <li><a href="${pageContext.request.contextPath}/uploadCustomers/webFormUpload">Web
-                                    Form</a></li>
+                                <li><a class="non-link" onclick="pullUploadTextFilePage()">Text File</a></li>
+                                <li><a class="non-link" onclick="pullUploadWebFormPage()">Web Form</a></li>
                             </ul>
                         </li>
 
@@ -53,8 +52,8 @@
                                aria-haspopup="true" aria-expanded="false">Information<span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li class="dropdown-header">Information</li>
-                                <li><a href="${pageContext.request.contextPath}/logging">Logging</a></li>
-                                <li><a href="${pageContext.request.contextPath}/email">Email</a></li>
+                                <li><a class="non-link" onclick="pullLoggingPage()">Logging</a></li>
+                                <li><a class="non-link" onclick="pullEmailPage()">Email</a></li>
                             </ul>
                         </li>
 
@@ -63,20 +62,24 @@
                                aria-haspopup="true" aria-expanded="false">Other<span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li class="dropdown-header">Other</li>
-                                <li><a href="${pageContext.request.contextPath}/settings">Settings</a></li>
+                                <li><a class="non-link" onclick="pullSettingsPage()">Settings</a></li>
                             </ul>
                         </li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <div id="header-right-btns-div">
-                            <div class="non-block">
-                                <a class="btn btn-danger btn-xs non-block"
-                                   href="${pageContext.request.contextPath}/signup">Sign Up</a>
-                            </div>
-                            <div class="non-block">
-                                <a class="btn btn-danger btn-xs non-block"
-                                   href="${pageContext.request.contextPath}/login">Login</a>
-                            </div>
+                            <c:choose>
+                                <c:when test="${empty sessionScope.userLoggedIn}">
+                                    <a class="btn customHEBButtonXSmall non-block"
+                                       href="${pageContext.request.contextPath}/login">Login
+                                    </a>
+                                </c:when>
+                                <c:otherwise>
+                                    <a class="btn customHEBButtonXSmall non-block"
+                                       href="${pageContext.request.contextPath}/logout">Logout
+                                    </a>
+                                </c:otherwise>
+                            </c:choose>
                         </div>
                     </ul>
                 </div>
@@ -85,10 +88,7 @@
     </div>
 
 
-<c:if test="${empty sessionScope.userLoggedIn}">
-    <div>
-    </div>
-    </c:if>
+
     <%-- add the loading page to every page.
          not sure if I like it just yet or
          only to add on long loading pages--%>

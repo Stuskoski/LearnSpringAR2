@@ -11,6 +11,8 @@ import util.ConfigFileController;
 import util.CreateEmailMessage;
 import util.SendCustomersViaEmail;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * Controller class to handle all the
  * functions with email.
@@ -32,9 +34,14 @@ public class EmailController {
      * @return Returns string email to view that webpage
      */
     @RequestMapping(method = RequestMethod.GET)
-    public String getEmailPage(Model model){
-        model.addAttribute("emailMessageTemplate", new EmailMessageTemplate(ConfigFileController.getMailFrom()));
-        return "email";
+    public String getEmailPage(Model model, HttpServletRequest request){
+
+        if(request.getSession().getAttribute("userLoggedIn") != null){
+            model.addAttribute("emailMessageTemplate", new EmailMessageTemplate(ConfigFileController.getMailFrom()));
+            return "email";
+        }else{
+            return "redirect:/login";
+        }
     }
 
     /**
@@ -50,14 +57,22 @@ public class EmailController {
      */
     @RequestMapping(value = "/sendEmail", method = RequestMethod.POST)
     public @ResponseBody
-    String sendEmail(@ModelAttribute("emailMessageTemplate") EmailMessageTemplate email){
-        if(SendCustomersViaEmail.sendEmail(email.getToEmail(), email.getFromEmail(), email.getSubject(),
-                email.getMessage())){
-            return "Email successfully sent";
-        }else{
-            return "Unable to send email";
-        }
+    String sendEmail(@ModelAttribute("emailMessageTemplate") EmailMessageTemplate email, HttpServletRequest request){
 
+        if(request.getSession().getAttribute("userLoggedIn") != null){
+
+            if(SendCustomersViaEmail.sendEmail(email.getToEmail(), email.getFromEmail(), email.getSubject(),
+                    email.getMessage())){
+
+                return "Email successfully sent";
+            }else{
+
+                return "Unable to send email";
+            }
+
+        }else{
+            return "please login";
+        }
     }
 
     /**
@@ -69,8 +84,13 @@ public class EmailController {
      */
     @RequestMapping(value = "/populateSortedCustomers", method = RequestMethod.GET)
     public @ResponseBody
-    String populateSortedCustomers(){
-        return CreateEmailMessage.getSortedEmail();
+    String populateSortedCustomers(HttpServletRequest request){
+
+        if(request.getSession().getAttribute("userLoggedIn") != null){
+            return CreateEmailMessage.getSortedEmail();
+        }else{
+            return "please log in";
+        }
     }
 
     /**
@@ -82,8 +102,13 @@ public class EmailController {
      */
     @RequestMapping(value = "/populateUnsortedCustomers", method = RequestMethod.GET)
     public @ResponseBody
-    String populateUnsortedCustomers(){
-        return CreateEmailMessage.getUnsortedEmail();
+    String populateUnsortedCustomers(HttpServletRequest request){
+
+        if(request.getSession().getAttribute("userLoggedIn") != null){
+            return CreateEmailMessage.getUnsortedEmail();
+        }else{
+            return "please log in";
+        }
     }
 
 

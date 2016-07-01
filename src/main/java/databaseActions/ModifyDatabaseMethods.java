@@ -46,7 +46,7 @@ public class ModifyDatabaseMethods {
                         CustomLogger.createLogMsgAndSave("Executing: " + sqlStr);
                         statement.executeUpdate(sqlStr);
 
-                        //Finally create the table
+                        //Create the customers table
                         sqlStr ="";
                         StringBuilder stringBuilder = new StringBuilder(sqlStr);
                         stringBuilder.append("CREATE TABLE customers ");
@@ -65,6 +65,18 @@ public class ModifyDatabaseMethods {
 
                         statement.executeUpdate(stringBuilder.toString());
 
+                        /*//Create Users Table
+                        sqlStr ="";
+                        stringBuilder = new StringBuilder(sqlStr);
+                        stringBuilder.append("CREATE TABLE users ");
+                        stringBuilder.append("(userName varchar(45) NOT NULL, ");
+                        stringBuilder.append(" password varchar(45) NOT NULL, ");
+                        stringBuilder.append(" PRIMARY KEY (userName))");
+
+                        CustomLogger.createLogMsgAndSave("Executing: " + stringBuilder.toString());
+
+                        statement.executeUpdate(stringBuilder.toString());*/
+
                         break;
 
                     case CLEAR:
@@ -76,7 +88,7 @@ public class ModifyDatabaseMethods {
 
 
                     case DELETE:
-                        sqlStr = "DROP DATABASE `assign2_db_augustus`;";
+                        sqlStr = "DROP TABLE `assign2_db_augustus`.`customers`;";
 
                         statement.executeUpdate(sqlStr);
 
