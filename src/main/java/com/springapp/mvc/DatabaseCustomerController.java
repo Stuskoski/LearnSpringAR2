@@ -35,6 +35,7 @@ public class DatabaseCustomerController {
         this.customerSpringService = customerSpringService;
     }
 
+
     @RequestMapping(value = "/customers", method = RequestMethod.GET)
     public String listCustomers(Model model){
 
@@ -49,6 +50,7 @@ public class DatabaseCustomerController {
         }
 
     }
+
 
     @RequestMapping(value = "/customer/add", method = RequestMethod.POST)
     public @ResponseBody

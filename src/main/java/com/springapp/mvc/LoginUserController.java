@@ -1,6 +1,7 @@
 package com.springapp.mvc;
 
 import databaseActions.DatabaseConnections;
+import fileActions.CustomLogger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -58,16 +59,6 @@ public class LoginUserController {
             redirectAttributes.addFlashAttribute("userLoginError", "Unable to login user");
             return "redirect:/login";
         }
-    }
-
-    @RequestMapping(method = RequestMethod.GET, value = "checkUser")
-    public String isUserLoggedIn(HttpServletRequest request, @ModelAttribute("page")final String page){
-        if(request.getSession().getAttribute("userLoggedIn") != null){
-            return page;
-        }else{
-            return "redirect:/login";
-        }
-
     }
 
     private boolean doesUserExist(String userName, String password){
