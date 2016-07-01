@@ -70,12 +70,12 @@
                         <div id="header-right-btns-div">
                             <c:choose>
                                 <c:when test="${empty sessionScope.userLoggedIn}">
-                                    <a class="btn customHEBButtonXSmall non-block"
+                                    <a class="btn customWhiteButtonXSmall"
                                        href="${pageContext.request.contextPath}/login">Login
                                     </a>
                                 </c:when>
                                 <c:otherwise>
-                                    <a class="btn customHEBButtonXSmall non-block"
+                                    <a class="btn customWhiteButtonXSmall"
                                        href="${pageContext.request.contextPath}/logout">Logout
                                     </a>
                                 </c:otherwise>

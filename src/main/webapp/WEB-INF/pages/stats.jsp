@@ -58,12 +58,12 @@
   <div class="row">
     <div class="col-sm-8">
       <div class="well">
-        <p>Text</p>
+        <p>Some informational window I could not think of...</p>
       </div>
     </div>
     <div class="col-sm-4">
       <div class="well">
-        <p>last user login</p>
+        <p>Current ${sessionScope.userLoggedIn}</p>
       </div>
     </div>
   </div>

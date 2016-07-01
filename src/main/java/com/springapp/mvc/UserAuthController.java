@@ -24,9 +24,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 
 @Controller
-@RequestMapping("/login")
-@SessionAttributes("userLoggedIn")
-public class LoginUserController {
+public class UserAuthController {
 
     private UserSpringService userSpringService;
 
@@ -36,7 +34,7 @@ public class LoginUserController {
         this.userSpringService = userSpringService;
     }
 
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET, value = "/login")
     public String getLoginPage(ModelMap modelMap, @ModelAttribute("userLoginError")final String userLoginError,
                                final Model model){
 
@@ -46,7 +44,15 @@ public class LoginUserController {
         return "login";
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "getUser")
+    @RequestMapping(method = RequestMethod.GET, value = "/logout")
+    public String logoutUser(HttpServletRequest request){
+
+        request.getSession().invalidate();
+
+        return "redirect:/login";
+    }
+
+    @RequestMapping(method = RequestMethod.POST, value = "/login/getUser")
     public String getUser(@ModelAttribute("user") UserEntity user, final RedirectAttributes redirectAttributes,
                           HttpServletRequest request){
 

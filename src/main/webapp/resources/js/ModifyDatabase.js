@@ -22,8 +22,10 @@ function callCreateDBPage(){
         if (xhttp.readyState == 4 ) {
             if(xhttp.status == 200){
                 document.getElementById("homeScreenLoader").innerHTML = xhttp.responseText;
+                showAndThenHideInfoWindow("Database created successfully");
             }else{
                 document.getElementById("homeScreenLoader").innerHTML = "Unable to create database";
+                showAndThenHideInfoWindow("Unable to create database");
             }
         }
     }
@@ -45,8 +47,10 @@ function callClearDBPage(){
         if (xhttp.readyState == 4 ) {
             if(xhttp.status == 200){
                 document.getElementById("homeScreenLoader").innerHTML = xhttp.responseText;
+                showAndThenHideInfoWindow("Database cleared successfully");
             }else{
                 document.getElementById("homeScreenLoader").innerHTML = "Unable to clear database";
+                showAndThenHideInfoWindow("Unable to clear database");
             }
         }
     }
@@ -68,8 +72,10 @@ function callDeleteDBPage(){
         if (xhttp.readyState == 4 ) {
             if(xhttp.status == 200){
                 document.getElementById("homeScreenLoader").innerHTML = xhttp.responseText;
+                showAndThenHideInfoWindow("Database deleted successfully");
             }else{
-                document.getElementById("homeScreenLoader").innerHTML = "Unable to delete datbase";
+                document.getElementById("homeScreenLoader").innerHTML = "Unable to delete database";
+                showAndThenHideInfoWindow("Unable to delete database");
             }
         }
     }

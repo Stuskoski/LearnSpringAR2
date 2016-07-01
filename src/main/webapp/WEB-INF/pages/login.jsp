@@ -5,7 +5,7 @@
 <div class="col-lg-4 col-md-4 col-sm-6 col-xs-8">
     <div class="loginContent">
         <form:form method="post" modelAttribute="userEntity" action="/login/getUser">
-            <div id="upload-customer-title">Login</div>
+            <div id="upload-customer-title">Login</div> <%-- todo fix id--%>
             <fieldset class="form-group" id="login-user-username-field">
                 <label for="userName">Username</label>
                 <form:input path="userName" id="userName" cssClass="form-control"

@@ -2,10 +2,11 @@
 
 
 <div class="col-lg-2 col-md-2 col-sm-3 col-xs-2"></div>
-<div id="web-form-wrapper" class="col-lg-8 col-md-8 col-sm-6 col-xs-8">
+<div class="col-lg-8 col-md-8 col-sm-6 col-xs-8">
     <div id="add-customer-web-form">
         <div class="signupContent">
-            <form:form method="post" modelAttribute="settingsTemplate" action="" id="allFieldsFullForm">
+            <form:form method="post" modelAttribute="settingsTemplate"
+                       onsubmit="event.preventDefault(); editSettings()" id="allFieldsFullForm">
                 <div id="upload-customer-title">Settings</div>
                 <fieldset class="form-group">
                     <label for="databaseURL">Database URL</label>
@@ -39,8 +40,7 @@
                 </fieldset>
                 <div id="saveAlert" class="center-text">** All changes are saved until server restart **</div><br>
                 <div id="submit-customer-btn-div">
-                    <button type="button" id="submit-settings-btn" class="customHEBButtonSmall btn btn-danger"
-                            onclick="editSettings()">
+                    <button type="submit" id="submit-settings-btn" class="customHEBButtonSmall btn btn-danger">
                         Submit
                     </button>
                 </div>
