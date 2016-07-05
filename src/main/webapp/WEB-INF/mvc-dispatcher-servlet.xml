@@ -12,11 +12,7 @@
         http://www.springframework.org/schema/tx
         http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
 
-    <context:component-scan base-package="com"/>
-    <context:component-scan base-package="util"/>
-    <context:component-scan base-package="persistance"/>
-
-
+    <context:component-scan base-package="com.heb.assortment"/>
 
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/pages/"/>
@@ -40,8 +36,8 @@
         <property name="dataSource" ref="dataSource" />
         <property name="annotatedClasses">
             <list>
-                <value>persistance.hibernateObjects.customer.DbCustomerEntity</value>
-                <value>persistance.hibernateObjects.user.UserEntity</value>
+                <value>com.heb.assortment.domain.DbCustomerEntity</value>
+                <value>com.heb.assortment.domain.UserEntity</value>
             </list>
         </property>
         <property name="hibernateProperties">
@@ -59,22 +55,22 @@
     </bean>
 
     <!-- Setting up the customer DAO -->
-    <bean id="customerDAO" class="persistance.hibernateObjects.customer.CustomerDAOImplementation">
+    <bean id="customerDAO" class="com.heb.assortment.service.impl.CustomerDAOImplementation">
         <property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
     </bean>
 
     <!-- Assigning the service for customer dao-->
-    <bean id="customerSpringService" class="persistance.hibernateObjects.customer.CustomerSpringServiceImplementation">
+    <bean id="customerSpringService" class="com.heb.assortment.service.impl.CustomerSpringServiceImplementation">
         <property name="customerDAO" ref="customerDAO"/>
     </bean>
 
     <!-- Setting up the user DAO -->
-    <bean id="userDAO" class="persistance.hibernateObjects.user.UserDAOImplementation">
+    <bean id="userDAO" class="com.heb.assortment.service.impl.UserDAOImplementation">
         <property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
     </bean>
 
     <!-- Assigning the service for customer dao-->
-    <bean id="userSpringService" class="persistance.hibernateObjects.user.UserSpringServiceImplementation">
+    <bean id="userSpringService" class="com.heb.assortment.service.impl.UserSpringServiceImplementation">
         <property name="userDAO" ref="userDAO"/>
     </bean>
 
