@@ -6,6 +6,8 @@ import java.util.List;
 
 /**
  * Created by r730819 on 6/24/2016.
+ *
+ * The Spring implementation overlay for Customer DAO
  */
 public class CustomerSpringServiceImplementation implements CustomerSpringService {
 

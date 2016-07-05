@@ -32,14 +32,14 @@
                 <fieldset class="form-group">
                     <label for="homeAddress">Home Address</label>
                     <form:input path="homeAddress" id="homeAddress" cssClass="form-control"
-                                placeholder="Enter Customer Home Address" required="true" pattern="[A-Za-z0-9]{5,60}"
+                                placeholder="Enter Customer Home Address" required="true" pattern="[A-Za-z0-9 ]{5,60}"
                                 title="Enter a valid home address between 5 and 60 characters"
                                 maxlength="60"/>
                 </fieldset>
                 <fieldset class="form-group">
                     <label for="city">City</label>
                     <form:input path="city" id="city" cssClass="form-control" placeholder="Enter Customer City"
-                                required="true" pattern="[A-Za-z]{2,40}"
+                                required="true" pattern="[A-Za-z ]{2,40}"
                                 title="Enter a valid city between 2 and 40 characters"
                                 maxlength="40"/>
                 </fieldset>

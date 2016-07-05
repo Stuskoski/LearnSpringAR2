@@ -5,6 +5,8 @@ import java.util.List;
 
 /**
  * Created by r730819 on 6/24/2016.
+ *
+ * The spring overlay for the customer DAO
  */
 public interface CustomerSpringService {
 

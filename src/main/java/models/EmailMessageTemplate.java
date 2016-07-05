@@ -2,6 +2,12 @@ package models;
 
 /**
  * Created by r730819 on 6/27/2016.
+ *
+ * Email message template that is pre populated
+ * with settings values.
+ *
+ * Is also used when finally sending the message
+ * and populating the body in html with message
  */
 public class EmailMessageTemplate {
     private String toEmail;
@@ -9,15 +15,13 @@ public class EmailMessageTemplate {
     private String subject;
     private String message;
 
+    //Constructors
     public EmailMessageTemplate(String fromEmail) {
         this.fromEmail = fromEmail;
     }
+    public EmailMessageTemplate(){}
 
-    public EmailMessageTemplate(){
-
-    }
-
-
+    //Getters and settings
     public String getToEmail() {
         return toEmail;
     }
@@ -56,10 +60,10 @@ public class EmailMessageTemplate {
         String emailString = "";
         StringBuilder stringBuilder = new StringBuilder(emailString);
 
-        stringBuilder.append("To: " + toEmail + "\n");
-        stringBuilder.append("From: " + fromEmail + "\n");
-        stringBuilder.append("Subject: " + subject + "\n");
-        stringBuilder.append("Message: " + message + "\n");
+        stringBuilder.append("To: ").append(toEmail).append("\n");
+        stringBuilder.append("From: ").append(fromEmail).append("\n");
+        stringBuilder.append("Subject: ").append(subject).append("\n");
+        stringBuilder.append("Message: ").append(message).append("\n");
 
         return stringBuilder.toString();
     }

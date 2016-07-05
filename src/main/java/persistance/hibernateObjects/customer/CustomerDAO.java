@@ -5,6 +5,9 @@ import java.util.List;
 
 /**
  * Created by r730819 on 6/24/2016.
+ *
+ * Interface for the customer data access object
+ * Standard methods for customer database alteration
  */
 public interface CustomerDAO {
 

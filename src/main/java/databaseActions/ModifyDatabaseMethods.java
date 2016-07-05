@@ -2,7 +2,6 @@ package databaseActions;
 
 import enums.DatabaseCommands;
 import fileActions.CustomLogger;
-
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -18,7 +17,7 @@ public class ModifyDatabaseMethods {
      *            either create, clear or delete the
      *            customer table
      */
-    public static void makeClearDeleteDB(DatabaseCommands cmd) { //todo enums in place
+    public static void makeClearDeleteDB(DatabaseCommands cmd) {
         CustomLogger.createLogMsgAndSave("Attempting to modify database");
         Connection connection;
         Statement statement;

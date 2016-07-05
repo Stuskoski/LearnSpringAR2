@@ -8,6 +8,8 @@ import util.HashPasswords;
 
 /**
  * Created by r730819 on 6/29/2016.
+ *
+ * The implementation of the user DAO for hibernate.
  */
 @Repository
 public class UserDAOImplementation implements UserDAO {
@@ -18,6 +20,13 @@ public class UserDAOImplementation implements UserDAO {
         this.sessionFactory = sessionFactory;
     }
 
+    /**
+     * Add the user to the database.  Not currently used b/c I manually add users.
+     *
+     * Originally planned for a signup like page
+     *
+     * @param user User object to be added to database
+     */
     @Override
     public void addUser(UserEntity user) {
         Session session = this.sessionFactory.getCurrentSession();
@@ -25,6 +34,14 @@ public class UserDAOImplementation implements UserDAO {
         CustomLogger.createLogMsgAndSave("User saved successfully, Customer Details=" + user.toString());
     }
 
+    /**
+     * Method update the user in the database with
+     * the new user object
+     *
+     * Not currently used
+     *
+     * @param user User object to be updated
+     */
     @Override
     public void updateUser(UserEntity user) {
         Session session = this.sessionFactory.getCurrentSession();
@@ -32,6 +49,18 @@ public class UserDAOImplementation implements UserDAO {
         CustomLogger.createLogMsgAndSave("User updated successfully, Customer Details="+user.toString());
     }
 
+    /**
+     * Get the user from the database with
+     * the passed credentials.
+     *
+     * Hashes the password before checking
+     * to make sure the hash matches the one
+     * in the database.
+     *
+     * @param userName Credential
+     * @param password Credential
+     * @return User Entity if it exists
+     */
     @SuppressWarnings("unchecked")
     @Override
     public UserEntity getUser(String userName, String password) {
@@ -58,6 +87,15 @@ public class UserDAOImplementation implements UserDAO {
 
     }
 
+    /**
+     * Method to remove the user from the database with
+     * the appropriate credentials
+     *
+     * Not currently used
+     *
+     * @param userName Credential
+     * @param password Credential
+     */
     @Override
     public void removeUser(String userName, String password) {
         Session session = this.sessionFactory.getCurrentSession();

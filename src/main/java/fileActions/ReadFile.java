@@ -1,7 +1,6 @@
 package fileActions;
 
 import persistance.hibernateObjects.customer.DbCustomerEntity;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -50,11 +49,6 @@ public class ReadFile {
         }else{
             CustomLogger.createLogMsgAndSave("Error: Unable to delete temp customer file ");
         }
-
-
-        //CustomerArrayList.personsArray = new ArrayList<Customer>(customerArrayList);
-
-        //UploadCustomerIntoDatabase.uploadMultipleCustomersIntoDatabase(customerArrayList);
 
         return customerArrayList;
 

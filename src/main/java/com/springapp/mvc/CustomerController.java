@@ -22,11 +22,15 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 
 /**
+ * Customer controller that will handle
+ * all the modifying, deleting, adding
+ * customer functions
+ *
  * Created by r730819 on 6/24/2016.
  */
 
 @Controller
-public class DatabaseCustomerController {
+public class CustomerController {
 
     private CustomerSpringService customerSpringService;
 
@@ -37,6 +41,16 @@ public class DatabaseCustomerController {
     }
 
 
+    /**
+     * Anytime the user calls /customers page this method
+     * will make a quick check if the db is available
+     * and then will create a list will all
+     * customers in it.
+     *
+     * @param model Model to add entity and customers to
+     * @param request Check if session available
+     * @return string to display page
+     */
     @RequestMapping(value = "/customers", method = RequestMethod.GET)
     public String listCustomers(Model model, HttpServletRequest request){
 
@@ -56,6 +70,16 @@ public class DatabaseCustomerController {
     }
 
 
+    /**
+     * Controller to add a user to
+     * the database.  Accepts a POST
+     * request with the customers
+     * info.
+     *
+     * @param dbCustomerEntity POST variable autowired with customers information
+     * @param request Check if session available
+     * @return A string response wether to login or customer action
+     */
     @RequestMapping(value = "/customer/add", method = RequestMethod.POST)
     public @ResponseBody
     String addCustomer(@ModelAttribute("customer") DbCustomerEntity dbCustomerEntity, HttpServletRequest request){
@@ -81,6 +105,14 @@ public class DatabaseCustomerController {
         }
     }
 
+    /**
+     * Controller to remove a user with
+     * their id in the url
+     *
+     * @param id ID of the customer to delete
+     * @param request Check if user has session
+     * @return redirect to either login page or customers
+     */
     @RequestMapping("/remove/{id}")
     public String removeCustomer(@PathVariable("id") int id, HttpServletRequest request){
 
@@ -92,18 +124,24 @@ public class DatabaseCustomerController {
         }
     }
 
-    @RequestMapping("/edit/{id}")
-    public String editCustomer(@PathVariable("id") int id, Model model, HttpServletRequest request){
+
+    /**
+     * Controller that will receives a GET
+     * request to return the page of viewCustomers.
+     *
+     * @param request Check if user has session open
+     * @return A page view or redirect url string
+     */
+    @RequestMapping(method = RequestMethod.GET, value = "/viewCustomers")
+    public String getViewCustomersPage(HttpServletRequest request){
 
         if(request.getSession().getAttribute("userLoggedIn") != null){
-            model.addAttribute("DbCustomerEntity", this.customerSpringService.getCustomerById(id));
-            model.addAttribute("listCustomers", this.customerSpringService.listCustomers());
-
             return "viewCustomers";
         }else{
             return "redirect:/login";
         }
     }
+
 
     /**
      * Controller receives a file upload from post

@@ -2,6 +2,12 @@ package models;
 
 /**
  * Created by r730819 on 6/30/2016.
+ *
+ * Stats model that is populated with util.PopulateStats
+ * and sent to the stats jsp view.
+ *
+ * Everything is populated with SQL calls and static values
+ *
  */
 public class StatsModel {
     private int dbEntries;
@@ -13,6 +19,7 @@ public class StatsModel {
     private String lastCustomerUpdate;
     private String dbSizeInMB;
 
+    //Getters and setters
     public int getDbEntries() {
         return dbEntries;
     }

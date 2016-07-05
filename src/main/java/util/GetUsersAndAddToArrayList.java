@@ -3,20 +3,23 @@ package util;
 import databaseActions.DatabaseConnections;
 import fileActions.CustomLogger;
 import persistance.hibernateObjects.customer.DbCustomerEntity;
-
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-/**
- * Created by r730819 on 6/27/2016.
- */
 public class GetUsersAndAddToArrayList {
+
     /**
-     * todo
+     * A method that will get a unsorted list from
+     * the database and create an ArrayList from all
+     * the customers generated.
      *
+     * Returns the list that will be handled else where
+     *
+     * @return ArrayList populated with all the customers from
+     *         the database
      */
     public static ArrayList<DbCustomerEntity> getUsers(){
         Statement statement;
@@ -42,16 +45,6 @@ public class GetUsersAndAddToArrayList {
                 ResultSet rs = statement.executeQuery(sqlStr);
 
                 while (rs.next()) {
-                    /*//Retrieve by data by column names
-                    Integer idcustomers = rs.getInt("idcustomers");
-                    String lastName = rs.getString("lastName");
-                    String firstName = rs.getString("firstName");
-                    String emailAddress = rs.getString("emailAddress");
-                    String homeAddress = rs.getString("homeAddress");
-                    String city = rs.getString("city");
-                    String state = rs.getString("state");
-                    String zipCode = rs.getString("zipCode");
-                    String timeStamp = rs.getString("timeStamp");*/
 
                     //Create a new person and add to array list for later use
                     DbCustomerEntity customer = new DbCustomerEntity();
@@ -66,7 +59,6 @@ public class GetUsersAndAddToArrayList {
                     customer.setTimeStamp(rs.getString("timeStamp"));
 
                     unsortedList.add(customer);
-
                 }
 
                 rs.close();

@@ -6,11 +6,22 @@ import org.springframework.stereotype.Controller;
 
 /**
  * Created by r730819 on 6/23/2016.
+ *
+ * Config file controller that handles
+ * all the configuration/settings for the server.
+ *
+ * originally autowired with the values from
+ * the config file but holds static references to
+ * have the ability to alter them.
+ *
+ * Back to default config file properties on server
+ * reboot
  */
 
 @Controller
 @Component
 public class ConfigFileController {
+    //Private values initialized with autowiring
     private static String databaseURL;
     private static String rootDatabaseURL;
     private static String databaseUser;
@@ -18,6 +29,7 @@ public class ConfigFileController {
     private static String mailHost;
     private static String mailFrom;
 
+    //Static references to those values
     public static String getDatabaseURL() {
         return databaseURL;
     }
@@ -35,6 +47,7 @@ public class ConfigFileController {
         return mailFrom;
     }
 
+    //Autowiring
     @Value("${db.url}")
     public void setDatabaseURL(String url){
         ConfigFileController.databaseURL = url;

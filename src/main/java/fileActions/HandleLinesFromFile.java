@@ -1,7 +1,6 @@
 package fileActions;
 
 import persistance.hibernateObjects.customer.DbCustomerEntity;
-
 import java.util.ArrayList;
 
 /**

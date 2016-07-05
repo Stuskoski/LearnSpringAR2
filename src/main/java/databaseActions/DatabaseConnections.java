@@ -2,7 +2,6 @@ package databaseActions;
 
 import util.ConfigFileController;
 import fileActions.CustomLogger;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -12,13 +11,12 @@ public class DatabaseConnections {
     private static Connection rootDbConnection;
 
     /**
-     * Created by r730819 on 6/14/2016.
-     * This class creates a database connection
-     * <p>
-     * Boolean uploadData determines if user wants to upload
-     * data or just grab a connection for looking at the DB
+     * This method will attempt to grab
+     * a database connection using the
+     * ConfigFileController with the user
+     * settings.
      *
-     * @return a connection to the database
+     * @return A database connection
      */
     public static Connection getDB() {
         CustomLogger.createLogMsgAndSave("Attempt database connection...");
@@ -48,7 +46,7 @@ public class DatabaseConnections {
      * Very similar to the method above but with
      * a different string url to connect to the root
      * of the database.
-     * <p>
+     *
      * This connection is needed when creating the database
      * since an attempt to connect to a non-existing db will
      * throw an error

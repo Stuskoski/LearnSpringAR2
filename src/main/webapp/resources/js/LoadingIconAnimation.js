@@ -1,3 +1,10 @@
+/**
+ * Functions for displaying and hiding
+ * the loading HEB icon between screens
+ * and during actions such as uploading
+ * customer lists
+ */
+
 $(window).load(function() {
     $("#loadingAnimationBorder").fadeOut("slow");
 });

@@ -1,3 +1,8 @@
+/**
+ * Gets the file in the file input area
+ * and sends to the appropriate page/controller
+ * to be uploaded into the database
+ */
 function uploadCustomerFile(){
     enableAnimation();
 

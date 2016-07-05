@@ -1,3 +1,9 @@
+/**
+ * Grabs all the logs from
+ * the logging page which
+ * is handled with the logging
+ * controller
+ */
 function refreshLogs() {
     $("#noticeContainer").html('Loading..');
     $.ajax({
@@ -22,6 +28,11 @@ function refreshLogs() {
     })
 }
 
+/**
+ * Ajax call to delete all the logs and
+ * set the content of the logs div to the
+ * html data
+ */
 function clearLogs() {
     $("#noticeContainer").html('Clearing..');
     $.ajax({

@@ -18,6 +18,7 @@ import javax.persistence.Table;
 @Table(name = "customers")
 public class DbCustomerEntity {
 
+    //Values
     @Id
     @Column(name = "idcustomers")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,6 +40,7 @@ public class DbCustomerEntity {
 
     private String timeStamp;
 
+    //Getters and setters
     public int getId() {
         return id;
     }

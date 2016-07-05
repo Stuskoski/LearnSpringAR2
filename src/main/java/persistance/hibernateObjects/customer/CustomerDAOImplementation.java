@@ -10,6 +10,7 @@ import java.util.List;
 
 /**
  * Created by r730819 on 6/24/2016.
+ * The actual customer DAO implementation
  */
 
 @Repository
@@ -22,6 +23,10 @@ public class CustomerDAOImplementation implements CustomerDAO {
     }
 
 
+    /**
+     * Add the customer to the database
+     * @param customer Entity to be added to DB
+     */
     @Override
     public void addCustomer(DbCustomerEntity customer) {
         Session session = this.sessionFactory.getCurrentSession();
@@ -29,6 +34,11 @@ public class CustomerDAOImplementation implements CustomerDAO {
         //CustomLogger.createLogMsgAndSave("Customer saved successfully, Customer Details="+customer.toString());
     }
 
+    /**
+     * Add multiple customers.
+     *
+     * @param customerList An arrarylist of entities to be added to DB
+     */
     @Override
     public void addMultipleCustomers(ArrayList<DbCustomerEntity> customerList) {
         Session session = this.sessionFactory.getCurrentSession();
@@ -39,6 +49,11 @@ public class CustomerDAOImplementation implements CustomerDAO {
         }
     }
 
+    /**
+     * Update the customer in the database with the new entity
+     *
+     * @param customer Entity to be updated
+     */
     @Override
     public void updateCustomer(DbCustomerEntity customer) {
         Session session = this.sessionFactory.getCurrentSession();
@@ -46,6 +61,12 @@ public class CustomerDAOImplementation implements CustomerDAO {
         CustomLogger.createLogMsgAndSave("Customer updated successfully, Customer Details="+customer.toString());
     }
 
+    /**
+     * Grab all the customers from the database and put them in
+     * a list object
+     *
+     * @return List of all customers
+     */
     @SuppressWarnings("unchecked")
     @Override
     public List<DbCustomerEntity> listCustomers() {
@@ -65,6 +86,13 @@ public class CustomerDAOImplementation implements CustomerDAO {
         return customerList;
     }
 
+    /**
+     * Get the customer from the database
+     * according to their ID
+     *
+     * @param id Customer ID
+     * @return The entity retrieved from DB
+     */
     @Override
     public DbCustomerEntity getCustomerById(int id) {
         Session session = this.sessionFactory.getCurrentSession();
@@ -73,6 +101,11 @@ public class CustomerDAOImplementation implements CustomerDAO {
         return customer;
     }
 
+    /**
+     * Remove the customer according to their ID
+     *
+     * @param id The customers ID to identify which one to delete
+     */
     @Override
     public void removeCustomer(int id) {
         Session session = this.sessionFactory.getCurrentSession();

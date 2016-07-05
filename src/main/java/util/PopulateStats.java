@@ -10,9 +10,22 @@ import java.sql.Statement;
 
 /**
  * Created by r730819 on 6/30/2016.
+ *
+ * Stats class that only has one method to get stats
  */
 public class PopulateStats {
 
+    /**
+     * Method that will make a SQL call to get
+     * various stats from the database.
+     *
+     * Also calls a few other methods such
+     * as number of logging to get those
+     * stats
+     *
+     * @return A stats model with all the updated information.
+     *         Used in stats.jsp
+     */
     public static StatsModel getStats(){
         StatsModel model = new StatsModel();
 

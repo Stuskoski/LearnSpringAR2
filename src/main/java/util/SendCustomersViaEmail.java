@@ -1,25 +1,19 @@
 package util;
 
-import databaseActions.DatabaseConnections;
 import databaseActions.UpdateTimeStampAfterEmail;
 import fileActions.CustomLogger;
-import persistance.hibernateObjects.customer.DbCustomerEntity;
-
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.Properties;
 
 /**
  * Created by r730819 on 6/27/2016.
+ *
+ * Sending email class
  */
 public class SendCustomersViaEmail {
 

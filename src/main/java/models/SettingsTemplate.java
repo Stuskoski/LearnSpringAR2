@@ -2,6 +2,12 @@ package models;
 
 /**
  * Created by r730819 on 6/28/2016.
+ *
+ * Settings template that is used to
+ * populate the settings jsp page.
+ *
+ * Is used also when sending the POST
+ * request to alter the user settings.
  */
 public class SettingsTemplate {
     private String databaseURL;
@@ -11,6 +17,7 @@ public class SettingsTemplate {
     private String mailHost;
     private String mailFrom;
 
+    //Constructors
     public SettingsTemplate(String databaseURL, String rootDatabaseURL, String databaseUser, String databasePass,
                             String mailHost, String mailFrom) {
         this.databaseURL = databaseURL;
@@ -20,10 +27,10 @@ public class SettingsTemplate {
         this.mailHost = mailHost;
         this.mailFrom = mailFrom;
     }
-    public SettingsTemplate() {
-    }
+    public SettingsTemplate() {}
 
 
+    //Getters and setters
     public String getDatabaseURL() {
         return databaseURL;
     }

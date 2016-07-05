@@ -5,9 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import persistance.hibernateObjects.customer.DbCustomerEntity;
-
 import javax.servlet.http.HttpServletRequest;
-
 
 /**
  * Created by r730819 on 6/22/2016.
@@ -20,8 +18,15 @@ import javax.servlet.http.HttpServletRequest;
 
 @Controller
 @RequestMapping("/uploadCustomers")
-public class DatabaseUploadCustomersController {
+public class UploadCustomersController {
 
+    /**
+     * Controller to display the text file upload
+     * page for customers.
+     *
+     * @param request User session check
+     * @return View page or redirect to login
+     */
     @RequestMapping(value = "/textFileUpload", method = RequestMethod.GET)
     public String getUploadCustomerViaTextFilePage(HttpServletRequest request){
 
@@ -32,6 +37,14 @@ public class DatabaseUploadCustomersController {
         }
     }
 
+    /**
+     * Controller to display the web form upload
+     * page for customers
+     *
+     * @param model Blank model to map to the form
+     * @param request User session check
+     * @return View web upload page or redirect to login
+     */
     @RequestMapping(value = "/webFormUpload", method = RequestMethod.GET)
     public String getUploadCustomerViaWebFormPage(Model model, HttpServletRequest request){
 

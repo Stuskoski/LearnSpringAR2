@@ -2,6 +2,10 @@ package persistance.hibernateObjects.user;
 
 /**
  * Created by r730819 on 6/29/2016.
+ *
+ * Interface for spring implementation.
+ *
+ * Used in beans
  */
 public interface UserSpringService {
 

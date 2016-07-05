@@ -1,12 +1,9 @@
 package util;
 
 import persistance.hibernateObjects.customer.DbCustomerEntity;
-
 import java.util.ArrayList;
 
-/**
- * Created by r730819 on 6/27/2016.
- */
+
 public class CreateEmailMessage {
 
     /**

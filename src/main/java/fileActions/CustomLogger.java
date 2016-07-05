@@ -67,7 +67,7 @@ public class CustomLogger {
      * to 0 to clear all logs
      */
     public static void clearLogs(){
-        numOfLogs=0;
+        setNumOfLogs(0);
         CustomLogger.createLogMsgAndSave("Clearing logs");
         logStringBuilder.setLength(0);
     }

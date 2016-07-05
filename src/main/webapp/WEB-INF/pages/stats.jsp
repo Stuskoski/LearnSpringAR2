@@ -63,7 +63,7 @@
     </div>
     <div class="col-sm-4">
       <div class="well">
-        <p>Current ${sessionScope.userLoggedIn}</p>
+        <p>Current User: ${sessionScope.userLoggedIn}</p>
       </div>
     </div>
   </div>

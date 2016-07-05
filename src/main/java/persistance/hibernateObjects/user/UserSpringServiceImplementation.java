@@ -4,12 +4,15 @@ import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Created by r730819 on 6/29/2016.
+ *
+ * The actual spring implementation overlay for user DAO and hibernate
+ *
+ * Just calls the actual functions in UserDAOImplementation
  */
 public class UserSpringServiceImplementation implements UserSpringService {
 
     private UserDAO userDAO;
     public void setUserDAO(UserDAO userDAO){ this.userDAO = userDAO; }
-
 
     @Override
     @Transactional

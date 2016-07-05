@@ -5,16 +5,27 @@ import models.SettingsTemplate;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import util.ConfigFileController;
-
 import javax.servlet.http.HttpServletRequest;
 
 /**
  * Created by r730819 on 6/22/2016.
+ *
+ * Settings controller class that will
+ * originally be initialized to the variables
+ * from the config file.
+ *
+ * Since those values from the config file are
+ * instantiated at server reboot, a static
+ * reference is needed.
+ *
+ * If the user changes the values via the settings
+ * page the static values will be used until a server
+ * reboot puts them back to default values.
+ *
  */
 
 @Controller
@@ -34,16 +45,18 @@ public class SettingsController {
     private String mailFrom;
 
 
+    /**
+     * GET request for the settings page
+     *
+     * @param model Model to preload the page with values
+     * @param request Check for user session
+     * @return Either view the page or redirect to
+     *         login page
+     */
     @RequestMapping(method = RequestMethod.GET)
-    public String getSettingsPage(ModelMap modelMap, Model model, HttpServletRequest request){
+    public String getSettingsPage(Model model, HttpServletRequest request){
 
         if(request.getSession().getAttribute("userLoggedIn") != null){
-           /* modelMap.addAttribute("dbURL", dbURL);
-            modelMap.addAttribute("rootURL", rootURL);
-            modelMap.addAttribute("dbUser", dbUser);
-            modelMap.addAttribute("dbPass", dbPass);
-            modelMap.addAttribute("mailHost", mailHost);
-            modelMap.addAttribute("mailFrom", mailFrom);*/
 
             model.addAttribute("settingsTemplate", new SettingsTemplate(ConfigFileController.getDatabaseURL(),
                     ConfigFileController.getRootDatabaseURL(), ConfigFileController.getDatabaseUser(),
@@ -56,6 +69,15 @@ public class SettingsController {
         }
     }
 
+    /**
+     * POST request to the changeSettings URL
+     * that will take the settings form and
+     * set static values to the new forms
+     *
+     * @param settingsTemplate Form that contains new settings value
+     * @param request Check for user session
+     * @return Settings page view or redirect to login
+     */
     @RequestMapping(method = RequestMethod.POST, value = "/changeSettings")
     public String changeSettings(@ModelAttribute("settingsTemplate") SettingsTemplate settingsTemplate,
                                  HttpServletRequest request){

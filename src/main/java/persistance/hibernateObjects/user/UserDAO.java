@@ -2,6 +2,9 @@ package persistance.hibernateObjects.user;
 
 /**
  * Created by r730819 on 6/29/2016.
+ *
+ * Interface for the user DAO for hibernate transactions
+ * Typical user alteration methods
  */
 public interface UserDAO {
 

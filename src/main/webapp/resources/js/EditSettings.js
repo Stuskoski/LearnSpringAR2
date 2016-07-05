@@ -1,3 +1,8 @@
+/**
+ * Edit settings javascript to make
+ * ajax calls to update the settings
+ * in the background.
+ */
 function editSettings() {
     if(isFormFilled()){
         var databaseURL = document.getElementById("databaseURL").value;

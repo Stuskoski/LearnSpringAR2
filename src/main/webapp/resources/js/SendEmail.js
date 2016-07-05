@@ -1,3 +1,9 @@
+/**
+ * Grabs all the email settings
+ * and msg body and sends to the email
+ * controller to be processed and
+ * sent to the appropriate addresses
+ */
 function sendEmail() {
     var toEmail = document.getElementById("toEmail").value;
     var fromEmail = document.getElementById("fromEmail").value;

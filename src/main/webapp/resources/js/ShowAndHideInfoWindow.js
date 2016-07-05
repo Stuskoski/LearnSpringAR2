@@ -1,4 +1,11 @@
-//Starts the animation for 3 seconds and then fades
+/**
+ * Shows and then hides the display
+ * window with the passed message.
+ *
+ * Takes 3 seconds
+ *
+ * @param msg Alert message to be shown
+ */
 function showAndThenHideInfoWindow(msg){
     var popupWindow = $("#infoPopupWindowBorder");
 

@@ -1,20 +1,19 @@
 package databaseActions;
 
 import fileActions.CustomLogger;
-
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
 /**
- * Created by r730819 on 6/28/2016.
+ * Created by r730819 on 6/28/2016.\
+ *
  */
 public class UpdateTimeStampAfterEmail {
     /**
-     * Created by r730819 on 6/15/2016.
      * This method will get a SQL connection
-     * and simply update all the time stamps
-     * of every customer is the
+     * and update all the time stamps
+     * of every customer that is in the database
      *
      */
 
