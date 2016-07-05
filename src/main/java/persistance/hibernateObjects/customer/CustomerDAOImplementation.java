@@ -26,7 +26,7 @@ public class CustomerDAOImplementation implements CustomerDAO {
     public void addCustomer(DbCustomerEntity customer) {
         Session session = this.sessionFactory.getCurrentSession();
         session.persist(customer);
-        CustomLogger.createLogMsgAndSave("Customer saved successfully, Customer Details="+customer.toString());
+        //CustomLogger.createLogMsgAndSave("Customer saved successfully, Customer Details="+customer.toString());
     }
 
     @Override

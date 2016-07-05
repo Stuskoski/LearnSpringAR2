@@ -88,7 +88,7 @@
 
 
     <!-- Mapping the resources folder -->
-    <mvc:resources mapping="/resources/**" location="/resources/" cache-period="31556926"/>
+    <mvc:resources mapping="/resources/**" location="/resources/" cache-period="${cache.cachePeriod}"/>
     <mvc:annotation-driven/>
 
 
@@ -96,7 +96,7 @@
                 class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 
         <!-- setting maximum upload size -->
-        <property name="maxUploadSize" value="10000000" />
+        <property name="maxUploadSize" value="${file.maxSize}" />
 
     </bean>
 

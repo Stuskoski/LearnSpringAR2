@@ -39,7 +39,10 @@ public class PopulateStats {
                         "(SELECT UPDATE_TIME\n" +
                          "FROM   information_schema.tables\n" +
                          "WHERE  TABLE_SCHEMA = 'assign2_db_augustus'\n" +
-                         "AND TABLE_NAME = 'customers') as lastCustomerUpdate;");
+                         "AND TABLE_NAME = 'customers') as lastCustomerUpdate," +
+                        "(SELECT sum( data_length + index_length ) / 1024 / 1024 size \n" +
+                         "FROM information_schema.TABLES \n" +
+                         "WHERE table_schema = 'assign2_db_augustus') as dbSize;");
 
 
                 rs.next();
@@ -52,6 +55,7 @@ public class PopulateStats {
                 model.setNumberOfUsers(rs.getInt("registeredUsers"));
                 model.setLastEmail(rs.getString("lastEmail"));
                 model.setLastCustomerUpdate(rs.getString("lastCustomerUpdate"));
+                model.setDbSizeInMB(rs.getString("dbSize"));
 
                 connection.close();
 

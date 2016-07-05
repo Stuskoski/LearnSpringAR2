@@ -75,6 +75,13 @@ body {
 #file-upload {
     display: none;
 }
+
+#file-upload-btn{
+    margin-bottom: 50px;
+    padding-bottom: 50px;
+    color: red;
+}
+
 .custom-file-upload {
     border: 1px solid #ccc;
     display: inline-block;

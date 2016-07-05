@@ -3,9 +3,8 @@ package persistance.hibernateObjects.user;
 import fileActions.CustomLogger;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.mapping.List;
 import org.springframework.stereotype.Repository;
-import persistance.hibernateObjects.customer.DbCustomerEntity;
+import util.HashPasswords;
 
 /**
  * Created by r730819 on 6/29/2016.
@@ -37,6 +36,8 @@ public class UserDAOImplementation implements UserDAO {
     @Override
     public UserEntity getUser(String userName, String password) {
         try{
+            password = HashPasswords.hash(password);
+
             Session session = this.sessionFactory.getCurrentSession();
 
             java.util.List<UserEntity> user = (java.util.List<UserEntity>)

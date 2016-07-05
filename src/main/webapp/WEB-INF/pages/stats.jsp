@@ -50,7 +50,6 @@
     <div class="col-sm-4">
       <div class="well">
         <p>Current Logs</p>
-
         <p>${stats.numberOfLogs}</p>
       </div>
     </div>
@@ -58,7 +57,8 @@
   <div class="row">
     <div class="col-sm-8">
       <div class="well">
-        <p>Some informational window I could not think of...</p>
+        <p>Database Size In MB</p>
+        <p>${stats.dbSizeInMB}</p>
       </div>
     </div>
     <div class="col-sm-4">

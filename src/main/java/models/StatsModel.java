@@ -11,6 +11,7 @@ public class StatsModel {
     private int numberOfLogs;
     private String lastEmail;
     private String lastCustomerUpdate;
+    private String dbSizeInMB;
 
     public int getDbEntries() {
         return dbEntries;
@@ -76,6 +77,10 @@ public class StatsModel {
     public void setLastCustomerUpdate(String lastCustomerUpdate) {
         this.lastCustomerUpdate = lastCustomerUpdate;
     }
+
+    public String getDbSizeInMB() {return dbSizeInMB;}
+
+    public void setDbSizeInMB(String dbSizeInMB) {this.dbSizeInMB = dbSizeInMB;}
 
 
 

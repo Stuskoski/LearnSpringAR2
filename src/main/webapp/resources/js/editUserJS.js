@@ -40,7 +40,7 @@ function deleteCustomer(id){
             if(xhttp.status == 200){
                 $('#customerRow'+id).hide(500);
             }else{
-                alert("Unable to delete customer")
+                showAndThenHideInfoWindow("Unable to delete customer");
             }
         }
     }
@@ -64,74 +64,89 @@ function deleteCustomer(id){
  * @param id - Customer ID
  */
 function editCustomer(id){
-    var firstName = document.getElementById("customerEntityFirstName"+id).textContent;
-    var lastName = document.getElementById("customerEntityLastName"+id).textContent;
-    var emailAddress = document.getElementById("customerEntityEmailAddress"+id).textContent;
-    var homeAddress = document.getElementById("customerEntityHomeAddress"+id).textContent;
-    var city = document.getElementById("customerEntityCity"+id).textContent;
-    var state = document.getElementById("customerEntityState"+id).textContent;
-    var zipCode = document.getElementById("customerEntityZipCode"+id).textContent;
-    var timeStamp = document.getElementById("customerEntityTimeStamp"+id).textContent;
+
+    if(checkFirstNameEdit(id) && checkLastNameEdit(id) && checkEmailEdit(id) && checkHomeEdit(id) && checkCityEdit(id)
+        && checkStateEdit(id) && checkZipCodeEdit(id)) {
 
 
-    /**
-     * I believe the jquery plugin at the bottom
-     * is adding white space and new lines in the
-     * fields for whatever reason.
-     *
-     * This function removes the whitespace in the front
-     * and back of the lines as well as the new line
-     * characters which won't be needed.
-     *
-     * @type {string}
-     */
-    firstName = firstName.trim().replace(/(\r\n|\n|\r)/gm,"");
-    lastName = lastName.trim().replace(/(\r\n|\n|\r)/gm,"");
-    emailAddress = emailAddress.trim().replace(/(\r\n|\n|\r)/gm,"");
-    homeAddress = homeAddress.trim().replace(/(\r\n|\n|\r)/gm,"");
-    city = city.trim().replace(/(\r\n|\n|\r)/gm,"");
-    state = state.trim().replace(/(\r\n|\n|\r)/gm,"");
-    zipCode = zipCode.trim().replace(/(\r\n|\n|\r)/gm,"");
-    timeStamp = timeStamp.trim().replace(/(\r\n|\n|\r)/gm,"");
+        var firstName = document.getElementById("customerEntityFirstName" + id).textContent;
+        var lastName = document.getElementById("customerEntityLastName" + id).textContent;
+        var emailAddress = document.getElementById("customerEntityEmailAddress" + id).textContent;
+        var homeAddress = document.getElementById("customerEntityHomeAddress" + id).textContent;
+        var city = document.getElementById("customerEntityCity" + id).textContent;
+        var state = document.getElementById("customerEntityState" + id).textContent;
+        var zipCode = document.getElementById("customerEntityZipCode" + id).textContent;
+        var timeStamp = document.getElementById("customerEntityTimeStamp" + id).textContent;
 
-    var xhttp = new XMLHttpRequest();
 
-    xhttp.open("POST", "/customer/add", true);
-    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        /**
+         * I believe the jquery plugin at the bottom
+         * is adding white space and new lines in the
+         * fields for whatever reason.
+         *
+         * This function removes the whitespace in the front
+         * and back of the lines as well as the new line
+         * characters which won't be needed.
+         *
+         * @type {string}
+         */
+        firstName = firstName.trim().replace(/(\r\n|\n|\r)/gm, "");
+        lastName = lastName.trim().replace(/(\r\n|\n|\r)/gm, "");
+        emailAddress = emailAddress.trim().replace(/(\r\n|\n|\r)/gm, "");
+        homeAddress = homeAddress.trim().replace(/(\r\n|\n|\r)/gm, "");
+        city = city.trim().replace(/(\r\n|\n|\r)/gm, "");
+        state = state.trim().replace(/(\r\n|\n|\r)/gm, "");
+        zipCode = zipCode.trim().replace(/(\r\n|\n|\r)/gm, "");
+        timeStamp = timeStamp.trim().replace(/(\r\n|\n|\r)/gm, "");
 
-    if(timeStamp==""){
-        xhttp.send("id="+id+"&firstName="+firstName+"&lastName="+lastName+"&emailAddress="+emailAddress+"&homeAddress="+
-            homeAddress+"&city="+city+"&state="+state+"&zipCode="+zipCode);
-    }else{
-        xhttp.send("id="+id+"&firstName="+firstName+"&lastName="+lastName+"&emailAddress="+emailAddress+"&homeAddress="+
-            homeAddress+"&city="+city+"&state="+state+"&zipCode="+zipCode+"&timeStamp="+timeStamp);
-    }
+        var xhttp = new XMLHttpRequest();
 
-    xhttp.onreadystatechange = customerAddedSuccessfully;
+        xhttp.open("POST", "/customer/add", true);
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
-    //On success disable the commit link again. On error show error box.
-    function customerAddedSuccessfully(){
-        if (xhttp.readyState == 4 ) {
-            if(xhttp.status == 200){
-                $('#commitLink'+id).addClass("disabledAnchor");
-                var goodCommit = $("#customerRow"+id);
+        if (timeStamp == "") {
+            xhttp.send("id=" + id + "&firstName=" + firstName + "&lastName=" + lastName + "&emailAddress=" + emailAddress + "&homeAddress=" +
+                homeAddress + "&city=" + city + "&state=" + state + "&zipCode=" + zipCode);
+        } else {
+            xhttp.send("id=" + id + "&firstName=" + firstName + "&lastName=" + lastName + "&emailAddress=" + emailAddress + "&homeAddress=" +
+                homeAddress + "&city=" + city + "&state=" + state + "&zipCode=" + zipCode + "&timeStamp=" + timeStamp);
+        }
 
-                goodCommit.removeClass("highLightRed");
-                goodCommit.removeClass("highLightGreen");
+        xhttp.onreadystatechange = customerAddedSuccessfully;
 
-                goodCommit.addClass("highLightGreen");
-                goodCommit.fadeOut(500).fadeIn(500);
-            }else{
-                showAndThenHideInfoWindow("Unable to commit customer changes");
-                var badCommit = $("#customerRow"+id);
+        //On success disable the commit link again. On error show error box.
+        function customerAddedSuccessfully() {
+            if (xhttp.readyState == 4) {
+                if (xhttp.status == 200 && xhttp.responseText == 'Customer updated') {
+                    $('#commitLink' + id).addClass("disabledAnchor");
+                    var goodCommit = $("#customerRow" + id);
 
-                badCommit.removeClass("highLightRed");
-                badCommit.removeClass("highLightGreen");
+                    goodCommit.removeClass("highLightRed");
+                    goodCommit.removeClass("highLightGreen");
 
-                badCommit.addClass("highLightRed");
-                badCommit.fadeOut(500).fadeIn(500);
+                    goodCommit.addClass("highLightGreen");
+                    goodCommit.fadeOut(500).fadeIn(500);
+                } else {
+                    showAndThenHideInfoWindow("Unable to commit customer changes");
+                    var badCommit = $("#customerRow" + id);
+
+                    badCommit.removeClass("highLightRed");
+                    badCommit.removeClass("highLightGreen");
+
+                    badCommit.addClass("highLightRed");
+                    badCommit.fadeOut(500).fadeIn(500);
+                }
             }
         }
+    }else{
+        showAndThenHideInfoWindow("Unable to commit customer changes");
+        var badCommit = $("#customerRow" + id);
+
+        badCommit.removeClass("highLightRed");
+        badCommit.removeClass("highLightGreen");
+
+        badCommit.addClass("highLightRed");
+        badCommit.fadeOut(500).fadeIn(500);
     }
 }
 
@@ -160,11 +175,15 @@ function checkFirstNameEdit(id){
         badCommit.removeClass("highLightGreen");
 
         badCommit.addClass("highLightRed");
+
+        return false;
     }else{
         var goodCommit = $("#customerEntityFirstName"+id);
 
         goodCommit.removeClass("highLightRed");
         goodCommit.removeClass("highLightGreen");
+
+        return true;
     }
 }
 
@@ -181,11 +200,15 @@ function checkLastNameEdit(id){
         badCommit.removeClass("highLightGreen");
 
         badCommit.addClass("highLightRed");
+
+        return false;
     }else{
         var goodCommit = $("#customerEntityLastName"+id);
 
         goodCommit.removeClass("highLightRed");
         goodCommit.removeClass("highLightGreen");
+
+        return true;
     }
 }
 
@@ -202,11 +225,15 @@ function checkEmailEdit(id){
         badCommit.removeClass("highLightGreen");
 
         badCommit.addClass("highLightRed");
+
+        return false;
     }else{
         var goodCommit = $("#customerEntityEmailAddress"+id);
 
         goodCommit.removeClass("highLightRed");
         goodCommit.removeClass("highLightGreen");
+
+        return true;
     }
 }
 
@@ -224,11 +251,15 @@ function checkHomeEdit(id){
 
         badCommit.addClass("highLightRed");
 
+        return false;
+
     }else{
         var goodCommit = $("#customerEntityHomeAddress"+id);
 
         goodCommit.removeClass("highLightRed");
         goodCommit.removeClass("highLightGreen");
+
+        return true;
     }
 }
 
@@ -245,11 +276,15 @@ function checkCityEdit(id){
         badCommit.removeClass("highLightGreen");
 
         badCommit.addClass("highLightRed");
+
+        return false;
     }else{
         var goodCommit = $("#customerEntityCity"+id);
 
         goodCommit.removeClass("highLightRed");
         goodCommit.removeClass("highLightGreen");
+
+        return true;
     }
 }
 
@@ -266,11 +301,15 @@ function checkStateEdit(id){
         badCommit.removeClass("highLightGreen");
 
         badCommit.addClass("highLightRed");
+
+        return false;
     }else{
         var goodCommit = $("#customerEntityState"+id);
 
         goodCommit.removeClass("highLightRed");
         goodCommit.removeClass("highLightGreen");
+
+        return true;
     }
 }
 
@@ -287,11 +326,15 @@ function checkZipCodeEdit(id){
         badCommit.removeClass("highLightGreen");
 
         badCommit.addClass("highLightRed");
+
+        return false;
     }else{
         var goodCommit = $("#customerEntityZipCode"+id);
 
         goodCommit.removeClass("highLightRed");
         goodCommit.removeClass("highLightGreen");
+
+        return true;
     }
 }
 

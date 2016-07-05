@@ -64,18 +64,20 @@ public class DatabaseCustomerController {
             try {
                 if(dbCustomerEntity.getId() == 0){
                     this.customerSpringService.addCustomer(dbCustomerEntity);
-                    return "Customer successfully added";
+                    CustomLogger.createLogMsgAndSave(
+                            "Customer saved successfully, Customer Details="+dbCustomerEntity.toString());
+                    return "Customer added";
                 }
                 else{
                     this.customerSpringService.updateCustomer(dbCustomerEntity);
-                    return "Customer exists, customer updated";
+                    return "Customer updated";
                 }
             }catch (Exception e){
                 CustomLogger.createLogMsgAndSave("An error has occurred.  Unable to upload customer");
-                return "An error has occurred.  Unable to upload customer";
+                return "Customer error";
             }
         }else{
-            return "redirect:/login";
+            return "Please log in";
         }
     }
 

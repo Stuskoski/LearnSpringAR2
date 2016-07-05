@@ -11,8 +11,9 @@ function setLinkActive(idName){
     $('#side-nav-bar-stats').removeClass("custom-active-nav-link");
     $('#side-nav-bar-database').removeClass("custom-active-nav-link");
     $('#side-nav-bar-upload-customers').removeClass("custom-active-nav-link");
-    $('#side-nav-bar-information').removeClass("custom-active-nav-link");
+    $('#side-nav-bar-logging').removeClass("custom-active-nav-link");
     $('#side-nav-bar-settings').removeClass("custom-active-nav-link");
+    $('#side-nav-bar-email').removeClass("custom-active-nav-link");
 
     $('#'+idName).addClass("custom-active-nav-link");
 }

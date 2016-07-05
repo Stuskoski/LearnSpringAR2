@@ -47,6 +47,11 @@ public class UserAuthController {
     @RequestMapping(method = RequestMethod.GET, value = "/logout")
     public String logoutUser(HttpServletRequest request){
 
+        Object userName = request.getAttribute("userLoggedIn");
+        if(userName!=null){
+            CustomLogger.createLogMsgAndSave(userName.toString() + " has been logged out");
+        }
+
         request.getSession().invalidate();
 
         return "redirect:/login";
@@ -59,6 +64,7 @@ public class UserAuthController {
         if(doesUserExist(user.getUserName(), user.getPassword())){
             //create user session
             request.getSession().setAttribute("userLoggedIn", user);
+            CustomLogger.createLogMsgAndSave(user.getUserName() + " has been logged in");
             return "redirect:/assignment2";
         }else{
             //throw error

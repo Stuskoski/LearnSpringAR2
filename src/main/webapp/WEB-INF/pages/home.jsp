@@ -17,10 +17,12 @@
 
                     <li class="">
                         <a id="side-nav-bar-database" onclick="showDatabaseOptions();
-                        setLinkActive('side-nav-bar-database');" class="non-link">Database&#xbb;</a>
+                        setLinkActive('side-nav-bar-database');" class="non-link">Database &#xbb;</a>
                         <ul class="hideMe" id="databaseLinks">
-                            <li><a onclick="pullModifyDatabasePage();" class="non-link">Modify Database</a></li>
-                            <li><a onclick="pullViewCustomersPage();" class="non-link">View Customers</a></li>
+                            <li><a onclick="pullModifyDatabasePage(); setLinkActive('side-nav-bar-database');"
+                                   class="non-link">Modify Database</a></li>
+                            <li><a onclick="pullViewCustomersPage(); setLinkActive('side-nav-bar-database');"
+                                   class="non-link">View Customers</a></li>
                         </ul>
                     </li>
 
@@ -28,23 +30,27 @@
                         <a onclick="showCustomerOptions(); setLinkActive('side-nav-bar-upload-customers');"
                            id="side-nav-bar-upload-customers" class="non-link">Upload Customers &#xbb;</a>
                         <ul class="hideMe" id="customerLinks">
-                            <li><a onclick="pullUploadTextFilePage();" class="non-link">Text File</a></li>
-                            <li><a onclick="pullUploadWebFormPage();" class="non-link">Web Form</a></li>
+                            <li><a onclick="pullUploadTextFilePage(); setLinkActive('side-nav-bar-upload-customers');"
+                                   class="non-link">Text File</a></li>
+                            <li><a onclick="pullUploadWebFormPage(); setLinkActive('side-nav-bar-upload-customers');"
+                                   class="non-link">Web Form</a></li>
                         </ul>
                     </li>
 
-                    <li class="">
-                        <a onclick="showInformationOptions(); setLinkActive('side-nav-bar-information');"
-                           id="side-nav-bar-information" class="non-link">Information &#xbb;</a>
-                        <ul class="hideMe" id="informationLinks">
-                            <li><a onclick="pullLoggingPage();" class="non-link">Logging</a></li>
-                            <li><a onclick="pullEmailPage();" class="non-link">Email</a></li>
-                        </ul>
+                    <li id="side-nav-bar-logging">
+                        <a onclick="pullLoggingPage(); setLinkActive('side-nav-bar-logging');" class="non-link">
+                            Logging &#x203A;</a>
                     </li>
+
+                    <li id="side-nav-bar-email">
+                        <a onclick="pullEmailPage(); setLinkActive('side-nav-bar-email');" class="non-link">
+                            Email &#x203A;</a>
+                    </li>
+
 
                     <li class="" id="side-nav-bar-settings">
-                        <a onclick="pullSettingsPage(); setLinkActive('side-nav-bar-settings');" id=""
-                           class="non-link">Settings&#x203A;</a>
+                        <a onclick="pullSettingsPage(); setLinkActive('side-nav-bar-settings');"
+                           class="non-link">Settings &#x203A;</a>
                     </li>
                 </ul>
                 <br>
