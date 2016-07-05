@@ -1,6 +1,3 @@
-<%--<jsp:include page="header.jsp"/>--%>
-
-
 <div class="text-center" id="modifyDBContainer">
     <div>
         <button id="modifyDBCreate" class="btn non-block non-link customHEBButtonXBig"

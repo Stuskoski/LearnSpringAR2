@@ -1,4 +1,4 @@
-/*------------------------ Side Navbar Customization ------------------------*/
+/*------------------------ Side Nav bar Customization ------------------------*/
 $('#sidebar').affix({
     offset: {
         top: $('header').height()
@@ -22,7 +22,6 @@ function setLinkActive(idName){
 function pullSettingsPage(){
     enableAnimation();
     var xhttp = new XMLHttpRequest();
-    var xhttps = new
 
     $('#homeScreenLoader').empty();
 
@@ -44,9 +43,6 @@ function pullSettingsPage(){
         }
     }
 }
-
-
-
 
 
 /*------------------------ Information Links ----------------------------*/

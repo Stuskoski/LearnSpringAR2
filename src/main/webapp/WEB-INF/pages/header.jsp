@@ -11,7 +11,8 @@
     <link href="<c:url value="/resources/css/style.css" />" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-
+    <link rel="shortcut icon" href="<c:url value="/resources/images/favicon.ico" />" type="image/x-icon">
+    <link rel="icon" href="<c:url value="/resources/images/favicon.ico" />" type="image/x-icon">
 </head>
 
 <body>
@@ -60,7 +61,7 @@
                         <li><a class="non-link" onclick="pullSettingsPage()">Settings</a></li>
 
                     </ul>
-                    <ul class="nav navbar-nav navbar-right">
+                    <div class="nav navbar-nav navbar-right">
                         <div id="header-right-btns-div">
                             <c:choose>
                                 <c:when test="${empty sessionScope.userLoggedIn}">
@@ -75,7 +76,7 @@
                                 </c:otherwise>
                             </c:choose>
                         </div>
-                    </ul>
+                    </div>
                 </div>
             </div>
         </nav>
@@ -86,5 +87,5 @@
     <%-- add the loading page to every page.
          not sure if I like it just yet or
          only to add on long loading pages--%>
-<jsp:include page="loadingAnimation.jsp"/>
-<jsp:include page="infoPopup.jsp"/>
+<jsp:include page="popups/loadingAnimation.jsp"/>
+<jsp:include page="popups/infoPopup.jsp"/>

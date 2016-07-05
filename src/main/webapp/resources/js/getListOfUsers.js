@@ -1,7 +1,11 @@
 /**
- * Created by r730819 on 6/27/2016.
+ * Ajax call to get the sorted customers
+ * from the email/populateSortedCustomers.
+ *
+ * The controller will grab the call and
+ * generate a response body that is put into
+ * the text area
  */
-
 function getSortedCustomers(){
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
@@ -27,6 +31,14 @@ function getSortedCustomers(){
     }
 }
 
+/**
+ * Ajax call to get the unsorted customers
+ * from the email/populateUnsortedCustomers.
+ *
+ * The controller will grab the call and
+ * generate a response body that is put into
+ * the text area
+ */
 function getUnsortedCustomers(){
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {

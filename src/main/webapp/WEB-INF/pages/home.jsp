@@ -66,19 +66,24 @@
     </div>
 </div>
 
-
-<script src="<c:url value="/resources/js/Dashboard.js"/>"></script>
+<%-- Add all the scripts at the end of the page to help with loading --%>
+<script src="<c:url value="/resources/js/dashboard.js"/>"></script>
 <script src="<c:url value="/resources/js/ShowAndHideInfoWindow.js"/>"></script>
 <script src="<c:url value="/resources/js/ModifyDatabase.js"/>"></script>
 <script src="<c:url value="/resources/js/UploadCustomers.js"/>"></script>
 <script src="<c:url value="/resources/js/SendEmail.js"/>"></script>
 <script src="<c:url value="/resources/js/EditSettings.js"/>"></script>
 <script src="<c:url value="/resources/js/LoggingActions.js"/>"></script>
-<script src="<c:url value="/resources/js/GetListOfUsers.js"/>"></script>
+<script src="<c:url value="/resources/js/getListOfUsers.js"/>"></script>
 <script src="<c:url value="/resources/js/EditUserJS.js"/>"></script>
 <script src="<c:url value="/resources/js/jquery-1.12.3.js"/>"></script>
 <script src="<c:url value="/resources/js/jquery.dataTables.min.js"/>"></script>
 <link href="<c:url value="/resources/css/jquery.dataTables.min.css"/>" rel="stylesheet">
+
+
+<%-- Tags were opened in header.  Closed here --%>
+</body>
+</html>
 
 
 
